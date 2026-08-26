@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/store-template",
+      "destination": "https://dsa-store-template.vercel.app/store-template"
+    },
+    {
+      "source": "/store-template/:path*",
+      "destination": "https://dsa-store-template.vercel.app/store-template/:path*"
+    },
+    {
+      "source": "/",
+      "destination": "https://dsa-ai-event-agents.vercel.app/"
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://dsa-ai-event-agents.vercel.app/:path*"
+    }
+  ]
+}
