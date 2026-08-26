@@ -1,5 +1,6 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "3.0",
+  "templateId": "wolkveld-pdp",
   "pageType": "generic-wolkveld-product-template",
   "language": "nl-NL",
   "routes": [
@@ -7,8 +8,191 @@
     "/stores",
     "/stores/dieren",
     "/stores/beauty",
-    "/stores/gadgets"
+    "/stores/gadgets",
+    "/stores/wellness",
+    "/stores/fashion",
+    "/stores/wonen",
+    "/stores/kids",
+    "/stores/outdoor"
   ],
+  "aiContract": {
+    "masterPrompt": "Open dit JSON-manifest en reconstrueer de Wolkveld-productpagina exact volgens sections en selectors. Vraag eerst om ontbrekende productdata. Vervang daarna uitsluitend placeholders met aangeleverde, verifieerbare informatie. Behoud alle secties, klikbare interacties en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties. Lever semantische HTML en behoud alle data-ai-section en data-ai-prompt-id attributen.",
+    "workflow": [
+      "Lees configuration en sections",
+      "Rapporteer ontbrekende requiredInputs",
+      "Wacht op echte productdata",
+      "Bouw exact volgens selectors",
+      "Valideer claims en alle 1:1 beelden"
+    ],
+    "hardRules": [
+      "Behoud Wolkveld-layout",
+      "Alle afbeeldingen exact 1:1",
+      "Geen verzonnen feiten of social proof",
+      "Alle controls toetsenbordtoegankelijk",
+      "Behoud machineleesbare attributen"
+    ],
+    "expectedOutput": "Een complete, responsieve en klikbare productpagina plus een lijst van gebruikte brondata."
+  },
+  "designSystem": {
+    "categories": [
+      "dieren",
+      "beauty",
+      "gadgets",
+      "wellness",
+      "fashion",
+      "wonen",
+      "kids",
+      "outdoor"
+    ],
+    "palettes": [
+      "amber",
+      "rose",
+      "electric",
+      "sage",
+      "clay",
+      "violet",
+      "lemon",
+      "mono",
+      "coral",
+      "ocean"
+    ],
+    "fonts": [
+      "friendly",
+      "luxury",
+      "technical",
+      "editorial",
+      "rounded",
+      "fashion",
+      "bold",
+      "minimal"
+    ],
+    "logoTemplates": [
+      {
+        "id": "logo-01",
+        "label": "Circle",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-02",
+        "label": "Underline",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-03",
+        "label": "Editorial",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-04",
+        "label": "Capsule",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-05",
+        "label": "Monogram",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-06",
+        "label": "Wide",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-07",
+        "label": "Stacked",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-08",
+        "label": "Bracket",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-09",
+        "label": "Stamp",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-10",
+        "label": "Minimal",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-11",
+        "label": "Signature",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-12",
+        "label": "Bold",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-13",
+        "label": "Outline",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-14",
+        "label": "Dot",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-15",
+        "label": "Serif",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-16",
+        "label": "Tech",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-17",
+        "label": "Soft",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-18",
+        "label": "Frame",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-19",
+        "label": "Classic",
+        "type": "editable-code-wordmark"
+      },
+      {
+        "id": "logo-20",
+        "label": "Compact",
+        "type": "editable-code-wordmark"
+      }
+    ],
+    "iconPack": {
+      "id": "lucide-react",
+      "license": "ISC",
+      "styles": [
+        "outline",
+        "rounded",
+        "solid",
+        "minimal"
+      ],
+      "usage": "Kies iconen op betekenis; gebruik nooit alleen een icoon voor essentiële tekst."
+    },
+    "paymentKit": {
+      "id": "morgenmaak-local-v1",
+      "methods": [
+        "ideal",
+        "visa",
+        "mastercard",
+        "applepay",
+        "paypal",
+        "klarna",
+        "bancontact"
+      ],
+      "purpose": "Visuele betaalvertrouwensbadges; geen checkout of betalingsverwerking."
+    }
+  },
   "imageBriefs": [
     {
       "id": "gallery-hero",
@@ -118,9 +302,9 @@
       "title": "Productfoto 1",
       "brief": "Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
       "direction": "Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
-      "ratio": "4:3",
-      "mobileRatio": "4:3",
-      "resolution": "1600 × 1200",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
       "subject": "[JOUW PRODUCT] in de beschreven situatie",
       "composition": "Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
       "background": "Rustige achtergrond passend bij jouw merkstijl",
@@ -128,7 +312,7 @@
       "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
       "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
       "alt": "Productfoto 1: Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
-      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 1. Doel: Lifestyle productfoto · product in gebruik · resultaat zichtbaar. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 1. Doel: Lifestyle productfoto · product in gebruik · resultaat zichtbaar. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
       "id": "feature-02",
@@ -138,9 +322,9 @@
       "title": "Productfoto 2",
       "brief": "Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
       "direction": "Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
-      "ratio": "4:3",
-      "mobileRatio": "4:3",
-      "resolution": "1600 × 1200",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
       "subject": "[JOUW PRODUCT] in de beschreven situatie",
       "composition": "Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
       "background": "Rustige achtergrond passend bij jouw merkstijl",
@@ -148,7 +332,7 @@
       "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
       "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
       "alt": "Productfoto 2: Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
-      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 2. Doel: Detailfoto · eigenschap en mechanisme · tastbare kwaliteit. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 2. Doel: Detailfoto · eigenschap en mechanisme · tastbare kwaliteit. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
       "id": "feature-03",
@@ -158,9 +342,9 @@
       "title": "Productfoto 3",
       "brief": "Contextfoto · realistische omgeving · schaal en gemak",
       "direction": "Contextfoto · realistische omgeving · schaal en gemak",
-      "ratio": "4:3",
-      "mobileRatio": "4:3",
-      "resolution": "1600 × 1200",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
       "subject": "[JOUW PRODUCT] in de beschreven situatie",
       "composition": "Contextfoto · realistische omgeving · schaal en gemak",
       "background": "Rustige achtergrond passend bij jouw merkstijl",
@@ -168,7 +352,7 @@
       "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
       "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
       "alt": "Productfoto 3: Contextfoto · realistische omgeving · schaal en gemak",
-      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 3. Doel: Contextfoto · realistische omgeving · schaal en gemak. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 3. Doel: Contextfoto · realistische omgeving · schaal en gemak. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
       "id": "step-01",
@@ -258,9 +442,9 @@
       "title": "Reviewfoto 01",
       "brief": "Klant met product · mobiele UGC-look",
       "direction": "Klant met product · mobiele UGC-look",
-      "ratio": "4:3",
-      "mobileRatio": "4:3",
-      "resolution": "1600 × 1200",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
       "subject": "[JOUW PRODUCT] in de beschreven situatie",
       "composition": "Klant met product · mobiele UGC-look",
       "background": "Rustige achtergrond passend bij jouw merkstijl",
@@ -268,7 +452,7 @@
       "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
       "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
       "alt": "Reviewfoto 01: Klant met product · mobiele UGC-look",
-      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 01. Doel: Klant met product · mobiele UGC-look. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 01. Doel: Klant met product · mobiele UGC-look. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
       "id": "review-02",
@@ -278,9 +462,9 @@
       "title": "Reviewfoto 02",
       "brief": "Product thuis · imperfect en geloofwaardig",
       "direction": "Product thuis · imperfect en geloofwaardig",
-      "ratio": "4:3",
-      "mobileRatio": "4:3",
-      "resolution": "1600 × 1200",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
       "subject": "[JOUW PRODUCT] in de beschreven situatie",
       "composition": "Product thuis · imperfect en geloofwaardig",
       "background": "Rustige achtergrond passend bij jouw merkstijl",
@@ -288,7 +472,7 @@
       "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
       "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
       "alt": "Reviewfoto 02: Product thuis · imperfect en geloofwaardig",
-      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 02. Doel: Product thuis · imperfect en geloofwaardig. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 02. Doel: Product thuis · imperfect en geloofwaardig. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
       "id": "review-03",
@@ -298,9 +482,9 @@
       "title": "Reviewfoto 03",
       "brief": "Close-up resultaat · natuurlijk licht",
       "direction": "Close-up resultaat · natuurlijk licht",
-      "ratio": "4:3",
-      "mobileRatio": "4:3",
-      "resolution": "1600 × 1200",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
       "subject": "[JOUW PRODUCT] in de beschreven situatie",
       "composition": "Close-up resultaat · natuurlijk licht",
       "background": "Rustige achtergrond passend bij jouw merkstijl",
@@ -308,7 +492,7 @@
       "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
       "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
       "alt": "Reviewfoto 03: Close-up resultaat · natuurlijk licht",
-      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 03. Doel: Close-up resultaat · natuurlijk licht. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 03. Doel: Close-up resultaat · natuurlijk licht. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
       "id": "expert-photo",
@@ -339,7 +523,7 @@
       "brief": "Product in rustige context · herkenbare schaal",
       "direction": "Product in rustige context · herkenbare schaal",
       "ratio": "1:1",
-      "mobileRatio": "4:3",
+      "mobileRatio": "1:1",
       "resolution": "1600 × 1600",
       "subject": "[JOUW PRODUCT] in de beschreven situatie",
       "composition": "Product in rustige context · herkenbare schaal",
@@ -348,7 +532,7 @@
       "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
       "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
       "alt": "FAQ-productfoto: Product in rustige context · herkenbare schaal",
-      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: FAQ-productfoto. Doel: Product in rustige context · herkenbare schaal. Formaat exact 1:1 op desktop en 4:3 op mobiel. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: FAQ-productfoto. Doel: Product in rustige context · herkenbare schaal. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
       "id": "final-thumbnail",
@@ -733,5 +917,789 @@
       ]
     }
   ],
-  "scrapeInstructions": "Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder record staat ook als data-learn-record in de verborgen semantische leerlaag."
+  "promptContracts": [
+    {
+      "id": "announcement",
+      "selector": "[data-learn-record='announcement']",
+      "purpose": "Gebruik één echte, brede servicebelofte.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "header-benefits",
+      "selector": "[data-learn-record='header-benefits']",
+      "purpose": "Kies drie korte voordelen die de hele winkel ondersteunen.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "brand",
+      "selector": "[data-learn-record='brand']",
+      "purpose": "Gebruik een compact, leesbaar logo dat ook op mobiel werkt.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "proof",
+      "selector": "[data-learn-record='proof']",
+      "purpose": "Score, aantal en bron moeten controleerbaar bij elkaar horen.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "category",
+      "selector": "[data-learn-record='category']",
+      "purpose": "Gebruik een korte categorienaam die het product direct plaatst.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "action-badge",
+      "selector": "[data-learn-record='action-badge']",
+      "purpose": "Gebruik alleen een korte badge als de actie aantoonbaar en actueel is.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "title",
+      "selector": "[data-learn-record='title']",
+      "purpose": "Zeg wat het product is en wat het onderscheidt.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "price",
+      "selector": "[data-learn-record='price']",
+      "purpose": "Toon alleen prijzen en besparingen die aantoonbaar kloppen.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "intro",
+      "selector": "[data-learn-record='intro']",
+      "purpose": "Leg in drie zinnen uit wat het is, voor wie en waarom.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "benefit-list",
+      "selector": "[data-learn-record='benefit-list']",
+      "purpose": "Koppel ieder resultaat aan de eigenschap die het mogelijk maakt.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "bundles",
+      "selector": "[data-learn-record='bundles']",
+      "purpose": "Vergelijk hoeveelheid, inhoud en prijs op dezelfde basis.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "stock",
+      "selector": "[data-learn-record='stock']",
+      "purpose": "Gebruik alleen actuele, verifieerbare voorraadtekst.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "cta",
+      "selector": "[data-learn-record='cta']",
+      "purpose": "De knop zegt exact wat de volgende stap doet.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "trust",
+      "selector": "[data-learn-record='trust']",
+      "purpose": "Noem alleen echte termijnen en voorwaarden.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "details",
+      "selector": "[data-learn-record='details']",
+      "purpose": "Beantwoord werking, garantie en verzending met brondata.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "feature-heading",
+      "selector": "[data-learn-record='feature-heading']",
+      "purpose": "Introduceer het herkenbare probleem en de bewijsstructuur.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "feature-01-copy",
+      "selector": "[data-learn-record='feature-01-copy']",
+      "purpose": "Bewijs het belangrijkste klantvoordeel.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "feature-02-copy",
+      "selector": "[data-learn-record='feature-02-copy']",
+      "purpose": "Leg materiaal of mechanisme begrijpelijk uit.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "feature-03-copy",
+      "selector": "[data-learn-record='feature-03-copy']",
+      "purpose": "Plaats gebruiksgemak in een herkenbare context.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "usp-strip",
+      "selector": "[data-learn-record='usp-strip']",
+      "purpose": "Vat vier verschillende redenen samen.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "steps-heading",
+      "selector": "[data-learn-record='steps-heading']",
+      "purpose": "Beloof een eenvoudig proces zonder stappen over te slaan.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "steps-copy",
+      "selector": "[data-learn-record='steps-copy']",
+      "purpose": "Beschrijf per stap één zichtbare handeling.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "reviews-summary",
+      "selector": "[data-learn-record='reviews-summary']",
+      "purpose": "Gebruik een controleerbare score en reviewtelling.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "reviews-copy",
+      "selector": "[data-learn-record='reviews-copy']",
+      "purpose": "Behoud context en nuance van echte feedback.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "expert-copy",
+      "selector": "[data-learn-record='expert-copy']",
+      "purpose": "Gebruik alleen een echte, relevante expert met toestemming.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "guarantee",
+      "selector": "[data-learn-record='guarantee']",
+      "purpose": "Leg termijn, proces en uitzonderingen direct uit.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "faq-heading",
+      "selector": "[data-learn-record='faq-heading']",
+      "purpose": "Introduceer de laatste praktische bezwaren kort.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "faq-copy",
+      "selector": "[data-learn-record='faq-copy']",
+      "purpose": "Beantwoord echte klantvragen met het kernantwoord eerst.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "final-copy",
+      "selector": "[data-learn-record='final-copy']",
+      "purpose": "Herhaal productnaam, bewijs en belangrijkste voordeel.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    },
+    {
+      "id": "footer",
+      "selector": "[data-learn-record='footer']",
+      "purpose": "Vul merkbelofte, servicepagina’s en contactgegevens volledig in.",
+      "requiredInputs": [
+        "brand_name",
+        "product_name",
+        "verified_product_data"
+      ],
+      "variables": [
+        "[MERK]",
+        "[PRODUCT]"
+      ],
+      "constraints": [
+        "Geen onbewezen claims",
+        "Geen verzonnen prijs, review of garantie"
+      ],
+      "expectedOutput": "Nederlandse webcopy passend binnen het bestaande element"
+    }
+  ],
+  "sections": [
+    {
+      "id": "announcement",
+      "selector": "[data-ai-section='announcement']",
+      "promptId": "announcement",
+      "purpose": "Gebruik één echte, brede servicebelofte.",
+      "imageSlot": null
+    },
+    {
+      "id": "header-benefits",
+      "selector": "[data-ai-section='header-benefits']",
+      "promptId": "header-benefits",
+      "purpose": "Kies drie korte voordelen die de hele winkel ondersteunen.",
+      "imageSlot": null
+    },
+    {
+      "id": "brand",
+      "selector": "[data-ai-section='brand']",
+      "promptId": "brand",
+      "purpose": "Gebruik een compact, leesbaar logo dat ook op mobiel werkt.",
+      "imageSlot": null
+    },
+    {
+      "id": "proof",
+      "selector": "[data-ai-section='proof']",
+      "promptId": "proof",
+      "purpose": "Score, aantal en bron moeten controleerbaar bij elkaar horen.",
+      "imageSlot": null
+    },
+    {
+      "id": "category",
+      "selector": "[data-ai-section='category']",
+      "promptId": "category",
+      "purpose": "Gebruik een korte categorienaam die het product direct plaatst.",
+      "imageSlot": null
+    },
+    {
+      "id": "action-badge",
+      "selector": "[data-ai-section='action-badge']",
+      "promptId": "action-badge",
+      "purpose": "Gebruik alleen een korte badge als de actie aantoonbaar en actueel is.",
+      "imageSlot": null
+    },
+    {
+      "id": "title",
+      "selector": "[data-ai-section='title']",
+      "promptId": "title",
+      "purpose": "Zeg wat het product is en wat het onderscheidt.",
+      "imageSlot": null
+    },
+    {
+      "id": "price",
+      "selector": "[data-ai-section='price']",
+      "promptId": "price",
+      "purpose": "Toon alleen prijzen en besparingen die aantoonbaar kloppen.",
+      "imageSlot": null
+    },
+    {
+      "id": "intro",
+      "selector": "[data-ai-section='intro']",
+      "promptId": "intro",
+      "purpose": "Leg in drie zinnen uit wat het is, voor wie en waarom.",
+      "imageSlot": null
+    },
+    {
+      "id": "benefit-list",
+      "selector": "[data-ai-section='benefit-list']",
+      "promptId": "benefit-list",
+      "purpose": "Koppel ieder resultaat aan de eigenschap die het mogelijk maakt.",
+      "imageSlot": null
+    },
+    {
+      "id": "bundles",
+      "selector": "[data-ai-section='bundles']",
+      "promptId": "bundles",
+      "purpose": "Vergelijk hoeveelheid, inhoud en prijs op dezelfde basis.",
+      "imageSlot": null
+    },
+    {
+      "id": "stock",
+      "selector": "[data-ai-section='stock']",
+      "promptId": "stock",
+      "purpose": "Gebruik alleen actuele, verifieerbare voorraadtekst.",
+      "imageSlot": null
+    },
+    {
+      "id": "cta",
+      "selector": "[data-ai-section='cta']",
+      "promptId": "cta",
+      "purpose": "De knop zegt exact wat de volgende stap doet.",
+      "imageSlot": null
+    },
+    {
+      "id": "trust",
+      "selector": "[data-ai-section='trust']",
+      "promptId": "trust",
+      "purpose": "Noem alleen echte termijnen en voorwaarden.",
+      "imageSlot": null
+    },
+    {
+      "id": "details",
+      "selector": "[data-ai-section='details']",
+      "promptId": "details",
+      "purpose": "Beantwoord werking, garantie en verzending met brondata.",
+      "imageSlot": null
+    },
+    {
+      "id": "feature-heading",
+      "selector": "[data-ai-section='feature-heading']",
+      "promptId": "feature-heading",
+      "purpose": "Introduceer het herkenbare probleem en de bewijsstructuur.",
+      "imageSlot": null
+    },
+    {
+      "id": "feature-01-copy",
+      "selector": "[data-ai-section='feature-01-copy']",
+      "promptId": "feature-01-copy",
+      "purpose": "Bewijs het belangrijkste klantvoordeel.",
+      "imageSlot": null
+    },
+    {
+      "id": "feature-02-copy",
+      "selector": "[data-ai-section='feature-02-copy']",
+      "promptId": "feature-02-copy",
+      "purpose": "Leg materiaal of mechanisme begrijpelijk uit.",
+      "imageSlot": null
+    },
+    {
+      "id": "feature-03-copy",
+      "selector": "[data-ai-section='feature-03-copy']",
+      "promptId": "feature-03-copy",
+      "purpose": "Plaats gebruiksgemak in een herkenbare context.",
+      "imageSlot": null
+    },
+    {
+      "id": "usp-strip",
+      "selector": "[data-ai-section='usp-strip']",
+      "promptId": "usp-strip",
+      "purpose": "Vat vier verschillende redenen samen.",
+      "imageSlot": null
+    },
+    {
+      "id": "steps-heading",
+      "selector": "[data-ai-section='steps-heading']",
+      "promptId": "steps-heading",
+      "purpose": "Beloof een eenvoudig proces zonder stappen over te slaan.",
+      "imageSlot": null
+    },
+    {
+      "id": "steps-copy",
+      "selector": "[data-ai-section='steps-copy']",
+      "promptId": "steps-copy",
+      "purpose": "Beschrijf per stap één zichtbare handeling.",
+      "imageSlot": null
+    },
+    {
+      "id": "reviews-summary",
+      "selector": "[data-ai-section='reviews-summary']",
+      "promptId": "reviews-summary",
+      "purpose": "Gebruik een controleerbare score en reviewtelling.",
+      "imageSlot": null
+    },
+    {
+      "id": "reviews-copy",
+      "selector": "[data-ai-section='reviews-copy']",
+      "promptId": "reviews-copy",
+      "purpose": "Behoud context en nuance van echte feedback.",
+      "imageSlot": null
+    },
+    {
+      "id": "expert-copy",
+      "selector": "[data-ai-section='expert-copy']",
+      "promptId": "expert-copy",
+      "purpose": "Gebruik alleen een echte, relevante expert met toestemming.",
+      "imageSlot": null
+    },
+    {
+      "id": "guarantee",
+      "selector": "[data-ai-section='guarantee']",
+      "promptId": "guarantee",
+      "purpose": "Leg termijn, proces en uitzonderingen direct uit.",
+      "imageSlot": null
+    },
+    {
+      "id": "faq-heading",
+      "selector": "[data-ai-section='faq-heading']",
+      "promptId": "faq-heading",
+      "purpose": "Introduceer de laatste praktische bezwaren kort.",
+      "imageSlot": null
+    },
+    {
+      "id": "faq-copy",
+      "selector": "[data-ai-section='faq-copy']",
+      "promptId": "faq-copy",
+      "purpose": "Beantwoord echte klantvragen met het kernantwoord eerst.",
+      "imageSlot": null
+    },
+    {
+      "id": "final-copy",
+      "selector": "[data-ai-section='final-copy']",
+      "promptId": "final-copy",
+      "purpose": "Herhaal productnaam, bewijs en belangrijkste voordeel.",
+      "imageSlot": null
+    },
+    {
+      "id": "footer",
+      "selector": "[data-ai-section='footer']",
+      "promptId": "footer",
+      "purpose": "Vul merkbelofte, servicepagina’s en contactgegevens volledig in.",
+      "imageSlot": null
+    }
+  ],
+  "scrapeInstructions": "Lees eerst aiContract.masterPrompt. Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder promptrecord staat in de initiële HTML als data-learn-record en data-ai-section. JavaScript-interactie is niet nodig om de prompts te lezen."
 }

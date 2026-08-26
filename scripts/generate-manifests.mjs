@@ -4,14 +4,30 @@ import { annotationBase } from '../src/content/annotations.js';
 
 fs.mkdirSync('public/stores', { recursive: true });
 const routes = ['/', '/stores', ...Object.keys(stores).map((slug) => `/stores/${slug}`)];
+const categories = ['dieren','beauty','gadgets','wellness','fashion','wonen','kids','outdoor'];
+const palettes = ['amber','rose','electric','sage','clay','violet','lemon','mono','coral','ocean'];
+const fonts = ['friendly','luxury','technical','editorial','rounded','fashion','bold','minimal'];
+const logoTemplates = ['Circle','Underline','Editorial','Capsule','Monogram','Wide','Stacked','Bracket','Stamp','Minimal','Signature','Bold','Outline','Dot','Serif','Tech','Soft','Frame','Classic','Compact'].map((label,index)=>({id:`logo-${String(index+1).padStart(2,'0')}`,label,type:'editable-code-wordmark'}));
+const paymentMethods = ['ideal','visa','mastercard','applepay','paypal','klarna','bancontact'];
+const masterPrompt = `Open dit JSON-manifest en reconstrueer de Wolkveld-productpagina exact volgens sections en selectors. Vraag eerst om ontbrekende productdata. Vervang daarna uitsluitend placeholders met aangeleverde, verifieerbare informatie. Behoud alle secties, klikbare interacties en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties. Lever semantische HTML en behoud alle data-ai-section en data-ai-prompt-id attributen.`;
 const manifest = {
-  schemaVersion: '2.0',
+  schemaVersion: '3.0',
+  templateId: 'wolkveld-pdp',
   pageType: 'generic-wolkveld-product-template',
   language: 'nl-NL',
   routes,
+  aiContract: {
+    masterPrompt,
+    workflow: ['Lees configuration en sections','Rapporteer ontbrekende requiredInputs','Wacht op echte productdata','Bouw exact volgens selectors','Valideer claims en alle 1:1 beelden'],
+    hardRules: ['Behoud Wolkveld-layout','Alle afbeeldingen exact 1:1','Geen verzonnen feiten of social proof','Alle controls toetsenbordtoegankelijk','Behoud machineleesbare attributen'],
+    expectedOutput: 'Een complete, responsieve en klikbare productpagina plus een lijst van gebruikte brondata.',
+  },
+  designSystem: {categories,palettes,fonts,logoTemplates,iconPack:{id:'lucide-react',license:'ISC',styles:['outline','rounded','solid','minimal'],usage:'Kies iconen op betekenis; gebruik nooit alleen een icoon voor essentiële tekst.'},paymentKit:{id:'morgenmaak-local-v1',methods:paymentMethods,purpose:'Visuele betaalvertrouwensbadges; geen checkout of betalingsverwerking.'}},
   imageBriefs: imageSlots,
   contentPrompts: Object.entries(annotationBase).map(([id, annotation]) => ({ id, ...annotation })),
-  scrapeInstructions: 'Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder record staat ook als data-learn-record in de verborgen semantische leerlaag.',
+  promptContracts: Object.entries(annotationBase).map(([id, annotation]) => ({id,selector:`[data-learn-record='${id}']`,purpose:annotation.guidance,requiredInputs:['brand_name','product_name','verified_product_data'],variables:['[MERK]','[PRODUCT]'],constraints:['Geen onbewezen claims','Geen verzonnen prijs, review of garantie'],expectedOutput:'Nederlandse webcopy passend binnen het bestaande element'})),
+  sections: Object.entries(annotationBase).map(([id, annotation])=>({id,selector:`[data-ai-section='${id}']`,promptId:id,purpose:annotation.guidance,imageSlot:annotation.shot?.shotId||null})),
+  scrapeInstructions: 'Lees eerst aiContract.masterPrompt. Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder promptrecord staat in de initiële HTML als data-learn-record en data-ai-section. JavaScript-interactie is niet nodig om de prompts te lezen.',
 };
 
 for (const slug of Object.keys(stores)) {
@@ -21,7 +37,7 @@ for (const slug of Object.keys(stores)) {
 }
 
 const index = {
-  schemaVersion: '2.0',
+  schemaVersion: '3.0',
   template: 'generic-wolkveld-product-template',
   routes,
   canonicalManifest: '/stores/dieren/template.json',

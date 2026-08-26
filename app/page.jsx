@@ -1,5 +1,5 @@
 import App from '../src/App.jsx';
 
-export default function Page() {
-  return <App />;
+export default async function Page({ searchParams }) {
+  return <App initialConfig={(await searchParams) || {}} />;
 }

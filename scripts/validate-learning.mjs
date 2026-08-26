@@ -9,6 +9,13 @@ const routes = ['/', '/stores', ...slugs.map((slug) => `/stores/${slug}`)];
 const annotations = getAnnotations();
 const canonicalManifestPath = 'public/stores/dieren/template.json';
 const forbiddenLegacyCopy = /wolknest|hondenmand|wolfvriend/i;
+const appSource = fs.readFileSync('src/App.jsx', 'utf8');
+
+if (slugs.length !== 8) failures.push(`Verwacht exact 8 categorieën, vond ${slugs.length}`);
+if (imageSlots.length !== 18) failures.push(`Verwacht exact 18 beeldslots, vond ${imageSlots.length}`);
+for (const token of ['aria-modal="true"','role="tablist"','aria-selected={tab===id}','onKeyDown={trapFocus}','aria-controls="builder-menu"']) {
+  if (!appSource.includes(token)) failures.push(`Bouwmenu-toegankelijkheid ontbreekt in bron: ${token}`);
+}
 
 const decode = (value = '') => value
   .replace(/<[^>]+>/g, ' ')
@@ -45,6 +52,9 @@ for (const slug of slugs) {
   if (canonicalBytes !== null && bytes !== canonicalBytes) failures.push(`${slug}: manifest wijkt byte-voor-byte af van canoniek manifest`);
   if (forbiddenLegacyCopy.test(bytes)) failures.push(`${slug}: manifest bevat oude productspecifieke data`);
   const manifest = JSON.parse(bytes);
+  if (manifest.designSystem?.palettes?.length !== 10) failures.push(`${slug}: verwacht 10 kleurpaletten`);
+  if (manifest.designSystem?.fonts?.length !== 8) failures.push(`${slug}: verwacht 8 lettertypes`);
+  if (manifest.designSystem?.logoTemplates?.length !== 20) failures.push(`${slug}: verwacht 20 logo-templates`);
   if (JSON.stringify(manifest.routes) !== JSON.stringify(routes)) failures.push(`${slug}: routelijst wijkt af`);
   if (JSON.stringify(manifest.imageBriefs) !== JSON.stringify(imageSlots)) failures.push(`${slug}: beeldslots wijken af van canonieke bron`);
   if (JSON.stringify(manifest.contentPrompts) !== JSON.stringify(expectedContentPrompts)) failures.push(`${slug}: contentprompts wijken af van canonieke bron`);
@@ -99,6 +109,12 @@ async function verifyRenderedRoutes() {
       }
 
       if (/<button[^>]*class="[^"]*learn-marker/.test(html)) failures.push(`${route}: leerlaag staat niet standaard uit`);
+    }
+
+    const configured = await fetch(`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20&icons=solid&pay=ideal%2Cvisa&brand=TESTMERK&product=TESTPRODUCT&c1=%23b65778&c2=%232b1720&c3=%23fffafb&c4=%23f6e8ec`);
+    const configuredHtml = await configured.text();
+    for (const token of ['TESTMERK','TESTPRODUCT','logo-20','lucide-solid','"category":"beauty"','"paymentMethods":["ideal","visa"]']) {
+      if (!configuredHtml.includes(token)) failures.push(`Deelbare URL mist SSR-configuratie: ${token}`);
     }
   } finally {
     server.kill('SIGTERM');

@@ -5,6 +5,6 @@ export const metadata = {
   description: 'Invulbare Wolkveld-productpagina met beeldbriefs en scrape-bare AI-prompts.',
 };
 
-export default function StoresPage() {
-  return <App />;
+export default async function StoresPage({ searchParams }) {
+  return <App initialConfig={(await searchParams) || {}} />;
 }

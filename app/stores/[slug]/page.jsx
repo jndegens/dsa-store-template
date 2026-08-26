@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function StoreTemplatePage({ params }) {
+export default async function StoreTemplatePage({ params, searchParams }) {
   await params;
-  return <App />;
+  return <App initialConfig={(await searchParams) || {}} />;
 }

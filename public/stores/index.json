@@ -1,17 +1,27 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "3.0",
   "template": "generic-wolkveld-product-template",
   "routes": [
     "/",
     "/stores",
     "/stores/dieren",
     "/stores/beauty",
-    "/stores/gadgets"
+    "/stores/gadgets",
+    "/stores/wellness",
+    "/stores/fashion",
+    "/stores/wonen",
+    "/stores/kids",
+    "/stores/outdoor"
   ],
   "canonicalManifest": "/stores/dieren/template.json",
   "aliases": [
     "/stores/dieren/template.json",
     "/stores/beauty/template.json",
-    "/stores/gadgets/template.json"
+    "/stores/gadgets/template.json",
+    "/stores/wellness/template.json",
+    "/stores/fashion/template.json",
+    "/stores/wonen/template.json",
+    "/stores/kids/template.json",
+    "/stores/outdoor/template.json"
   ]
 }
