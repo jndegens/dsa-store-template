@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "4.0",
+  "schemaVersion": "4.1",
   "templateId": "wolkveld-pdp",
   "pageType": "generic-wolkveld-product-template",
   "language": "nl-NL",
@@ -34,12 +34,12 @@
     "configurableUrlParams": [
       "cat",
       "pal",
-      "font",
-      "logo"
+      "font"
     ],
     "expectedOutput": "Een complete, responsieve en klikbare productpagina plus een lijst van gebruikte brondata."
   },
   "designSystem": {
+    "templateBrand": "DSA STORE TEMPLATE",
     "categories": [
       "dieren",
       "beauty",
@@ -71,108 +71,6 @@
       "fashion",
       "bold",
       "minimal"
-    ],
-    "logoTemplates": [
-      {
-        "id": "logo-01",
-        "label": "Circle",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-02",
-        "label": "Underline",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-03",
-        "label": "Editorial",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-04",
-        "label": "Capsule",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-05",
-        "label": "Monogram",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-06",
-        "label": "Wide",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-07",
-        "label": "Stacked",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-08",
-        "label": "Bracket",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-09",
-        "label": "Stamp",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-10",
-        "label": "Minimal",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-11",
-        "label": "Signature",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-12",
-        "label": "Bold",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-13",
-        "label": "Outline",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-14",
-        "label": "Dot",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-15",
-        "label": "Serif",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-16",
-        "label": "Tech",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-17",
-        "label": "Soft",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-18",
-        "label": "Frame",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-19",
-        "label": "Classic",
-        "type": "editable-code-wordmark"
-      },
-      {
-        "id": "logo-20",
-        "label": "Compact",
-        "type": "editable-code-wordmark"
-      }
     ],
     "iconPack": {
       "id": "lucide-react",

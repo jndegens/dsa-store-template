@@ -14,10 +14,12 @@ const appSource = fs.readFileSync('src/App.jsx', 'utf8');
 
 if (slugs.length !== 8) failures.push(`Verwacht exact 8 categorieën, vond ${slugs.length}`);
 if (imageSlots.length !== 18) failures.push(`Verwacht exact 18 beeldslots, vond ${imageSlots.length}`);
-for (const token of ['className="template-toolbar"','aria-controls={`selector-${id}`}','aria-expanded={open}','Exporteer deze prompt','datatrans-payment-logos','ALLE 18 INDIVIDUELE BEELDREGELS','slots:imageSlots.map','ref={cartRef}','copyStyleV2']) {
+for (const token of ['className="template-toolbar"','icon="category"','icon="palette"','icon="font"','className="current-palette"','className="current-font"','DSA STORE TEMPLATE','aria-controls={`selector-${id}`}','aria-expanded={open}','Exporteer deze prompt','datatrans-payment-logos','ALLE 18 INDIVIDUELE BEELDREGELS','slots:imageSlots.map','ref={cartRef}','copyStyleV2']) {
   if (!appSource.includes(token)) failures.push(`Compacte templatebediening ontbreekt in bron: ${token}`);
 }
 if (/setBrandName|setProductName|BuilderMenu|builder-menu/.test(appSource)) failures.push('Merk- of producttekst is nog aanpasbaar via het oude bouwmenu');
+if (/id="logo"|label="Merk & logo"|setLogoId|logoId|logoTemplates|Logo-template/.test(appSource)) failures.push('De verwijderde merk- en logokeuze staat nog in de templatebediening of AI-export');
+if (appSource.indexOf('<TemplateToolbar') > appSource.indexOf('<div className="sale-bar')) failures.push('Template-instellingen staan niet helemaal bovenaan de pagina');
 if (/GEBRUIK-DE-HUIDIGE-PAGINA-URL|De configureerbare URL wordt opgebouwd/.test(appSource)) failures.push('AI-export bevat nog een URL-placeholder');
 for (const asset of ['ideal.svg','visa.svg','mastercard.svg','apple-pay.svg','paypal.svg','klarna.svg','bancontact.svg']) {
   const assetPath=`public/payment-logos/${asset}`;
@@ -61,8 +63,10 @@ for (const slug of slugs) {
   const manifest = JSON.parse(bytes);
   if (manifest.designSystem?.palettes?.length !== 10) failures.push(`${slug}: verwacht 10 kleurpaletten`);
   if (manifest.designSystem?.fonts?.length !== 8) failures.push(`${slug}: verwacht 8 lettertypes`);
-  if (manifest.designSystem?.logoTemplates?.length !== 20) failures.push(`${slug}: verwacht 20 logo-templates`);
-  if (manifest.schemaVersion !== '4.0') failures.push(`${slug}: verwacht manifestschema 4.0`);
+  if (manifest.designSystem?.logoTemplates) failures.push(`${slug}: verwijderde logo-instelling staat nog in het manifest`);
+  if (manifest.designSystem?.templateBrand !== 'DSA STORE TEMPLATE') failures.push(`${slug}: vaste DSA-templatebranding ontbreekt`);
+  if (JSON.stringify(manifest.aiContract?.configurableUrlParams) !== JSON.stringify(['cat','pal','font'])) failures.push(`${slug}: configureerbare URL-parameters zijn niet exact cat, pal en font`);
+  if (manifest.schemaVersion !== '4.1') failures.push(`${slug}: verwacht manifestschema 4.1`);
   if (manifest.designSystem?.paymentKit?.id !== 'datatrans-payment-logos') failures.push(`${slug}: Datatrans payment-kit ontbreekt`);
   if (manifest.designSystem?.iconPack?.source !== 'https://github.com/lucide-icons/lucide') failures.push(`${slug}: officiële Lucide-bron ontbreekt`);
   if (JSON.stringify(manifest.routes) !== JSON.stringify(routes)) failures.push(`${slug}: routelijst wijkt af`);
@@ -121,12 +125,12 @@ async function verifyRenderedRoutes() {
       if (/<button[^>]*class="[^"]*learn-marker/.test(html)) failures.push(`${route}: leerlaag staat niet standaard uit`);
     }
 
-    const configured = await fetch(`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20`);
+    const configured = await fetch(`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury`);
     const configuredHtml = await configured.text();
-    for (const token of ['JOUW MERKNAAM','[JOUW PRODUCTNAAM]','logo-20','"category":{"id":"beauty"','datatrans-payment-logos']) {
+    for (const token of ['DSA STORE TEMPLATE','[JOUW PRODUCTNAAM]','"category":{"id":"beauty"','datatrans-payment-logos']) {
       if (!configuredHtml.includes(token)) failures.push(`Deelbare URL mist SSR-configuratie: ${token}`);
     }
-    const expectedUrl=`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20`;
+    const expectedUrl=`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury`;
     if (!configuredHtml.replaceAll('&amp;','&').includes(expectedUrl)) failures.push('SSR-export bevat niet de exacte configureerbare URL');
     for (const slot of imageSlots) {
       if (!configuredHtml.includes(`"id":"${slot.id}"`)) failures.push(`SSR-export mist individuele beeldregel ${slot.id}`);
@@ -140,7 +144,7 @@ async function verifyRenderedRoutes() {
     const productionRoute='https://morgenmaak-product-template.jndegens.chatgpt.site/stores/beauty';
     for (const spoofHeaders of spoofCases) {
       const response = await new Promise((resolve, reject) => {
-        const request = http.request({ hostname: '127.0.0.1', port, path: '/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20', headers: spoofHeaders }, (result) => {
+        const request = http.request({ hostname: '127.0.0.1', port, path: '/stores/beauty?cat=beauty&pal=rose&font=luxury', headers: spoofHeaders }, (result) => {
           let body = '';
           result.setEncoding('utf8');
           result.on('data', (chunk) => { body += chunk; });
