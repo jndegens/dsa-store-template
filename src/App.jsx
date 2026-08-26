@@ -13,6 +13,20 @@ const Stars = ({ rating, dark = false }) => (
   </span>
 );
 
+function MediaPlaceholder({ media, compact = false, wide = false }) {
+  return (
+    <div className={`media-placeholder ${compact ? 'media-placeholder--compact' : ''} ${wide ? 'media-placeholder--wide' : ''}`} role="img" aria-label={media.alt}>
+      <span className="media-placeholder__number">{media.number}</span>
+      <span className="media-placeholder__corner media-placeholder__corner--tl" />
+      <span className="media-placeholder__corner media-placeholder__corner--tr" />
+      <span className="media-placeholder__corner media-placeholder__corner--bl" />
+      <span className="media-placeholder__corner media-placeholder__corner--br" />
+      <span className="media-placeholder__picture" aria-hidden="true"><Icon name="image" size={compact ? 20 : 34} /></span>
+      {!compact && <div className="media-placeholder__copy"><small>{media.label}</small><strong>{media.title}</strong><p>{media.direction}</p><code>{media.spec}</code></div>}
+    </div>
+  );
+}
+
 function LearnMarker({ id, label, onOpen }) {
   return (
     <button className="learn-marker" type="button" aria-label={`${store.ui.explanationLabel}: ${label}`} onClick={(event) => { event.stopPropagation(); onOpen(id); }}>
@@ -194,14 +208,14 @@ function App() {
         <section className="product-shell">
           <div className="gallery learn-target" data-learn-id="product-gallery">
             <div className="gallery__stage">
-              <img src={store.product.media[mediaIndex].src} alt={store.product.media[mediaIndex].alt} />
+              <MediaPlaceholder media={store.product.media[mediaIndex]} />
               <span className="gallery__count">{String(mediaIndex + 1).padStart(2, '0')} / {String(store.product.media.length).padStart(2, '0')}</span>
               {learnMode && <LearnMarker id="product-gallery" label={store.ui.markerLabels.gallery} onOpen={openAnnotation} />}
             </div>
             <div className="gallery__thumbs" aria-label={store.ui.galleryLabel}>
               {store.product.media.map((media, index) => (
-                <button key={media.src} type="button" className={mediaIndex === index ? 'is-active' : ''} onClick={() => setMediaIndex(index)} aria-label={`${store.ui.viewImage} ${index + 1}`} aria-pressed={mediaIndex === index}>
-                  <img src={media.src} alt="" />
+                <button key={media.id} type="button" className={mediaIndex === index ? 'is-active' : ''} onClick={() => setMediaIndex(index)} aria-label={`${store.ui.viewImage} ${index + 1}: ${media.title}`} aria-pressed={mediaIndex === index}>
+                  <MediaPlaceholder media={media} compact />
                 </button>
               ))}
             </div>
@@ -268,7 +282,7 @@ function App() {
         </section>
 
         <section className="included-section" id="in-de-doos">
-          <div className="included-image"><img src={store.story.includedImage.src} alt={store.story.includedImage.alt} /></div>
+          <div className="included-image"><MediaPlaceholder media={store.story.includedImage} wide /></div>
           <div className="included-copy"><span className="section-number">{store.ui.includedSectionLabel}</span><h2>{store.ui.includedTitle}</h2><ul>{store.story.included.map((item) => <li key={item}><Icon name="check" />{item}</li>)}</ul><button type="button" className="text-button" onClick={() => { document.querySelector('.bundle-selector').scrollIntoView({ behavior: 'smooth' }); }}>{store.ui.chooseSet} <Icon name="arrow" /></button></div>
         </section>
 
@@ -320,7 +334,7 @@ function App() {
       {cartOpen && <><button className="overlay overlay--cart" onClick={closeCart} aria-label={store.ui.closeCart} /><aside className="cart-drawer" ref={cartRef} tabIndex="-1" role="dialog" aria-modal="true" aria-labelledby="cart-title">
         <div className="cart-drawer__header"><div><span>{store.ui.demoCart}</span><h2 id="cart-title">{store.ui.cartTitle}</h2></div><button type="button" className="icon-button" onClick={closeCart} aria-label={store.ui.closeCart}><Icon name="close" /></button></div>
         {!cart ? <div className="empty-cart"><Icon name="cart" size={44} /><h3>{store.ui.emptyCartTitle}</h3><p>{store.ui.emptyCartText}</p><button type="button" className="secondary-button" onClick={closeCart}>{store.ui.continueViewing}</button></div> : <div className="cart-content">
-          <div className="cart-product"><img src={store.product.media[0].src} alt=""/><div><strong>{cart.bundle.label}</strong><span>{cart.bundle.detail}</span><small>{store.ui.quantity}: {cart.quantity}</small></div><strong>{money(cart.total)}</strong></div>
+          <div className="cart-product"><MediaPlaceholder media={store.product.media[0]} compact /><div><strong>{cart.bundle.label}</strong><span>{cart.bundle.detail}</span><small>{store.ui.quantity}: {cart.quantity}</small></div><strong>{money(cart.total)}</strong></div>
           <div className="cart-summary"><span>{store.ui.shipping} <strong>{store.ui.free}</strong></span><span>{store.ui.total} <strong>{money(cart.total)}</strong></span></div>
           <p className="demo-disclosure"><Icon name="info" /> {store.ui.demoDisclosure}</p>
           <button type="button" className="primary-button checkout-button" onClick={demoCheckout}>{store.ui.finishDemo} <Icon name="arrow" /></button>

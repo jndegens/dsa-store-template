@@ -88,10 +88,10 @@ export const store = {
     compareAtPrice: 89,
     currency: 'EUR',
     media: [
-      { src: '/morgenmaak-kit.png', alt: 'Complete MORGENMAAK cold brew starterset met brewer, bonenpot en glas' },
-      { src: '/filter-detail.svg', alt: 'Detailillustratie van het ultrafijne metalen filter' },
-      { src: '/kit-layout.svg', alt: 'Overzicht van alle onderdelen in de starterset' },
-      { src: '/brew-steps.svg', alt: 'Drie eenvoudige stappen voor cold brew' },
+      { id: 'hero', number: '01', label: 'PRODUCTFOTO', title: 'Hero shot', direction: 'Toon het volledige product op een rustige achtergrond.', spec: '1600 × 1600 · JPG/WEBP · 1:1', alt: 'Afbeeldingsplaceholder voor de belangrijkste productfoto' },
+      { id: 'detail', number: '02', label: 'DETAILFOTO', title: 'Bewijs het detail', direction: 'Zoom in op materiaal, afwerking of het belangrijkste mechanisme.', spec: '1600 × 1600 · JPG/WEBP · 1:1', alt: 'Afbeeldingsplaceholder voor een detailfoto van het product' },
+      { id: 'contents', number: '03', label: 'INHOUDSFOTO', title: 'Wat krijg je?', direction: 'Leg alle onderdelen overzichtelijk naast elkaar.', spec: '1600 × 1600 · JPG/WEBP · 1:1', alt: 'Afbeeldingsplaceholder voor alle onderdelen van de set' },
+      { id: 'lifestyle', number: '04', label: 'LIFESTYLE', title: 'Product in gebruik', direction: 'Laat het product in een herkenbaar gebruiksmoment zien.', spec: '1600 × 1600 · JPG/WEBP · 1:1', alt: 'Afbeeldingsplaceholder voor het product in gebruik' },
     ],
     bundles: [
       { id: 'starter', label: 'Starterset', detail: '1 brewer · 4 glazen', price: 69, badge: 'Meest gekozen' },
@@ -120,7 +120,7 @@ export const store = {
       { number: '02', title: 'Schenk', text: 'Voeg koud water toe en draai het deksel vast.' },
       { number: '03', title: 'Slaap', text: 'Laat 8–12 uur trekken. Schenk ’s ochtends direct in.' },
     ],
-    includedImage: { src: '/kit-layout.svg', alt: 'Illustratief overzicht van de onderdelen van de starterset' },
+    includedImage: { id: 'included', number: '05', label: 'OVERZICHTSFOTO', title: 'Alles wat wordt meegeleverd', direction: 'Fotografeer de complete inhoud van bovenaf en houd elk onderdeel herkenbaar.', spec: '1800 × 1400 · JPG/WEBP · 9:7', alt: 'Afbeeldingsplaceholder voor de complete inhoud van de starterset' },
     included: ['Ribbelglazen brewer van 1 liter', 'Ultrafijn roestvrijstalen filter', 'Lekvrij kobaltblauw deksel', 'Maatlepel en startgids', 'Vier stapelbare glazen'],
   },
   reviews: [
@@ -135,11 +135,11 @@ export const store = {
     { question: 'Is dit een echte winkel?', answer: 'Nee. Dit is een interactieve onderwijstemplate. Er wordt niets afgerekend en alle productdata, reviews en voorwaarden zijn herkenbare voorbeeldinhoud.' },
   ],
   colors: {
-    paper: '#f4f0e7',
-    ink: '#101b3a',
-    cobalt: '#2446a8',
-    tomato: '#ee4d35',
-    amber: '#b7682d',
+    paper: '#f7f8f5',
+    ink: '#15201c',
+    cobalt: '#0b6b5d',
+    tomato: '#ef6a4c',
+    amber: '#c7f36b',
   },
 };
 
@@ -158,6 +158,7 @@ export const icons = {
   menu: [{ tag: 'path', props: { d: 'M4 7h16M4 12h16M4 17h16' } }],
   minus: [{ tag: 'path', props: { d: 'M5 12h14' } }],
   plus: [{ tag: 'path', props: { d: 'M5 12h14M12 5v14' } }],
+  image: [{ tag: 'rect', props: { x: 3, y: 4, width: 18, height: 16, rx: 1 } }, { tag: 'circle', props: { cx: 8.5, cy: 9, r: 1.5 } }, { tag: 'path', props: { d: 'M4 17l5-5 3 3 2-2 6 6' } }],
   chevron: [{ tag: 'path', props: { d: 'M6 9l6 6 6-6' } }],
 };
 
