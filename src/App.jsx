@@ -1,355 +1,104 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { icons, money, store } from './content/product.js';
+import { icons, money, stores } from './content/product.js';
 
-const Icon = ({ name, size = 22 }) => {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{(icons[name] || []).map(({ tag: Tag, props }, index) => <Tag key={`${name}-${index}`} {...props} />)}</svg>;
+function Icon({name,size=20}) { return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{(icons[name]||[]).map(([Tag,props],i)=>{const El=Tag;return <El key={i}{...props}/>})}</svg>; }
+function Stars({rating}) { return <span className="stars" aria-label={`${rating} van 5 sterren`}>★★★★★</span>; }
+
+const annotationBase = {
+  announcement:{label:'Aankondigingsbalk',type:'copy',guidance:'Kies één concrete servicebelofte die voor bijna iedere bezoeker geldt.',prompt:'Schrijf 5 aankondigingsbalken van maximaal 55 tekens voor [PRODUCT]. Gebruik alleen een echte verzend-, garantie- of servicebelofte. Vermijd nep-urgentie.',checklist:['Eén voordeel','Maximaal 55 tekens','Feitelijk bewijsbaar']},
+  brand:{label:'Merk en logo',type:'brand',guidance:'Een korte, leesbare merknaam bouwt herkenning en brengt de bezoeker terug naar boven.',prompt:'Bedenk 12 korte merknamen voor [PRODUCTCATEGORIE]. Ze moeten makkelijk uitspreekbaar en onderscheidend zijn. Geef per naam één tagline. Controleer daarna handelsmerken en domeinen.',checklist:['Leesbaar op mobiel','Past bij de niche','Merkcheck vereist']},
+  title:{label:'Producttitel',type:'copy',guidance:'De titel zegt wat het product is. De ondertitel maakt het gewenste gebruiksmoment concreet.',prompt:'Schrijf 10 producttitels voor [PRODUCT], maximaal 6 woorden. Benoem producttype en belangrijkste onderscheid. Voeg per titel een ondertitel van maximaal 10 woorden toe. Geen superlatieven zonder bewijs.',checklist:['Producttype duidelijk','Belangrijk onderscheid','Geen onbewezen claim']},
+  proof:{label:'Reviewbewijs',type:'social-proof',guidance:'Score en aantal horen samen en linken naar de onderliggende reviews.',prompt:'Vat deze geverifieerde reviews van [PRODUCT] samen: [RUWE REVIEWS]. Geef 3 terugkerende thema’s, het vaakst genoemde nadeel en de transparant berekende gemiddelde score. Verzin niets.',checklist:['Echte bron','Score plus aantal','Ook nuance']},
+  price:{label:'Prijs en korting',type:'offer',guidance:'Maak de huidige prijs dominant. Toon alleen een vergelijkingsprijs als die aantoonbaar geldig is.',prompt:'Maak een helder prijsblok voor [PRODUCT] met verkoopprijs [PRIJS] en geldige vergelijkingsprijs [VAN-PRIJS]. Bereken de besparing exact. Laat kortingstaal weg wanneer de referentieprijs niet aantoonbaar is.',checklist:['Prijs dominant','Besparing narekenbaar','Geen verborgen kosten']},
+  bundles:{label:'Voordeelbundels',type:'offer',guidance:'Vergelijk iedere optie op dezelfde dimensies: hoeveelheid, inhoud, prijs en besparing.',prompt:'Ontwerp 3 eerlijke bundels voor [PRODUCT]. Geef per bundel: exacte inhoud, totaalprijs, prijs per stuk, doelgroep en feitelijke badge. Adviseer alleen een optie wanneer de waarde aantoonbaar beter is.',checklist:['Exacte inhoud','Zelfde vergelijkingsbasis','Selectie zichtbaar']},
+  cta:{label:'Primaire koopknop',type:'conversion',guidance:'De knop beschrijft exact wat er na de klik gebeurt. Praktische geruststelling staat er direct onder.',prompt:'Schrijf 8 actieve CTA-knoppen voor [PRODUCT], maximaal 4 woorden. De tekst moet exact overeenkomen met de vervolgstap. Voeg per CTA één korte regel toe over [VERZENDING/GARANTIE].',checklist:['Actief werkwoord','Eén primaire actie','Uitkomst klopt']},
+  benefits:{label:'Belangrijkste voordelen',type:'copy',guidance:'Combineer ieder gewenst resultaat met de producteigenschap die dat mogelijk maakt.',prompt:'Zet deze eigenschappen van [PRODUCT] om in 3 voordelen: [EIGENSCHAPPEN]. Geef per voordeel een kop van maximaal 5 woorden en één feitelijke uitlegzin. Behoud beperkingen.',checklist:['Resultaat plus reden','Snel scanbaar','Geen absolute claims']},
+  story:{label:'Probleem en mechanisme',type:'content',guidance:'Deze sectie maakt duidelijk waarom het probleem bestaat en hoe het product praktisch helpt.',prompt:'Schrijf een probleem-mechanisme-sectie voor [PRODUCT]. Open met een herkenbaar moment, leg in gewone taal uit hoe [MECHANISME] helpt en eindig met precies 3 gebruiksstappen. Maximaal 160 woorden.',checklist:['Herkenbaar probleem','Mechanisme uitgelegd','Drie concrete stappen']},
+  included:{label:'Wat zit er in de doos?',type:'content',guidance:'Een exacte inhoudslijst voorkomt onzekerheid en retouren.',prompt:'Maak een verpakkingsinhoud-sectie voor [PRODUCT] op basis van [ECHTE INHOUD]. Noem ieder onderdeel exact één keer en voeg niets toe dat niet wordt meegeleverd.',checklist:['Alles één keer','Exacte benamingen','Geen verzonnen extra’s']},
+  reviews:{label:'Reviewsectie',type:'social-proof',guidance:'Gebruik uitsluitend echte feedback met context, concreet resultaat en ruimte voor nuance.',prompt:'Structureer deze echte klantfeedback voor [PRODUCT]: [RUWE REVIEWS]. Behoud betekenis en formulering, anonimiseer persoonsgegevens, verzin niets en selecteer een evenwichtige mix inclusief één genuanceerde review.',checklist:['Echte bron','Context zichtbaar','Ook nuance']},
+  faq:{label:'Veelgestelde vragen',type:'content',guidance:'Beantwoord bezwaren die nog niet eerder zijn opgelost. Geef eerst het directe antwoord.',prompt:'Maak 8 FAQ’s voor [PRODUCT] uit [KLANTVRAGEN]. Begin ieder antwoord met een direct kernfeit, houd het onder 55 woorden en verzin geen beleid of productspecificaties.',checklist:['Gebaseerd op bron','Antwoord eerst','Geen herhaling']},
 };
 
-const Stars = ({ rating, dark = false }) => (
-  <span className={`stars ${dark ? 'stars--dark' : ''}`} aria-label={`${rating} ${store.ui.starsLabel}`}>
-    {[0, 1, 2, 3, 4].map((n) => <span key={n}>★</span>)}
-  </span>
-);
-
-function MediaPlaceholder({ media, compact = false, wide = false }) {
-  return (
-    <div className={`media-placeholder ${compact ? 'media-placeholder--compact' : ''} ${wide ? 'media-placeholder--wide' : ''}`} role="img" aria-label={media.alt}>
-      <span className="media-placeholder__number">{media.number}</span>
-      <span className="media-placeholder__corner media-placeholder__corner--tl" />
-      <span className="media-placeholder__corner media-placeholder__corner--tr" />
-      <span className="media-placeholder__corner media-placeholder__corner--bl" />
-      <span className="media-placeholder__corner media-placeholder__corner--br" />
-      <span className="media-placeholder__picture" aria-hidden="true"><Icon name="image" size={compact ? 20 : 34} /></span>
-      {!compact && <div className="media-placeholder__copy"><small>{media.label}</small><strong>{media.title}</strong><p>{media.direction}</p><code>{media.spec}</code></div>}
-    </div>
-  );
+function getAnnotations(store){
+  const shots=Object.fromEntries(store.product.media.map((m)=>[m.id,{label:m.title,type:`beeldbrief · ${m.shotType}`,guidance:m.direction,prompt:m.prompt,checklist:[`Altijd ${m.ratio}`,`Onderwerp: ${m.subject}`,`Verplicht: ${m.mustInclude}`,`Vermijd: ${m.avoid}`],shot:m}]));
+  return {...annotationBase,...shots};
 }
 
-function LearnMarker({ id, label, onOpen }) {
-  return (
-    <button className="learn-marker" type="button" aria-label={`${store.ui.explanationLabel}: ${label}`} onClick={(event) => { event.stopPropagation(); onOpen(id); }}>
-      <span>{label}</span><Icon name="info" size={18} />
-    </button>
-  );
+function MediaCard({media,compact=false,onOpen,learning=false}){
+  return <div className={`shot ${compact?'shot--compact':''} ${learning?'shot--learning':''}`} data-shot-id={media.shotId} data-ratio="1:1" role="img" aria-label={media.alt} onClick={()=>learning&&onOpen(media.id)}>
+    <span className="shot__number">{media.number}</span><span className="shot__ratio">1:1</span>
+    <div className="shot__visual" aria-hidden="true"><Icon name="image" size={compact?20:32}/></div>
+    {!compact&&<div className="shot__caption"><span>{media.shotType}</span><strong>{media.title}</strong><p>{media.direction}</p><small>1600 × 1600 · klik voor AI-brief</small></div>}
+    {learning&&!compact&&<button className="shot__open" type="button" onClick={(e)=>{e.stopPropagation();onOpen(media.id)}}>Open beeldbrief <Icon name="arrow" size={15}/></button>}
+  </div>
 }
 
-function useFocusTrap(open, dialogRef, restoreRef, onClose) {
-  useEffect(() => {
-    if (!open || !dialogRef.current) return undefined;
-    const dialog = dialogRef.current;
-    const selector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    const focusables = () => [...dialog.querySelectorAll(selector)];
-    (focusables()[0] || dialog).focus();
-    const trap = (event) => {
-      if (event.key === 'Escape') { event.preventDefault(); onClose(); return; }
-      if (event.key !== 'Tab') return;
-      const items = focusables();
-      if (!items.length) { event.preventDefault(); return; }
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    };
-    dialog.addEventListener('keydown', trap);
-    return () => {
-      dialog.removeEventListener('keydown', trap);
-      requestAnimationFrame(() => restoreRef.current?.focus?.());
-    };
-  }, [open, dialogRef, restoreRef]);
+function Marker({id,label,onOpen}){return <button className="marker" type="button" onClick={(e)=>{e.stopPropagation();onOpen(id)}} aria-label={`Open uitleg voor ${label}`}><Icon name="info" size={16}/><span>{label}</span></button>}
+
+function LearnTarget({id,label,learning,onOpen,className='',children,as:Tag='div',...rest}){return <Tag className={`learn-target ${className}`} data-learn-id={id} {...rest}>{children}{learning&&<Marker id={id} label={label} onOpen={onOpen}/>}</Tag>}
+
+function Hub(){
+  return <main className="hub"><header className="hub__header"><span>DSA · STORE LIBRARY</span><h1>Begin met een winkel<br/>die al klopt.</h1><p>Kies je niche. De structuur blijft conversiegericht; kleur, typografie, inhoud en iedere 1:1-beeldbrief passen zich aan.</p></header><section className="hub__grid" aria-label="Kies een storetemplate">{Object.values(stores).map((s,i)=><a key={s.slug} href={`/stores/${s.slug}`} className={`hub-card ${s.fontClass}`} style={{'--card':s.colors.primary,'--wash':s.colors.soft,'--cardInk':s.colors.ink}}><span>0{i+1} · {s.nicheLabel}</span><div className="hub-card__mock"><i>{s.mark}</i><div><b/><b/><b/></div></div><h2>{s.brand}</h2><p>{s.product.name}</p><strong>Open template <Icon name="arrow"/></strong></a>)}</section><footer className="hub__footer">Eén codebasis · drie niches · alle beeldslots 1:1 · prompts scrape-baar</footer></main>
 }
 
-function App() {
-  const [learnMode, setLearnMode] = useState(false);
-  const [annotations, setAnnotations] = useState([]);
-  const [activeAnnotationId, setActiveAnnotationId] = useState(null);
-  const [mediaIndex, setMediaIndex] = useState(0);
-  const [bundleId, setBundleId] = useState(store.product.bundles[0].id);
-  const [quantity, setQuantity] = useState(1);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [cart, setCart] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [reviewIndex, setReviewIndex] = useState(0);
-  const [copied, setCopied] = useState(false);
-  const [notice, setNotice] = useState('');
-  const [previewAnnotationId, setPreviewAnnotationId] = useState(null);
-  const panelRef = useRef(null);
-  const cartRef = useRef(null);
-  const annotationTriggerRef = useRef(null);
-  const cartTriggerRef = useRef(null);
+export default function App({page='store',niche='dieren'}){
+  if(page==='hub')return <Hub/>;
+  return <StorePage initialNiche={stores[niche]?niche:'dieren'}/>;
+}
 
-  const selectedBundle = store.product.bundles.find((bundle) => bundle.id === bundleId);
-  const activeAnnotation = annotations.find((item) => item.id === activeAnnotationId);
-  const previewAnnotation = annotations.find((item) => item.id === previewAnnotationId);
-  const palette = useMemo(() => ({
-    '--paper': store.colors.paper,
-    '--ink': store.colors.ink,
-    '--cobalt': store.colors.cobalt,
-    '--tomato': store.colors.tomato,
-    '--amber': store.colors.amber,
-  }), []);
+function StorePage({initialNiche}){
+  const store=stores[initialNiche];
+  const annotations=useMemo(()=>getAnnotations(store),[store]);
+  const [learning,setLearning]=useState(false),[activeId,setActiveId]=useState(null),[mediaIndex,setMediaIndex]=useState(0),[bundleId,setBundleId]=useState(store.product.bundles[0].id),[quantity,setQuantity]=useState(1),[reviewIndex,setReviewIndex]=useState(0),[cart,setCart]=useState(null),[menu,setMenu]=useState(false),[copied,setCopied]=useState(false);
+  const drawerRef=useRef(null),restoreRef=useRef(null);
+  const active=activeId?annotations[activeId]:null;
+  const bundle=store.product.bundles.find((b)=>b.id===bundleId);
+  const theme={'--paper':store.colors.paper,'--ink':store.colors.ink,'--primary':store.colors.primary,'--accent':store.colors.accent,'--soft':store.colors.soft,'--signal':store.colors.signal};
+  const review=store.reviews[reviewIndex],reviewShot=store.product.media.find((m)=>m.id.endsWith('review'));
 
-  useEffect(() => {
-    fetch('/learning.json')
-      .then((response) => response.json())
-      .then((data) => {
-        setAnnotations(data.annotations);
-        const params = new URLSearchParams(window.location.search);
-        const annotation = params.get('annotation');
-        if (params.get('learn') === '1') setLearnMode(true);
-        if (annotation && data.annotations.some((item) => item.id === annotation)) {
-          setLearnMode(true);
-          setActiveAnnotationId(annotation);
-        }
-      });
-  }, []);
+  useEffect(()=>{const p=new URLSearchParams(location.search);if(p.get('learn')==='1')setLearning(true);const a=p.get('annotation');if(a&&annotations[a])setActiveId(a)},[annotations]);
+  useEffect(()=>{if(!active)return;const node=drawerRef.current;node?.focus();const key=(e)=>{if(e.key==='Escape')closePanel();if(e.key==='Tab'&&node){const focusable=[...node.querySelectorAll('button,a,[tabindex]:not([tabindex="-1"])')].filter((el)=>!el.disabled);if(!focusable.length)return;const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}};document.addEventListener('keydown',key);return()=>document.removeEventListener('keydown',key)},[activeId]);
+  const syncUrl=(learn,id)=>{const u=new URL(location.href);learn?u.searchParams.set('learn','1'):u.searchParams.delete('learn');id?u.searchParams.set('annotation',id):u.searchParams.delete('annotation');history.replaceState({},'',u)};
+  const openPanel=(id)=>{restoreRef.current=document.activeElement;setLearning(true);setActiveId(id);syncUrl(true,id)};
+  const closePanel=()=>{setActiveId(null);syncUrl(learning,null);requestAnimationFrame(()=>restoreRef.current?.focus?.())};
+  const toggleLearning=()=>{const next=!learning;setLearning(next);if(!next)setActiveId(null);syncUrl(next,null)};
+  const copyPrompt=async()=>{try{await navigator.clipboard.writeText(active.prompt)}catch{}setCopied(true);setTimeout(()=>setCopied(false),1400)};
+  const add=()=>setCart({bundle,quantity,total:bundle.price*quantity});
 
-  const openAnnotation = (id) => {
-    annotationTriggerRef.current = document.activeElement;
-    setActiveAnnotationId(id);
-    const url = new URL(window.location.href);
-    url.searchParams.set('learn', '1');
-    url.searchParams.set('annotation', id);
-    window.history.replaceState({}, '', url);
-  };
-
-  const openCart = () => {
-    cartTriggerRef.current = document.activeElement;
-    setCartOpen(true);
-  };
-
-  const closeCart = () => setCartOpen(false);
-
-  const closeAnnotation = () => {
-    setActiveAnnotationId(null);
-    const url = new URL(window.location.href);
-    url.searchParams.delete('annotation');
-    window.history.replaceState({}, '', url);
-  };
-
-  const toggleLearn = () => {
-    const next = !learnMode;
-    setLearnMode(next);
-    if (!next) setActiveAnnotationId(null);
-    const url = new URL(window.location.href);
-    if (next) url.searchParams.set('learn', '1'); else { url.searchParams.delete('learn'); url.searchParams.delete('annotation'); }
-    window.history.replaceState({}, '', url);
-  };
-
-  const addToCart = () => {
-    setCart({ bundle: selectedBundle, quantity, total: selectedBundle.price * quantity });
-    openCart();
-  };
-
-  const copyPrompt = async () => {
-    try {
-      await navigator.clipboard.writeText(activeAnnotation.prompt);
-    } catch {
-      const text = document.createElement('textarea');
-      text.value = activeAnnotation.prompt;
-      document.body.appendChild(text);
-      text.select();
-      document.execCommand('copy');
-      text.remove();
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1800);
-  };
-
-  const demoCheckout = () => {
-    setCartOpen(false);
-    setCart(null);
-    setNotice(store.ui.demoComplete);
-    setTimeout(() => setNotice(''), 4000);
-  };
-
-  useFocusTrap(Boolean(activeAnnotation), panelRef, annotationTriggerRef, closeAnnotation);
-  useFocusTrap(cartOpen, cartRef, cartTriggerRef, closeCart);
-
-  const learnEventId = (event) => event.target.closest('[data-learn-id]')?.dataset.learnId || null;
-
-  return (
-    <div className={`app ${learnMode ? 'is-learning' : ''}`} style={palette}
-      onPointerOver={(event) => learnMode && setPreviewAnnotationId(learnEventId(event))}
-      onPointerOut={(event) => learnMode && setPreviewAnnotationId(event.relatedTarget?.closest?.('[data-learn-id]')?.dataset.learnId || null)}
-      onFocusCapture={(event) => learnMode && setPreviewAnnotationId(learnEventId(event))}
-      onBlurCapture={(event) => learnMode && setPreviewAnnotationId(event.relatedTarget?.closest?.('[data-learn-id]')?.dataset.learnId || null)}>
-      <a className="skip-link" href="#product-main">{store.ui.skipLink}</a>
-
-      <div className="announcement learn-target" data-learn-id="announcement-bar">
-        <span>{store.announcement}</span>
-        {learnMode && <LearnMarker id="announcement-bar" label={store.ui.markerLabels.announcement} onOpen={openAnnotation} />}
-      </div>
-
-      <header className="site-header" id="top">
-        <a className="brand learn-target" data-learn-id="brand-logo" href="#top" aria-label={`${store.brand.name}, ${store.ui.backToTop}`}>
-          <span className="brand__mark">{store.brand.logoMark}</span>
-          <span className="brand__name">{store.brand.name}</span>
-          {learnMode && <LearnMarker id="brand-logo" label={store.ui.markerLabels.logo} onOpen={openAnnotation} />}
-        </a>
-        <nav className="desktop-nav" aria-label={store.ui.mainNavigationLabel}>
-          {store.navigation.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
-        </nav>
-        <div className="header-actions">
-          <button className={`learn-toggle ${learnMode ? 'is-active' : ''}`} type="button" onClick={toggleLearn} aria-pressed={learnMode}>
-            <span className="learn-toggle__dot" /> {learnMode ? store.ui.learnOn : store.ui.learnOff}
-          </button>
-          <button className="icon-button cart-button" type="button" onClick={openCart} aria-label={`${store.ui.demoCart}${cart ? `, ${cart.quantity} ${store.ui.productSingular}` : ''}`}>
-            <Icon name="cart" /><span>{cart?.quantity || 0}</span>
-          </button>
-          <button className="icon-button menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={menuOpen ? store.ui.closeMenu : store.ui.openMenu}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
+  return <div className={`store ${store.fontClass} ${learning?'is-learning':''}`} style={theme}>
+    <a className="skip" href="#main">Ga naar productinformatie</a>
+    <LearnTarget as="div" id="announcement" label="Balk" learning={learning} onOpen={openPanel} className="announcement">{store.announcement}</LearnTarget>
+    <header className="header" id="top"><a className="brand" href="#top"><i>{store.mark}</i><b>{store.brand}</b>{learning&&<Marker id="brand" label="Logo" onOpen={openPanel}/>}</a><nav>{store.navigation.map(n=><a key={n.href} href={n.href}>{n.label}</a>)}</nav><div className="header__actions"><button className={`learn-toggle ${learning?'on':''}`} onClick={toggleLearning} aria-pressed={learning}><Icon name="info"/>{learning?store.ui.learnOn:store.ui.learnOff}</button><button className="round" onClick={()=>setCart(cart||{bundle,quantity:0,total:0})} aria-label="Open demo winkelmand"><Icon name="cart"/><em>{cart?.quantity||0}</em></button><button className="round menu" onClick={()=>setMenu(!menu)} aria-label="Open menu"><Icon name={menu?'close':'menu'}/></button></div></header>
+    {menu&&<nav className="mobile-nav">{store.navigation.map(n=><a key={n.href} href={n.href} onClick={()=>setMenu(false)}>{n.label}<Icon name="arrow"/></a>)}</nav>}
+    <main id="main">
+      <section className="pdp">
+        <div className="gallery"><div className="gallery__main"><MediaCard media={store.product.media[mediaIndex]} learning={learning} onOpen={openPanel}/><span className="gallery__count">{mediaIndex+1} / {store.product.media.length}</span></div><div className="thumbs">{store.product.media.map((m,i)=><button key={m.id} className={i===mediaIndex?'active':''} onClick={()=>setMediaIndex(i)} aria-label={`Bekijk ${m.title}`}><MediaCard media={m} compact/></button>)}</div></div>
+        <div className="buy"><div className="crumb">Home / {store.category}</div><span className="eyebrow">{store.product.eyebrow}</span><LearnTarget id="title" label="Titel" learning={learning} onOpen={openPanel} className="title"><h1>{store.product.name}</h1><p>{store.product.subtitle}</p></LearnTarget>
+          <LearnTarget as="a" href="#reviews" id="proof" label="Bewijs" learning={learning} onOpen={openPanel} className="rating"><Stars rating={store.product.rating}/><b>{store.product.rating}</b><span>{store.product.reviewCount} {store.ui.reviews}</span></LearnTarget>
+          <p className="description">{store.product.description}</p><ul className="bullets">{store.product.bullets.map(b=><li key={b}><Icon name="check"/>{b}</li>)}</ul>
+          <LearnTarget id="price" label="Prijs" learning={learning} onOpen={openPanel} className="price"><b>{money(bundle.price)}</b><s>{money(bundle.compareAtPrice||store.product.compareAtPrice)}</s>{(bundle.compareAtPrice||bundle.id==='single')&&<span>{store.ui.save} {money((bundle.compareAtPrice||store.product.compareAtPrice)-bundle.price)}</span>}</LearnTarget>
+          <LearnTarget as="fieldset" id="bundles" label="Bundels" learning={learning} onOpen={openPanel} className="bundles"><legend>{store.ui.choose}</legend>{store.product.bundles.map(b=><label key={b.id} className={bundleId===b.id?'selected':''}><input type="radio" name="bundle" checked={bundleId===b.id} onChange={()=>setBundleId(b.id)}/><i/><span><b>{b.label}</b><small>{b.detail}</small></span><span><b>{money(b.price)}</b>{b.badge&&<small>{b.badge}</small>}</span></label>)}</LearnTarget>
+          <LearnTarget id="cta" label="CTA" learning={learning} onOpen={openPanel} className="purchase"><div className="qty"><button onClick={()=>setQuantity(Math.max(1,quantity-1))} aria-label="Aantal verlagen"><Icon name="minus"/></button><span>{quantity}</span><button onClick={()=>setQuantity(quantity+1)} aria-label="Aantal verhogen"><Icon name="plus"/></button></div><button className="cta" onClick={add}>{store.ui.add}<span>{money(bundle.price*quantity)}</span></button></LearnTarget>
+          <div className="trust"><span><Icon name="check"/>{store.ui.shipping}</span><span><Icon name="shield"/>{store.ui.guarantee}</span></div>
+          <LearnTarget id="benefits" label="Voordelen" learning={learning} onOpen={openPanel} className="benefits">{store.product.bullets.map((b,i)=><div key={b}><i>0{i+1}</i><span>{b}</span></div>)}</LearnTarget>
         </div>
-      </header>
-
-      {menuOpen && <nav className="mobile-nav" aria-label={store.ui.mobileNavigationLabel}>{store.navigation.map((item) => <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}<Icon name="arrow" /></a>)}</nav>}
-
-      <main id="product-main">
-        <section className="product-shell">
-          <div className="gallery learn-target" data-learn-id="product-gallery">
-            <div className="gallery__stage">
-              <MediaPlaceholder media={store.product.media[mediaIndex]} />
-              <span className="gallery__count">{String(mediaIndex + 1).padStart(2, '0')} / {String(store.product.media.length).padStart(2, '0')}</span>
-              {learnMode && <LearnMarker id="product-gallery" label={store.ui.markerLabels.gallery} onOpen={openAnnotation} />}
-            </div>
-            <div className="gallery__thumbs" aria-label={store.ui.galleryLabel}>
-              {store.product.media.map((media, index) => (
-                <button key={media.id} type="button" className={mediaIndex === index ? 'is-active' : ''} onClick={() => setMediaIndex(index)} aria-label={`${store.ui.viewImage} ${index + 1}: ${media.title}`} aria-pressed={mediaIndex === index}>
-                  <MediaPlaceholder media={media} compact />
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="buy-column">
-            <div className="breadcrumb"><a href="#top">{store.ui.home}</a><span>/</span><span>{store.ui.breadcrumbCategory}</span></div>
-            <div className="eyebrow">{store.product.eyebrow}</div>
-            <div className="title-block learn-target" data-learn-id="product-title">
-              <h1>{store.product.name}</h1>
-              <p className="subtitle">{store.product.subtitle}</p>
-              {learnMode && <LearnMarker id="product-title" label={store.ui.markerLabels.title} onOpen={openAnnotation} />}
-            </div>
-            <a className="rating-summary learn-target" data-learn-id="review-summary" href="#reviews">
-              <Stars rating={store.product.rating} /><strong>{store.product.rating}</strong><span>{store.product.reviewCount} {store.ui.exampleReviews}</span>
-              {learnMode && <LearnMarker id="review-summary" label={store.ui.markerLabels.proof} onOpen={openAnnotation} />}
-            </a>
-            <p className="product-description">{store.product.description}</p>
-
-            <div className="price-block learn-target" data-learn-id="price-block" aria-live="polite">
-              <strong>{money(selectedBundle.price)}</strong>
-              {selectedBundle.compareAtPrice && <><s>{money(selectedBundle.compareAtPrice)}</s><span>{store.ui.save} {money(selectedBundle.compareAtPrice - selectedBundle.price)}</span></>}
-              {!selectedBundle.compareAtPrice && selectedBundle.id === 'starter' && <><s>{money(store.product.compareAtPrice)}</s><span>{store.ui.exampleDeal}</span></>}
-              {learnMode && <LearnMarker id="price-block" label={store.ui.markerLabels.price} onOpen={openAnnotation} />}
-            </div>
-
-            <fieldset className="bundle-selector learn-target" data-learn-id="bundle-selector">
-              <legend>{store.ui.chooseSet}</legend>
-              {store.product.bundles.map((bundle) => (
-                <label key={bundle.id} className={bundleId === bundle.id ? 'is-selected' : ''}>
-                  <input type="radio" name="bundle" value={bundle.id} checked={bundleId === bundle.id} onChange={() => setBundleId(bundle.id)} />
-                  <span className="radio-dot" />
-                  <span className="bundle-copy"><strong>{bundle.label}</strong><small>{bundle.detail}</small></span>
-                  <span className="bundle-price"><strong>{money(bundle.price)}</strong>{bundle.badge && <small>{bundle.badge}</small>}</span>
-                </label>
-              ))}
-              {learnMode && <LearnMarker id="bundle-selector" label={store.ui.markerLabels.offer} onOpen={openAnnotation} />}
-            </fieldset>
-
-            <div className="purchase-row learn-target" data-learn-id="add-to-cart">
-              <div className="quantity" aria-label={store.ui.quantity}>
-                <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} aria-label={store.ui.decreaseQuantity}><Icon name="minus" size={18} /></button>
-                <span aria-live="polite">{quantity}</span>
-                <button type="button" onClick={() => setQuantity(quantity + 1)} aria-label={store.ui.increaseQuantity}><Icon name="plus" size={18} /></button>
-              </div>
-              <button className="primary-button" type="button" onClick={addToCart}>{store.ui.add} — {money(selectedBundle.price * quantity)} <Icon name="arrow" /></button>
-              {learnMode && <LearnMarker id="add-to-cart" label={store.ui.markerLabels.cta} onOpen={openAnnotation} />}
-            </div>
-            <div className="micro-trust"><span><Icon name="check" size={17} /> {store.ui.shippingTrust}</span><span><Icon name="check" size={17} /> {store.ui.guaranteeTrust}</span></div>
-
-            <div className="benefit-grid learn-target" data-learn-id="benefit-strip">
-              {store.product.benefits.map((benefit) => <div key={benefit.title}><Icon name={benefit.icon} /><span><strong>{benefit.title}</strong><small>{benefit.text}</small></span></div>)}
-              {learnMode && <LearnMarker id="benefit-strip" label={store.ui.markerLabels.benefits} onOpen={openAnnotation} />}
-            </div>
-          </div>
-        </section>
-
-        <section className="story-section" id="zo-werkt-het">
-          <div className="story-intro"><span className="section-number">{store.ui.storySectionLabel}</span><p>{store.story.kicker}</p><h2>{store.story.title}</h2><p className="story-lead">{store.story.intro}</p></div>
-          <div className="steps learn-target" data-learn-id="how-it-works">
-            {store.story.steps.map((step) => <article key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></article>)}
-            {learnMode && <LearnMarker id="how-it-works" label={store.ui.markerLabels.process} onOpen={openAnnotation} />}
-          </div>
-        </section>
-
-        <section className="included-section" id="in-de-doos">
-          <div className="included-image"><MediaPlaceholder media={store.story.includedImage} wide /></div>
-          <div className="included-copy"><span className="section-number">{store.ui.includedSectionLabel}</span><h2>{store.ui.includedTitle}</h2><ul>{store.story.included.map((item) => <li key={item}><Icon name="check" />{item}</li>)}</ul><button type="button" className="text-button" onClick={() => { document.querySelector('.bundle-selector').scrollIntoView({ behavior: 'smooth' }); }}>{store.ui.chooseSet} <Icon name="arrow" /></button></div>
-        </section>
-
-        <section className="guarantee-section learn-target" data-learn-id="guarantee-block">
-          <div className="guarantee-stamp"><span>{store.product.guarantee.days}</span><small>{store.product.guarantee.daysLabel}</small></div>
-          <div><span className="section-number">{store.ui.guaranteeSectionLabel}</span><h2>{store.product.guarantee.title}</h2><p>{store.product.guarantee.text}</p></div>
-          {learnMode && <LearnMarker id="guarantee-block" label={store.ui.markerLabels.guarantee} onOpen={openAnnotation} />}
-        </section>
-
-        <section className="reviews-section learn-target" id="reviews" data-learn-id="reviews-section">
-          <div className="reviews-heading"><div><span className="section-number">{store.ui.reviewsSectionLabel}</span><h2>{store.ui.reviewsTitle}</h2></div><div className="score-card"><strong>{store.product.rating}</strong><div><Stars rating={store.product.rating} dark /><span>{store.ui.basedOn} {store.product.reviewCount} {store.ui.exampleReviews}</span></div></div></div>
-          <div className="review-carousel" aria-live="polite">
-            <button type="button" className="carousel-arrow prev" onClick={() => setReviewIndex((reviewIndex - 1 + store.reviews.length) % store.reviews.length)} aria-label={store.ui.previousReview}>←</button>
-            <article className="review-card">
-              <div className="review-card__top"><span className="avatar">{store.reviews[reviewIndex].initials}</span><div><strong>{store.reviews[reviewIndex].name}</strong><small><Icon name="check" size={14} /> {store.ui.verifiedExamplePurchase}</small></div><Stars rating={store.reviews[reviewIndex].rating} dark /></div>
-              <h3>{store.reviews[reviewIndex].title}</h3><blockquote>“{store.reviews[reviewIndex].quote}”</blockquote>
-              <span className="review-count">{String(reviewIndex + 1).padStart(2, '0')} / {String(store.reviews.length).padStart(2, '0')}</span>
-            </article>
-            <button type="button" className="carousel-arrow next" onClick={() => setReviewIndex((reviewIndex + 1) % store.reviews.length)} aria-label={store.ui.nextReview}>→</button>
-          </div>
-          {learnMode && <LearnMarker id="reviews-section" label={store.ui.markerLabels.reviews} onOpen={openAnnotation} />}
-        </section>
-
-        <section className="faq-section learn-target" id="faq" data-learn-id="faq-section">
-          <div className="faq-heading"><span className="section-number">{store.ui.faqSectionLabel}</span><h2>{store.ui.faqTitle}</h2><p>{store.ui.faqIntro}</p></div>
-          <div className="faq-list">{store.faqs.map((faq, index) => <Faq key={faq.question} faq={faq} defaultOpen={index === 0} />)}</div>
-          {learnMode && <LearnMarker id="faq-section" label={store.ui.markerLabels.faq} onOpen={openAnnotation} />}
-        </section>
-      </main>
-
-      <footer className="site-footer"><a className="brand brand--footer" href="#top"><span className="brand__mark">{store.brand.logoMark}</span><span className="brand__name">{store.brand.name}</span></a><p>{store.brand.tagline}</p><p className="footer-note">{store.ui.footerNote}</p><a href="/learning.json">{store.ui.learningDataLink}</a></footer>
-
-      <div className="mobile-buy"><div><small>{store.ui.from}</small><strong>{money(selectedBundle.price)}</strong></div><button type="button" onClick={addToCart}>{store.ui.add}</button></div>
-
-      {previewAnnotation && learnMode && !activeAnnotation && <div className="learn-preview" role="status">
-        <strong>{previewAnnotation.label}</strong><span>{previewAnnotation.guidance}</span><code>{previewAnnotation.prompt}</code>
-      </div>}
-
-      {activeAnnotation && <><button className="overlay" onClick={closeAnnotation} aria-label={store.ui.closeExplanation} /><aside className="learn-panel" ref={panelRef} tabIndex="-1" role="dialog" aria-modal="true" aria-labelledby="learn-title">
-        <div className="learn-panel__handle" />
-        <div className="learn-panel__header"><div><span>{store.ui.learningLayer} · {activeAnnotation.elementType}</span><h2 id="learn-title">{activeAnnotation.label}</h2></div><button type="button" className="icon-button" onClick={closeAnnotation} aria-label={store.ui.closeExplanation}><Icon name="close" /></button></div>
-        <p className="learn-guidance">{activeAnnotation.guidance}</p>
-        <div className="checklist"><strong>{store.ui.checkThis}</strong>{activeAnnotation.checklist.map((item) => <span key={item}><Icon name="check" size={16} />{item}</span>)}</div>
-        <div className="prompt-card"><div><span>{store.ui.aiPrompt}</span><button type="button" onClick={copyPrompt}><Icon name={copied ? 'check' : 'copy'} size={17} />{copied ? store.ui.copied : store.ui.copy}</button></div><code>{activeAnnotation.prompt}</code></div>
-        {activeAnnotation.riskFlags.length > 0 && <div className="risk-note"><strong>{store.ui.attention}</strong><span>{activeAnnotation.riskFlags.join(' · ')}</span></div>}
-        <a className="json-link" href="/learning.json" target="_blank" rel="noreferrer">{store.ui.machineJson} <Icon name="arrow" size={17} /></a>
-      </aside></>}
-
-      {cartOpen && <><button className="overlay overlay--cart" onClick={closeCart} aria-label={store.ui.closeCart} /><aside className="cart-drawer" ref={cartRef} tabIndex="-1" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-        <div className="cart-drawer__header"><div><span>{store.ui.demoCart}</span><h2 id="cart-title">{store.ui.cartTitle}</h2></div><button type="button" className="icon-button" onClick={closeCart} aria-label={store.ui.closeCart}><Icon name="close" /></button></div>
-        {!cart ? <div className="empty-cart"><Icon name="cart" size={44} /><h3>{store.ui.emptyCartTitle}</h3><p>{store.ui.emptyCartText}</p><button type="button" className="secondary-button" onClick={closeCart}>{store.ui.continueViewing}</button></div> : <div className="cart-content">
-          <div className="cart-product"><MediaPlaceholder media={store.product.media[0]} compact /><div><strong>{cart.bundle.label}</strong><span>{cart.bundle.detail}</span><small>{store.ui.quantity}: {cart.quantity}</small></div><strong>{money(cart.total)}</strong></div>
-          <div className="cart-summary"><span>{store.ui.shipping} <strong>{store.ui.free}</strong></span><span>{store.ui.total} <strong>{money(cart.total)}</strong></span></div>
-          <p className="demo-disclosure"><Icon name="info" /> {store.ui.demoDisclosure}</p>
-          <button type="button" className="primary-button checkout-button" onClick={demoCheckout}>{store.ui.finishDemo} <Icon name="arrow" /></button>
-          <button type="button" className="remove-button" onClick={() => setCart(null)}>{store.ui.removeDemo}</button>
-        </div>}
-      </aside></>}
-
-      {notice && <div className="toast" role="status"><Icon name="check" />{notice}</div>}
-    </div>
-  );
+      </section>
+      <LearnTarget as="section" id="story" label="Verhaal" learning={learning} onOpen={openPanel} className="story"><div id="waarom"><span>01 · WAAROM DIT WERKT</span><small>{store.story.kicker}</small><h2>{store.story.title}</h2><p>{store.story.intro}</p></div><div className="steps" id="gebruik">{store.story.steps.map(s=><article key={s[0]}><span>{s[0]}</span><h3>{s[1]}</h3><p>{s[2]}</p></article>)}</div></LearnTarget>
+      <section className="included"><div><MediaCard media={store.product.media[4]} learning={learning} onOpen={openPanel}/></div><LearnTarget id="included" label="Inhoud" learning={learning} onOpen={openPanel} className="included__copy"><span>02 · {store.ui.included.toUpperCase()}</span><h2>Alles wat nodig is. Niets wat verrast.</h2><ul>{store.included.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></LearnTarget></section>
+      <section className="guarantee"><div><b>30</b><span>DAGEN</span></div><section><span>ZONDER GEDOE PROBEREN</span><h2>Voelt het niet als een match?</h2><p>Stuur het product binnen 30 dagen terug volgens je echte retourvoorwaarden. Deze tekst is voorbeeldinhoud.</p></section></section>
+      <LearnTarget as="section" id="reviews" label="Reviews" learning={learning} onOpen={openPanel} className="reviews"><header><div><span>03 · ERVARINGEN</span><h2>Wat klanten merken.</h2></div><div className="score"><b>{store.product.rating}</b><span><Stars rating={store.product.rating}/>{store.ui.basedOn} {store.product.reviewCount} {store.ui.reviews}</span></div></header><div className="review"><div className="review__image"><MediaCard media={reviewShot} learning={learning} onOpen={openPanel}/></div><article><Stars rating={review[1]}/><small>{store.ui.verified}</small><h3>{review[2]}</h3><blockquote>“{review[3]}”</blockquote><footer><b>{review[0]}</b><div><button onClick={()=>setReviewIndex((reviewIndex-1+store.reviews.length)%store.reviews.length)} aria-label="Vorige review">←</button><span>{reviewIndex+1} / {store.reviews.length}</span><button onClick={()=>setReviewIndex((reviewIndex+1)%store.reviews.length)} aria-label="Volgende review">→</button></div></footer></article></div></LearnTarget>
+      <LearnTarget as="section" id="faq" label="FAQ" learning={learning} onOpen={openPanel} className="faq"><header><span>04 · NOG EVEN DIT</span><h2>{store.ui.faq}</h2><p>Gebruik echte klantvragen om de laatste bezwaren weg te nemen.</p></header><div>{store.faqs.map((f,i)=><Faq key={f[0]} item={f} openByDefault={i===0}/>)}</div></LearnTarget>
+    </main>
+    <footer className="footer"><a className="brand" href="#top"><i>{store.mark}</i><b>{store.brand}</b></a><p>Onderwijstemplate · alle productdata en reviews zijn voorbeeldinhoud</p><a href={`/stores/${store.slug}/template.json`}>Open scrape-bare JSON <Icon name="arrow"/></a><a href="/stores">Andere niche</a></footer>
+    <div className="mobile-buy"><span>Vanaf <b>{money(bundle.price)}</b></span><button onClick={add}>{store.ui.add}</button></div>
+    <MachineContent store={store} annotations={annotations}/>
+    {active&&<><button className="overlay" onClick={closePanel} aria-label="Sluit uitleg"/><aside className="drawer" ref={drawerRef} tabIndex="-1" role="dialog" aria-modal="true" aria-labelledby="drawer-title"><header><div><span>LEERLAAG · {active.type}</span><h2 id="drawer-title">{active.label}</h2></div><button className="round" onClick={closePanel} aria-label="Sluit uitleg"><Icon name="close"/></button></header>{active.shot&&<div className="drawer__shot"><b>{active.shot.number}</b><span>{active.shot.shotType}</span><strong>1:1 · 1600 × 1600</strong></div>}<p className="drawer__guidance">{active.guidance}</p><div className="checklist"><b>Controleer dit</b>{active.checklist.map(x=><span key={x}><Icon name="check"/>{x}</span>)}</div><div className="prompt"><header><span>AI-PROMPT</span><button onClick={copyPrompt}><Icon name={copied?'check':'copy'}/>{copied?'Gekopieerd':'Kopieer'}</button></header><code>{active.prompt}</code></div>{active.shot&&<dl><dt>Compositie</dt><dd>{active.shot.composition}</dd><dt>Achtergrond</dt><dd>{active.shot.background}</dd><dt>Belichting</dt><dd>{active.shot.lighting}</dd></dl>}<a href={`/stores/${store.slug}/template.json`}>Bekijk volledige JSON <Icon name="arrow"/></a></aside></>}
+    {cart&&<><button className="overlay" onClick={()=>setCart(null)} aria-label="Sluit winkelmand"/><aside className="cart" role="dialog" aria-modal="true"><header><span>DEMO-WINKELMAND</span><button className="round" onClick={()=>setCart(null)} aria-label="Sluit winkelmand"><Icon name="close"/></button></header><h2>{cart.quantity?'Goede keuze.':'Je winkelmand is leeg.'}</h2>{cart.quantity>0&&<div className="cart__item"><MediaCard media={store.product.media[0]} compact/><span><b>{cart.bundle.label}</b><small>{store.product.name} · {cart.quantity}×</small></span><b>{money(cart.total)}</b></div>}<p>{store.ui.demo}</p><button className="cta" onClick={()=>setCart(null)}>{cart.quantity?'Rond demo af':'Verder winkelen'} <Icon name="arrow"/></button></aside></>}
+  </div>
 }
 
-function Faq({ faq, defaultOpen }) {
-  const [open, setOpen] = useState(defaultOpen);
-  return <article className={open ? 'is-open' : ''}><h3><button type="button" onClick={() => setOpen(!open)} aria-expanded={open}>{faq.question}<Icon name="chevron" /></button></h3>{open && <p>{faq.answer}</p>}</article>;
-}
+function Faq({item,openByDefault}){const[open,setOpen]=useState(openByDefault);return <article className={open?'open':''}><h3><button onClick={()=>setOpen(!open)} aria-expanded={open}>{item[0]}<Icon name="chevron"/></button></h3>{open&&<p>{item[1]}</p>}</article>}
 
-export default App;
+function MachineContent({store,annotations}){return <section className="machine-content" aria-label="Scrape-bare templateprompts"><h2>AI-leerdata voor {store.nicheLabel}</h2>{Object.entries(annotations).map(([id,a])=><article key={id} data-learn-record={id} data-shot-id={a.shot?.shotId}><h3>{a.label}</h3><p>{a.guidance}</p><code>{a.prompt}</code>{a.shot&&<ul><li>ratio: 1:1</li><li>subject: {a.shot.subject}</li><li>composition: {a.shot.composition}</li><li>background: {a.shot.background}</li><li>lighting: {a.shot.lighting}</li><li>mustInclude: {a.shot.mustInclude}</li><li>avoid: {a.shot.avoid}</li></ul>}</article>)}</section>}

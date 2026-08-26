@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vinext dev",
-    "build": "vinext build",
+    "build": "node scripts/generate-manifests.mjs && vinext build",
     "start": "vinext start",
-    "test": "node scripts/validate-learning.mjs"
+    "test": "node scripts/generate-manifests.mjs && node scripts/validate-learning.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
