@@ -4041,21 +4041,25 @@ button {
 /* The studio controls are always DSA-branded; store palettes only style the PDP below. */
 .template-toolbar[data-interface-brand="dsa"] {
   --dsa-navy: #101820;
-  --dsa-panel: #19232e;
-  --dsa-panel-hover: #23313e;
+  --dsa-panel: #142821;
+  --dsa-panel-hover: #19372e;
   --dsa-green: #007c65;
-  --dsa-orange: #e89a27;
-  --dsa-line: #344451;
-  --dsa-muted: #aeb9c2;
-  background: var(--dsa-navy);
-  border-top: 2px solid var(--dsa-green);
-  border-bottom-color: #ffffff18;
-  box-shadow: 0 12px 32px #07101638;
+  --dsa-green-bright: #11a889;
+  --dsa-mint: #80d8c5;
+  --dsa-line: #2b574d;
+  --dsa-muted: #b6cbc5;
+  background:
+    radial-gradient(circle at 8% 0%, #007c6529, transparent 27%),
+    linear-gradient(110deg, #0d171b 0%, var(--dsa-navy) 48%, #0b211c 100%);
+  border-top: 3px solid var(--dsa-green);
+  border-bottom-color: #80d8c52b;
+  box-shadow: 0 12px 32px #07101645;
   color: #fff;
 }
 .template-toolbar[data-interface-brand="dsa"] .toolbar-intro-icon {
   background: var(--dsa-green);
-  box-shadow: 0 10px 28px #007c6545;
+  border-color: #80d8c55c;
+  box-shadow: 0 10px 28px #007c656b;
 }
 .template-toolbar[data-interface-brand="dsa"] .selector-label {
   color: var(--dsa-muted);
@@ -4063,25 +4067,37 @@ button {
 .template-toolbar[data-interface-brand="dsa"] .selector-label svg,
 .template-toolbar[data-interface-brand="dsa"] .current-category-icon,
 .template-toolbar[data-interface-brand="dsa"] .current-font b {
-  color: var(--dsa-orange);
+  color: var(--dsa-mint);
 }
 .template-toolbar[data-interface-brand="dsa"] .selector-control,
 .template-toolbar[data-interface-brand="dsa"] .toolbar-prompts {
   border-color: var(--dsa-line);
   background: var(--dsa-panel);
-  box-shadow: inset 0 1px #ffffff0b;
+  box-shadow: inset 0 1px #ffffff0d, 0 8px 22px #06100d1f;
+}
+.template-toolbar[data-interface-brand="dsa"] .selector-current {
+  border-inline-color: #80d8c51f !important;
+}
+.template-toolbar[data-interface-brand="dsa"] .selector-control > button:first-child,
+.template-toolbar[data-interface-brand="dsa"] .selector-control > button:last-child {
+  color: var(--dsa-mint);
+  background: #007c650d;
 }
 .template-toolbar[data-interface-brand="dsa"] .selector-control > button:hover,
 .template-toolbar[data-interface-brand="dsa"] .toolbar-prompts:hover,
 .template-toolbar[data-interface-brand="dsa"] .toolbar-prompts:focus-visible {
-  border-color: var(--dsa-orange);
+  border-color: var(--dsa-green-bright);
   background: var(--dsa-panel-hover);
 }
 .template-toolbar[data-interface-brand="dsa"] .toolbar-prompts.is-on,
 .template-toolbar[data-interface-brand="dsa"] .toolbar-export {
-  border-color: var(--dsa-orange);
-  background: var(--dsa-orange);
-  box-shadow: 0 9px 25px #e89a2748;
+  border-color: var(--dsa-green-bright);
+  background: linear-gradient(135deg, var(--dsa-green), var(--dsa-green-bright));
+  box-shadow: 0 9px 25px #007c655c, inset 0 1px #ffffff29;
+}
+.template-toolbar[data-interface-brand="dsa"] .toolbar-export:hover {
+  background: linear-gradient(135deg, #006e59, #0f987d);
+  box-shadow: 0 12px 30px #007c6573, inset 0 1px #ffffff2e;
 }
 .template-toolbar[data-interface-brand="dsa"]
   .compact-option-grid
@@ -4093,6 +4109,6 @@ button {
   color: var(--dsa-green);
 }
 .template-toolbar[data-interface-brand="dsa"] :is(button, a):focus-visible {
-  outline: 3px solid #f6bb61;
+  outline: 3px solid var(--dsa-mint);
   outline-offset: 2px;
 }
