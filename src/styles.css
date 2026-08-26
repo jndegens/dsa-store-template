@@ -566,7 +566,7 @@ button {
   box-shadow: 0 0 0 4px #4d9c581a;
 }
 .add-button,
-.final-buy > button,
+.final-buy__button,
 .cart-continue {
   width: 100%;
   min-height: 58px;
@@ -584,7 +584,7 @@ button {
   box-shadow: 0 8px 20px #a6631c28;
 }
 .add-button:hover,
-.final-buy > button:hover {
+.final-buy__button:hover {
   filter: brightness(0.96);
   transform: translateY(-1px);
 }
@@ -1005,33 +1005,73 @@ button {
 .final-buy {
   margin-top: 65px;
   margin-bottom: 65px;
-  border: 1px solid #ddd6cc;
-  border-radius: 15px;
-  background: #fff;
-  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, #ddd6cc);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--cream) 94%, #fff);
+  padding: clamp(20px, 2.5vw, 34px);
   display: grid;
-  grid-template-columns: 100px 1fr 230px;
-  align-items: center;
-  gap: 22px;
+  grid-template-columns: minmax(360px, 1.06fr) minmax(380px, 0.94fr);
+  align-items: start;
+  gap: clamp(28px, 4vw, 54px);
   box-shadow: var(--shadow);
 }
-.final-buy .placeholder {
-  border-radius: 9px;
+.final-buy__media {
+  position: relative;
+  min-width: 0;
 }
-.final-buy .placeholder__copy {
-  display: none;
+.final-buy__media .placeholder {
+  aspect-ratio: 1 !important;
+  border-radius: 15px;
+}
+.final-buy__media .discount-pill {
+  z-index: 3;
+}
+.final-buy__details {
+  min-width: 0;
+  padding-top: 4px;
 }
 .final-buy h2 {
-  font: 800 25px var(--font-display);
-  margin: 7px 0 4px;
+  font: 800 clamp(31px, 3vw, 48px) / 0.94 var(--font-display);
+  letter-spacing: -0.045em;
+  margin: 10px 0 14px;
 }
-.final-buy p {
-  margin: 0;
+.final-buy .product-intro {
+  margin: 16px 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
+  line-height: 1.55;
 }
-.final-buy > button {
-  width: 230px;
+.final-buy .icon-benefits {
+  margin: 20px 0 22px;
+}
+.final-buy .bundle-picker {
+  margin: 0 0 12px;
+}
+.final-buy .bundle-picker label {
+  min-height: 54px;
+  margin-bottom: 6px;
+  padding: 8px 12px;
+}
+.final-buy .bundle-picker label.is-selected {
+  padding: 7px 11px;
+}
+.final-buy .bundle-picker label > span strong {
+  font-size: 12px;
+}
+.final-buy .bundle-picker label > span small {
+  font-size: 9px;
+}
+.final-buy .stock-line {
+  margin: 10px 0;
+}
+.final-buy__button {
+  width: 100%;
+}
+.final-buy .payments {
+  margin: 10px 0;
+}
+.final-buy .trust-cards {
+  margin-top: 10px;
 }
 .site-footer {
   background: var(--ink);
@@ -1482,21 +1522,18 @@ button {
     aspect-ratio: 4/3;
   }
   .final-buy {
-    grid-template-columns: 70px 1fr;
+    grid-template-columns: 1fr;
     margin-top: 45px;
     margin-bottom: 95px;
-    padding: 10px;
-    gap: 12px;
+    padding: 14px;
+    gap: 24px;
   }
   .final-buy h2 {
-    font-size: 17px;
+    font-size: clamp(30px, 10vw, 44px);
   }
-  .final-buy p {
-    display: none;
-  }
-  .final-buy > button {
-    grid-column: 1/-1;
-    width: 100%;
+  .final-buy .product-intro {
+    display: block;
+    font-size: 13px;
   }
   .site-footer {
     padding-top: 55px;
@@ -3060,30 +3097,6 @@ button {
   font-weight: 850;
   letter-spacing: 0.13em;
 }
-.final-buy {
-  grid-template-columns: minmax(270px, 0.78fr) minmax(390px, 1.22fr);
-  align-items: end;
-  padding: 26px;
-  gap: 26px 32px;
-}
-.final-buy__summary {
-  align-self: start;
-  display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 20px;
-  align-items: center;
-}
-.final-buy__summary .placeholder {
-  aspect-ratio: 1 !important;
-}
-.final-buy .bundle-picker {
-  margin: 0;
-}
-.final-buy__button {
-  grid-column: 2;
-  width: 100% !important;
-}
-
 @media (max-width: 760px) {
   .dsa-logo-mark {
     width: 47px;
@@ -3117,20 +3130,15 @@ button {
   }
   .final-buy {
     grid-template-columns: 1fr;
-    padding: 16px;
-    gap: 18px;
+    padding: 14px;
+    gap: 24px;
     margin-inline: 14px;
     width: auto;
   }
-  .final-buy__summary {
-    grid-template-columns: 82px minmax(0, 1fr);
-    gap: 13px;
+  .final-buy__details {
+    padding: 0 4px 4px;
   }
-  .final-buy .bundle-picker,
-  .final-buy__button {
-    grid-column: 1;
-  }
-  .final-buy p {
+  .final-buy .product-intro {
     display: block;
   }
 }
