@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0.0",
+  "pageContext": "product-page",
+  "language": "nl",
+  "title": "MORGENMAAK productpagina — scrapeerbare leerlaag",
+  "description": "Didactische annotaties en copy-pasteprompts die één-op-één gekoppeld zijn aan elementen op de voorbeeldproductpagina.",
+  "sourceRegistry": [
+    { "id": "reference-pdp", "status": "observed-reference", "patterns": ["productgalerij", "aanbodkeuze", "reviewbewijs", "garantie", "FAQ", "sticky koopactie"], "urls": ["https://pelsbarn.org/products/cooling-mat-bogo", "https://www.ryzesuperfoods.com/products/mushroom-coffee", "https://www.shopflavcity.com/products/salted-caramel-protein-powder-smoothie", "https://www.plaud.ai/products/plaud-note-ai-voice-recorder?variant=52693291303275", "https://thepawprint.store/products/the-paw-print-box-club", "https://thewoobles.com/products/polar-pals-bundle", "https://drinkwillies.com/products/willies-soda-thc-seltzer-black-cherry-lime-10mg"], "note": "Alleen algemene conversiepatronen zijn geabstraheerd; inhoud, merk en vormgeving zijn origineel." },
+    { "id": "reference-store-set", "status": "user-supplied-reference", "urls": ["https://whipl.de/", "https://elavate.com/", "https://belle-body.de/", "https://olend.net/", "https://luveon.com/", "https://humantra.co.uk/", "https://feelreformed.com/", "https://serenium.it/", "https://kijimea.de/", "https://myvariations.com/", "https://farbenloewe.de/", "https://leaf-cosmetics.com/", "https://aplusnutri.com/", "https://roxynailsparis.com/", "https://sheko.com/it-it", "https://fittabella.com/", "https://champohaircare.com/", "https://zenther.co/", "https://meeloy.com/", "https://alphainfuse.com/"], "note": "Door de gebruiker aangeleverd als bredere referentieset; er zijn geen omzetclaims overgenomen." },
+    { "id": "performance-claims", "status": "user-supplied-claim", "note": "Omzet- en advertentieaantallen uit de briefing zijn niet als geverifieerde feiten gebruikt." }
+  ],
+  "annotations": [
+    {
+      "id": "announcement-bar",
+      "sourceRefs": ["reference-pdp", "reference-store-set"],
+      "elementType": "announcement",
+      "label": "Aankondigingsbalk",
+      "guidance": "Gebruik één concreet voordeel dat voor vrijwel iedere bezoeker geldt. Houd de zin kort en laat hem niet concurreren met de hoofdknop.",
+      "prompt": "Schrijf 5 aankondigingsbalken van maximaal 55 tekens voor [PRODUCT]. Benoem alleen een echte verzend-, garantie- of servicebelofte. Vermijd uitroeptekens en kunstmatige urgentie.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Eén voordeel", "Maximaal 55 tekens", "Feitelijk bewijsbaar"],
+      "riskFlags": ["fake-urgency"]
+    },
+    {
+      "id": "brand-logo",
+      "sourceRefs": ["reference-pdp"],
+      "elementType": "brand",
+      "label": "Logo en merkanker",
+      "guidance": "Het logo brengt bezoekers terug naar het begin en geeft de pagina een herkenbaar afzenderpunt. Gebruik een leesbare woordmarkering naast een eenvoudig beeldmerk.",
+      "prompt": "Bedenk 12 korte merknamen voor [PRODUCTCATEGORIE]. De naam moet in het Nederlands uitspreekbaar zijn, niet beschrijvend-generiek klinken en ruimte laten voor toekomstige producten. Voeg per naam één tagline toe.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Klikt naar boven", "Leesbaar op mobiel", "Geen verwarring met bestaande merken"],
+      "riskFlags": ["trademark-check-required"]
+    },
+    {
+      "id": "product-gallery",
+      "sourceRefs": ["reference-pdp"],
+      "elementType": "media-gallery",
+      "label": "Productgalerij",
+      "guidance": "Laat eerst het complete product zien en beantwoord daarna visueel vragen over detail, inhoud en gebruik. Iedere thumbnail moet een ander bezwaar wegnemen.",
+      "prompt": "Maak een shotlist van 6 productbeelden voor [PRODUCT]. Geef per beeld: doel, compositie, achtergrond, zichtbaar detail, alt-tekst en welk klantbezwaar het beeld beantwoordt. Gebruik geen tekst in de afbeelding.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Compleet product eerst", "Details daarna", "Beschrijvende alt-tekst"],
+      "riskFlags": ["misleading-imagery"]
+    },
+    {
+      "id": "product-title",
+      "sourceRefs": ["reference-pdp"],
+      "elementType": "heading",
+      "label": "Producttitel",
+      "guidance": "Een sterke titel benoemt wat het is, terwijl de ondertitel het gewenste resultaat of gebruiksmoment concreet maakt.",
+      "prompt": "Schrijf 10 producttitels voor [PRODUCT]. Gebruik maximaal 6 woorden en benoem producttype plus belangrijkste onderscheid. Schrijf daarna per titel een ondertitel van maximaal 10 woorden die het gebruiksmoment tastbaar maakt. Geen superlatieven zonder bewijs.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Producttype duidelijk", "Onderscheid zichtbaar", "Geen onbewezen claim"],
+      "riskFlags": ["unsubstantiated-claim"]
+    },
+    {
+      "id": "review-summary",
+      "sourceRefs": ["reference-pdp", "reference-store-set"],
+      "elementType": "social-proof",
+      "label": "Reviewbewijs",
+      "guidance": "Toon score en aantal samen en laat de link naar de daadwerkelijke reviews springen. Gebruik uitsluitend echte, herleidbare reviews in een live winkel.",
+      "prompt": "Vat [AANTAL] geverifieerde reviews van [PRODUCT] samen in 3 terugkerende thema's. Citeer niets dat niet letterlijk in de bron staat. Geef ook het vaakst genoemde nadeel en bereken de gemiddelde score transparant.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Score plus aantal", "Klikt naar reviews", "Nadeel niet verbergen"],
+      "riskFlags": ["fabricated-reviews"]
+    },
+    {
+      "id": "price-block",
+      "sourceRefs": ["reference-pdp", "reference-store-set"],
+      "elementType": "price",
+      "label": "Prijs en besparing",
+      "guidance": "Maak de huidige prijs dominant. Toon een doorgestreepte prijs en besparing alleen als de vergelijking aantoonbaar klopt.",
+      "prompt": "Maak een helder prijsblok voor [PRODUCT] met verkoopprijs [PRIJS], geldige vergelijkingsprijs [VAN-PRIJS] en eventuele bundelbesparing. Leg de berekening uit en laat alle kortingstaal weg wanneer er geen geldige referentieprijs is.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Prijs dominant", "Besparing narekenbaar", "Geen verborgen kosten"],
+      "riskFlags": ["false-discount"]
+    },
+    {
+      "id": "bundle-selector",
+      "sourceRefs": ["reference-pdp", "reference-store-set"],
+      "elementType": "offer-selector",
+      "label": "Aanbodkeuze",
+      "guidance": "Vergelijk opties op dezelfde dimensies: hoeveelheid, inhoud, prijs en besparing. De geselecteerde kaart moet ook met toetsenbord duidelijk zijn.",
+      "prompt": "Ontwerp 3 eerlijke aanbodopties voor [PRODUCT]. Geef per optie naam, exacte inhoud, prijs, prijs per eenheid, wie er het meest aan heeft en een feitelijke badge. Maak de middelste optie alleen aanbevolen als de waarde aantoonbaar beter is.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Zelfde vergelijkingsbasis", "Selectie duidelijk", "Prijs synchroniseert"],
+      "riskFlags": ["dark-pattern-default"]
+    },
+    {
+      "id": "add-to-cart",
+      "sourceRefs": ["reference-pdp"],
+      "elementType": "primary-cta",
+      "label": "Primaire koopknop",
+      "guidance": "De hoofdknop beschrijft de directe actie. Zet praktische geruststelling er vlak onder, zonder twijfel in de knoptekst te stoppen.",
+      "prompt": "Schrijf 8 CTA-knoppen voor [PRODUCT] in actief Nederlands, maximaal 4 woorden. De actie moet exact overeenkomen met wat er na de klik gebeurt. Voeg per CTA één korte geruststellende regel toe over [VERZENDING/GARANTIE].",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Actiewerkwoord", "Uitkomst klopt", "Eén primaire CTA"],
+      "riskFlags": ["misleading-action"]
+    },
+    {
+      "id": "benefit-strip",
+      "sourceRefs": ["reference-pdp"],
+      "elementType": "benefits",
+      "label": "Voordelenstrook",
+      "guidance": "Combineer een snel scanbaar resultaat met één zin die uitlegt waardoor dat resultaat ontstaat. Iconen ondersteunen de tekst, maar dragen geen essentiële informatie alleen.",
+      "prompt": "Zet deze producteigenschappen van [PRODUCT] om in 4 voordelen: [EIGENSCHAPPEN]. Geef per voordeel een kop van maximaal 4 woorden, één verklarende zin en een passend eenvoudig icoonconcept. Behoud technische beperkingen en vermijd gezondheidsclaims.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Resultaat plus reden", "Vier scanpunten", "Tekst werkt zonder icoon"],
+      "riskFlags": ["feature-benefit-confusion"]
+    },
+    {
+      "id": "how-it-works",
+      "sourceRefs": ["reference-pdp"],
+      "elementType": "process",
+      "label": "Zo-werkt-het-sectie",
+      "guidance": "Verlaag waargenomen moeite met een korte reeks concrete handelingen. Begin iedere stap met een werkwoord en toon de logische volgorde.",
+      "prompt": "Leg het gebruik van [PRODUCT] uit in precies 3 stappen. Geef elke stap een nummer, een werkwoord als titel van maximaal 2 woorden en één zin van maximaal 16 woorden. Benoem wachttijd of benodigdheden eerlijk.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Chronologische volgorde", "Werkwoordtitels", "Moeite niet bagatelliseren"],
+      "riskFlags": ["oversimplification"]
+    },
+    {
+      "id": "guarantee-block",
+      "sourceRefs": ["reference-pdp", "reference-store-set"],
+      "elementType": "risk-reversal",
+      "label": "Garantieblok",
+      "guidance": "Een garantie verlaagt risico als duur, voorwaarden en vervolgstap begrijpelijk zijn. Link in een echte winkel naar de volledige voorwaarden.",
+      "prompt": "Schrijf een garantieblok voor [PRODUCT] op basis van deze echte voorwaarden: [VOORWAARDEN]. Geef een warme kop, een uitleg in maximaal 35 woorden en een duidelijke vervolgstap. Voeg niets toe dat juridisch niet is toegezegd.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Duur genoemd", "Voorwaarden eerlijk", "Vervolgstap duidelijk"],
+      "riskFlags": ["misleading-guarantee"]
+    },
+    {
+      "id": "reviews-section",
+      "sourceRefs": ["reference-pdp", "reference-store-set"],
+      "elementType": "reviews",
+      "label": "Reviewsectie",
+      "guidance": "Goede reviews beschrijven context, concreet resultaat en eventueel een nadeel. Laat besturing van een carousel ook voor toetsenbord en screenreader werken.",
+      "prompt": "Structureer deze echte klantfeedback voor [PRODUCT]: [RUWE REVIEWS]. Behoud de betekenis en formulering, verwijder alleen persoonsgegevens, verzin niets en label onzekerheden. Selecteer een evenwichtige mix met minimaal één genuanceerde review.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Echte bron", "Context zichtbaar", "Ook nuance"],
+      "riskFlags": ["fabricated-reviews", "privacy"]
+    },
+    {
+      "id": "faq-section",
+      "sourceRefs": ["reference-pdp"],
+      "elementType": "faq",
+      "label": "Veelgestelde vragen",
+      "guidance": "Beantwoord koopbezwaren die nog niet eerder zijn opgelost. Begin met het directe antwoord en voeg daarna pas nuance toe.",
+      "prompt": "Maak 8 FAQ's voor [PRODUCT] uit deze klantenservicevragen en bezwaren: [BRONMATERIAAL]. Begin ieder antwoord met een direct ja, nee, getal of kernfeit. Houd elk antwoord onder 55 woorden en verzin geen beleid.",
+      "language": "nl",
+      "pageContext": "product-page",
+      "checklist": ["Gebaseerd op echte vragen", "Antwoord eerst", "Geen herhaling"],
+      "riskFlags": ["invented-policy"]
+    }
+  ]
+}

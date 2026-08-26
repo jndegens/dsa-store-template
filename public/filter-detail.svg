@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="t d">
+  <title id="t">Ultrafijn cold-brewfilter</title><desc id="d">Opengewerkte illustratie van filter, deksel en glazen brewer</desc>
+  <rect width="1200" height="1200" fill="#2446a8"/><circle cx="850" cy="230" r="255" fill="#ee4d35"/>
+  <text x="80" y="110" fill="#f4f0e7" font-family="Arial" font-size="42" font-weight="700" letter-spacing="6">DETAIL 01</text>
+  <g transform="translate(335 185)">
+    <rect x="40" y="80" width="450" height="150" rx="70" fill="#101b3a"/>
+    <path d="M100 225h330l-55 690H155z" fill="#f4f0e7" opacity=".2" stroke="#f4f0e7" stroke-width="12"/>
+    <path d="M170 260h190l-35 510H205z" fill="#d7ab7a" stroke="#101b3a" stroke-width="10"/>
+    <g stroke="#101b3a" stroke-width="3" opacity=".7">
+      <path d="M185 300h160M180 340h162M177 380h163M174 420h164M171 460h165M168 500h166M165 540h168M162 580h170M160 620h170M157 660h172M154 700h175"/>
+    </g>
+  </g>
+  <text x="80" y="1030" fill="#f4f0e7" font-family="Arial" font-size="74" font-weight="700">FIJN FILTER.</text>
+  <text x="80" y="1100" fill="#f4f0e7" font-family="Arial" font-size="38">Heldere koffie, zonder papieren filters.</text>
+</svg>

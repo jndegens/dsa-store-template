@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="t d">
+  <title id="t">Alles in de MORGENMAAK starterset</title><desc id="d">Illustratief overzicht van brewer, glazen, filter, lepel en gids</desc>
+  <rect width="1200" height="1200" fill="#f4f0e7"/>
+  <path d="M0 0h470L0 470z" fill="#ee4d35"/><path d="M1200 1200H730l470-470z" fill="#2446a8"/>
+  <text x="600" y="95" text-anchor="middle" fill="#101b3a" font-family="Arial" font-size="38" font-weight="700" letter-spacing="7">IN DE DOOS</text>
+  <g fill="none" stroke="#101b3a" stroke-width="14" stroke-linejoin="round">
+    <path d="M440 255h320l-34 580H474z"/><path d="M430 240h340v85H430z" fill="#2446a8"/>
+    <path d="M525 325h150l-20 390H545z" stroke-dasharray="12 8"/>
+    <path d="M165 530h190l-20 250H185zM845 530h190l-20 250H865z"/>
+    <path d="M165 845h240v130H165z" fill="#ee4d35"/><path d="M800 865l215-110M805 870l35 70"/>
+  </g>
+  <g fill="#101b3a" font-family="Arial" font-size="28" font-weight="700"><text x="130" y="820">2× GLAS</text><text x="850" y="820">2× GLAS</text><text x="210" y="1020">STARTGIDS</text><text x="840" y="980">MAATLEPEL</text></g>
+</svg>
