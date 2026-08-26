@@ -22,6 +22,40 @@
 @media(max-width:980px){.toolbar-inner>.template-selector:last-of-type .selector-popover{left:10px;right:10px}}
 @media(max-width:680px){.toolbar-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}.template-selector{min-width:0}.toolbar-prompts{grid-column:1/-1;width:100%;height:31px}.toolbar-prompts span{display:inline}.selector-popover{top:67px}}
 
+/* Final DSA polish requested on the annotated product template. */
+.dsa-logo-mark{display:block;width:58px;height:24px;flex:none;object-fit:contain;filter:brightness(0) saturate(100%) invert(20%) sepia(20%) saturate(1033%) hue-rotate(118deg) brightness(92%) contrast(91%)}
+.wordmark .dsa-logo-mark{width:60px;height:28px}
+.dsa-brand.is-footer .dsa-logo-mark,.toolbar-intro-icon .dsa-logo-mark{filter:brightness(0) invert(1)}
+.toolbar-intro-icon .dsa-logo-mark{width:25px;height:13px}
+.benefit-bar{gap:0;padding-inline:max(18px,calc((100vw - 1080px)/2))}
+.benefit-bar>span:not([hidden]){width:240px;justify-content:center}
+.benefit-bar>[hidden]{display:none!important}
+.trustpilot-stars{display:inline-flex;gap:2px;vertical-align:middle}
+.trustpilot-stars i{width:18px;height:18px;display:grid;place-items:center;background:#00b67a;color:#fff;font:normal 700 12px/1 Arial,sans-serif}
+.rating-row{min-height:20px}
+.payments{gap:8px;justify-content:center}
+.payments img{height:35px;max-width:78px;padding:5px 7px;border-radius:5px}
+.stock-line{font-size:12px;gap:6px;font-weight:500}
+.stock-line>span{width:9px;height:9px;flex:none;border-radius:50%;background:#41a45b;box-shadow:0 0 0 0 #41a45b66;animation:stock-pulse 1.55s ease-out infinite}
+@keyframes stock-pulse{0%{box-shadow:0 0 0 0 #41a45b70}70%{box-shadow:0 0 0 8px #41a45b00}100%{box-shadow:0 0 0 0 #41a45b00}}
+.guarantee-banner>div>.guarantee-kicker{display:inline-block;font-size:14px;font-weight:850;letter-spacing:.13em}
+.final-buy{grid-template-columns:minmax(270px,.78fr) minmax(390px,1.22fr);align-items:end;padding:26px;gap:26px 32px}
+.final-buy__summary{align-self:start;display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;align-items:center}
+.final-buy__summary .placeholder{aspect-ratio:1!important}
+.final-buy .bundle-picker{margin:0}
+.final-buy__button{grid-column:2;width:100%!important}
+
+@media(max-width:760px){
+ .dsa-logo-mark{width:47px;height:21px}.wordmark .dsa-logo-mark{width:50px;height:23px}.toolbar-intro-icon .dsa-logo-mark{width:22px;height:11px}
+ .benefit-bar{padding-inline:7px}.benefit-bar>span{width:auto;flex:1}
+ .payments{gap:5px}.payments img{height:29px;max-width:61px;padding:4px}
+ .stock-line{font-size:11px}
+ .final-buy{grid-template-columns:1fr;padding:16px;gap:18px;margin-inline:14px;width:auto}
+ .final-buy__summary{grid-template-columns:82px minmax(0,1fr);gap:13px}
+ .final-buy .bundle-picker,.final-buy__button{grid-column:1}
+ .final-buy p{display:block}
+}
+
 /* DSA template studio — the settings are the first, clearest layer of the page. */
 .template-toolbar{position:sticky;top:0;z-index:100;background:#11151c;color:#fff;border:0;border-bottom:1px solid #ffffff14;box-shadow:0 12px 32px #0b0e1430}
 .toolbar-inner{width:min(1480px,100%);min-height:92px;padding:12px 22px;display:grid;grid-template-columns:minmax(190px,1.05fr) repeat(3,minmax(190px,1fr)) minmax(130px,.62fr);gap:10px;overflow:visible}

@@ -2,26 +2,26 @@
   "schemaVersion": "4.1",
   "template": "generic-wolkveld-product-template",
   "routes": [
-    "/",
-    "/stores",
-    "/stores/dieren",
-    "/stores/beauty",
-    "/stores/gadgets",
-    "/stores/wellness",
-    "/stores/fashion",
-    "/stores/wonen",
-    "/stores/kids",
-    "/stores/outdoor"
+    "/store-template/",
+    "/store-template/stores",
+    "/store-template/stores/dieren",
+    "/store-template/stores/beauty",
+    "/store-template/stores/gadgets",
+    "/store-template/stores/wellness",
+    "/store-template/stores/fashion",
+    "/store-template/stores/wonen",
+    "/store-template/stores/kids",
+    "/store-template/stores/outdoor"
   ],
-  "canonicalManifest": "/stores/dieren/template.json",
+  "canonicalManifest": "/store-template/stores/dieren/template.json",
   "aliases": [
-    "/stores/dieren/template.json",
-    "/stores/beauty/template.json",
-    "/stores/gadgets/template.json",
-    "/stores/wellness/template.json",
-    "/stores/fashion/template.json",
-    "/stores/wonen/template.json",
-    "/stores/kids/template.json",
-    "/stores/outdoor/template.json"
+    "/store-template/stores/dieren/template.json",
+    "/store-template/stores/beauty/template.json",
+    "/store-template/stores/gadgets/template.json",
+    "/store-template/stores/wellness/template.json",
+    "/store-template/stores/fashion/template.json",
+    "/store-template/stores/wonen/template.json",
+    "/store-template/stores/kids/template.json",
+    "/store-template/stores/outdoor/template.json"
   ]
 }

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "export NEXT_PUBLIC_BASE_PATH=/store-template; node scripts/generate-manifests.mjs && next build"
+}

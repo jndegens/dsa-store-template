@@ -3,11 +3,13 @@ import { stores, imageSlots } from '../src/content/product.js';
 import { annotationBase } from '../src/content/annotations.js';
 
 fs.mkdirSync('public/stores', { recursive: true });
-const routes = ['/', '/stores', ...Object.keys(stores).map((slug) => `/stores/${slug}`)];
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/$/, '');
+const withBasePath = (path) => `${basePath}${path}`;
+const routes = [withBasePath('/'), withBasePath('/stores'), ...Object.keys(stores).map((slug) => withBasePath(`/stores/${slug}`))];
 const categories = ['dieren','beauty','gadgets','wellness','fashion','wonen','kids','outdoor'];
 const palettes = ['amber','rose','electric','sage','clay','violet','lemon','mono','coral','ocean'];
 const fonts = ['friendly','luxury','technical','editorial','rounded','fashion','bold','minimal'];
-const paymentMethods = [{id:'ideal',asset:'/payment-logos/ideal.svg'},{id:'visa',asset:'/payment-logos/visa.svg'},{id:'mastercard',asset:'/payment-logos/mastercard.svg'},{id:'applepay',asset:'/payment-logos/apple-pay.svg'},{id:'paypal',asset:'/payment-logos/paypal.svg'},{id:'klarna',asset:'/payment-logos/klarna.svg'},{id:'bancontact',asset:'/payment-logos/bancontact.svg'}];
+const paymentMethods = [{id:'ideal',asset:withBasePath('/payment-logos/ideal.svg')},{id:'visa',asset:withBasePath('/payment-logos/visa.svg')},{id:'mastercard',asset:withBasePath('/payment-logos/mastercard.svg')},{id:'applepay',asset:withBasePath('/payment-logos/apple-pay.svg')},{id:'paypal',asset:withBasePath('/payment-logos/paypal.svg')},{id:'klarna',asset:withBasePath('/payment-logos/klarna.svg')},{id:'bancontact',asset:withBasePath('/payment-logos/bancontact.svg')}];
 const masterPrompt = `Open dit JSON-manifest en reconstrueer de Wolkveld-productpagina exact volgens sections en selectors. Vraag eerst om ontbrekende productdata. Vervang daarna uitsluitend placeholders met aangeleverde, verifieerbare informatie. Behoud alle secties, klikbare interacties en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties. Lever semantische HTML en behoud alle data-ai-section en data-ai-prompt-id attributen.`;
 const manifest = {
   schemaVersion: '4.1',
@@ -40,8 +42,8 @@ const index = {
   schemaVersion: '4.1',
   template: 'generic-wolkveld-product-template',
   routes,
-  canonicalManifest: '/stores/dieren/template.json',
-  aliases: Object.keys(stores).map((slug) => `/stores/${slug}/template.json`),
+  canonicalManifest: withBasePath('/stores/dieren/template.json'),
+  aliases: Object.keys(stores).map((slug) => withBasePath(`/stores/${slug}/template.json`)),
 };
 fs.writeFileSync('public/stores/index.json', `${JSON.stringify(index, null, 2)}\n`);
 console.log(`Eén generiek manifest gegenereerd voor ${routes.length} routes en ${imageSlots.length} zichtbare beeldslots.`);

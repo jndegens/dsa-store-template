@@ -4,16 +4,16 @@
   "pageType": "generic-wolkveld-product-template",
   "language": "nl-NL",
   "routes": [
-    "/",
-    "/stores",
-    "/stores/dieren",
-    "/stores/beauty",
-    "/stores/gadgets",
-    "/stores/wellness",
-    "/stores/fashion",
-    "/stores/wonen",
-    "/stores/kids",
-    "/stores/outdoor"
+    "/store-template/",
+    "/store-template/stores",
+    "/store-template/stores/dieren",
+    "/store-template/stores/beauty",
+    "/store-template/stores/gadgets",
+    "/store-template/stores/wellness",
+    "/store-template/stores/fashion",
+    "/store-template/stores/wonen",
+    "/store-template/stores/kids",
+    "/store-template/stores/outdoor"
   ],
   "aiContract": {
     "masterPrompt": "Open dit JSON-manifest en reconstrueer de Wolkveld-productpagina exact volgens sections en selectors. Vraag eerst om ontbrekende productdata. Vervang daarna uitsluitend placeholders met aangeleverde, verifieerbare informatie. Behoud alle secties, klikbare interacties en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties. Lever semantische HTML en behoud alle data-ai-section en data-ai-prompt-id attributen.",
@@ -86,31 +86,31 @@
       "methods": [
         {
           "id": "ideal",
-          "asset": "/payment-logos/ideal.svg"
+          "asset": "/store-template/payment-logos/ideal.svg"
         },
         {
           "id": "visa",
-          "asset": "/payment-logos/visa.svg"
+          "asset": "/store-template/payment-logos/visa.svg"
         },
         {
           "id": "mastercard",
-          "asset": "/payment-logos/mastercard.svg"
+          "asset": "/store-template/payment-logos/mastercard.svg"
         },
         {
           "id": "applepay",
-          "asset": "/payment-logos/apple-pay.svg"
+          "asset": "/store-template/payment-logos/apple-pay.svg"
         },
         {
           "id": "paypal",
-          "asset": "/payment-logos/paypal.svg"
+          "asset": "/store-template/payment-logos/paypal.svg"
         },
         {
           "id": "klarna",
-          "asset": "/payment-logos/klarna.svg"
+          "asset": "/store-template/payment-logos/klarna.svg"
         },
         {
           "id": "bancontact",
-          "asset": "/payment-logos/bancontact.svg"
+          "asset": "/store-template/payment-logos/bancontact.svg"
         }
       ],
       "purpose": "Visuele betaalvertrouwensbadges; geen checkout of betalingsverwerking."
