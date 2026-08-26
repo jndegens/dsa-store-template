@@ -4,3 +4,6 @@ dist
 .wrangler
 .DS_Store
 .vercel
+.vinext
+outputs
+work

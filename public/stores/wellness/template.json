@@ -1,31 +1,41 @@
 {
-  "schemaVersion": "4.1",
-  "templateId": "wolkveld-pdp",
-  "pageType": "generic-wolkveld-product-template",
+  "schemaVersion": "5.0",
+  "templateId": "dsa-store-template",
+  "pageType": "generic-dsa-product-template",
   "language": "nl-NL",
   "routes": [
-    "/store-template/",
-    "/store-template/stores",
-    "/store-template/stores/dieren",
-    "/store-template/stores/beauty",
-    "/store-template/stores/gadgets",
-    "/store-template/stores/wellness",
-    "/store-template/stores/fashion",
-    "/store-template/stores/wonen",
-    "/store-template/stores/kids",
-    "/store-template/stores/outdoor"
+    "/",
+    "/stores",
+    "/stores/dieren",
+    "/stores/beauty",
+    "/stores/gadgets",
+    "/stores/wellness",
+    "/stores/fashion",
+    "/stores/wonen",
+    "/stores/kids",
+    "/stores/outdoor"
   ],
+  "sourceRepository": {
+    "url": "https://github.com/jndegens/dsa-store-template",
+    "cloneUrl": "https://github.com/jndegens/dsa-store-template.git",
+    "branch": "main",
+    "guide": "https://github.com/jndegens/dsa-store-template/blob/main/BASE44.md",
+    "machineData": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/base44.json",
+    "download": "https://github.com/jndegens/dsa-store-template/archive/refs/heads/main.zip"
+  },
   "aiContract": {
-    "masterPrompt": "Open dit JSON-manifest en reconstrueer de Wolkveld-productpagina exact volgens sections en selectors. Vraag eerst om ontbrekende productdata. Vervang daarna uitsluitend placeholders met aangeleverde, verifieerbare informatie. Behoud alle secties, klikbare interacties en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties. Lever semantische HTML en behoud alle data-ai-section en data-ai-prompt-id attributen.",
+    "masterPrompt": "Importeer of clone eerst de openbare DSA GitHub-repository. Lees BASE44.md, public/base44.json en daarna dit route-manifest. Gebruik de bestaande broncode als source of truth en reconstrueer de pagina niet vanaf een screenshot. Vraag eerst om ontbrekende productdata. Vervang daarna uitsluitend placeholders met aangeleverde, verifieerbare informatie. Behoud alle secties, klikbare interacties, machineleesbare attributen en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties.",
     "workflow": [
+      "Importeer de GitHub-repository",
+      "Lees BASE44.md en public/base44.json",
       "Lees configuration en sections",
       "Rapporteer ontbrekende requiredInputs",
       "Wacht op echte productdata",
-      "Bouw exact volgens selectors",
-      "Valideer claims en alle 1:1 beelden"
+      "Vul de bestaande componenten",
+      "Voer npm test uit"
     ],
     "hardRules": [
-      "Behoud Wolkveld-layout",
+      "Behoud de DSA-layout en componentstructuur",
       "Alle afbeeldingen exact 1:1",
       "Geen verzonnen feiten of social proof",
       "Alle controls toetsenbordtoegankelijk",
@@ -51,6 +61,7 @@
       "outdoor"
     ],
     "palettes": [
+      "dsa",
       "amber",
       "rose",
       "electric",
@@ -86,31 +97,31 @@
       "methods": [
         {
           "id": "ideal",
-          "asset": "/store-template/payment-logos/ideal.svg"
+          "asset": "/payment-logos/ideal.svg"
         },
         {
           "id": "visa",
-          "asset": "/store-template/payment-logos/visa.svg"
+          "asset": "/payment-logos/visa.svg"
         },
         {
           "id": "mastercard",
-          "asset": "/store-template/payment-logos/mastercard.svg"
+          "asset": "/payment-logos/mastercard.svg"
         },
         {
           "id": "applepay",
-          "asset": "/store-template/payment-logos/apple-pay.svg"
+          "asset": "/payment-logos/apple-pay.svg"
         },
         {
           "id": "paypal",
-          "asset": "/store-template/payment-logos/paypal.svg"
+          "asset": "/payment-logos/paypal.svg"
         },
         {
           "id": "klarna",
-          "asset": "/store-template/payment-logos/klarna.svg"
+          "asset": "/payment-logos/klarna.svg"
         },
         {
           "id": "bancontact",
-          "asset": "/store-template/payment-logos/bancontact.svg"
+          "asset": "/payment-logos/bancontact.svg"
         }
       ],
       "purpose": "Visuele betaalvertrouwensbadges; geen checkout of betalingsverwerking."
@@ -1624,5 +1635,5 @@
       "imageSlot": null
     }
   ],
-  "scrapeInstructions": "Lees eerst aiContract.masterPrompt. Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder promptrecord staat in de initiële HTML als data-learn-record en data-ai-section. JavaScript-interactie is niet nodig om de prompts te lezen."
+  "scrapeInstructions": "Begin bij public/base44.json en lees daarna aiContract.masterPrompt. Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder promptrecord staat in de initiële HTML als data-learn-record en data-ai-section. JavaScript-interactie is niet nodig om de prompts te lezen."
 }

@@ -1,27 +1,36 @@
 {
-  "schemaVersion": "4.1",
-  "template": "generic-wolkveld-product-template",
+  "schemaVersion": "5.0",
+  "template": "generic-dsa-product-template",
   "routes": [
-    "/store-template/",
-    "/store-template/stores",
-    "/store-template/stores/dieren",
-    "/store-template/stores/beauty",
-    "/store-template/stores/gadgets",
-    "/store-template/stores/wellness",
-    "/store-template/stores/fashion",
-    "/store-template/stores/wonen",
-    "/store-template/stores/kids",
-    "/store-template/stores/outdoor"
+    "/",
+    "/stores",
+    "/stores/dieren",
+    "/stores/beauty",
+    "/stores/gadgets",
+    "/stores/wellness",
+    "/stores/fashion",
+    "/stores/wonen",
+    "/stores/kids",
+    "/stores/outdoor"
   ],
-  "canonicalManifest": "/store-template/stores/dieren/template.json",
+  "sourceRepository": {
+    "url": "https://github.com/jndegens/dsa-store-template",
+    "cloneUrl": "https://github.com/jndegens/dsa-store-template.git",
+    "branch": "main",
+    "guide": "https://github.com/jndegens/dsa-store-template/blob/main/BASE44.md",
+    "machineData": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/base44.json",
+    "download": "https://github.com/jndegens/dsa-store-template/archive/refs/heads/main.zip"
+  },
+  "base44Data": "/base44.json",
+  "canonicalManifest": "/stores/dieren/template.json",
   "aliases": [
-    "/store-template/stores/dieren/template.json",
-    "/store-template/stores/beauty/template.json",
-    "/store-template/stores/gadgets/template.json",
-    "/store-template/stores/wellness/template.json",
-    "/store-template/stores/fashion/template.json",
-    "/store-template/stores/wonen/template.json",
-    "/store-template/stores/kids/template.json",
-    "/store-template/stores/outdoor/template.json"
+    "/stores/dieren/template.json",
+    "/stores/beauty/template.json",
+    "/stores/gadgets/template.json",
+    "/stores/wellness/template.json",
+    "/stores/fashion/template.json",
+    "/stores/wonen/template.json",
+    "/stores/kids/template.json",
+    "/stores/outdoor/template.json"
   ]
 }

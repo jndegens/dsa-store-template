@@ -1,7 +1,7 @@
 import {headers} from 'next/headers';
 
-const productionOrigin='https://morgenmaak-product-template.jndegens.chatgpt.site';
-const productionHost='morgenmaak-product-template.jndegens.chatgpt.site';
+const productionOrigin='https://agents.dropshipacademy.nl';
+const productionHost='agents.dropshipacademy.nl';
 const localHostPattern=/^(?:localhost|127\.0\.0\.1)(?::\d{1,5})?$/;
 
 function firstHeaderValue(value=''){
