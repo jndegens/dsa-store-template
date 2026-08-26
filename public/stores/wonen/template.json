@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "3.0",
+  "schemaVersion": "4.0",
   "templateId": "wolkveld-pdp",
   "pageType": "generic-wolkveld-product-template",
   "language": "nl-NL",
@@ -30,6 +30,12 @@
       "Geen verzonnen feiten of social proof",
       "Alle controls toetsenbordtoegankelijk",
       "Behoud machineleesbare attributen"
+    ],
+    "configurableUrlParams": [
+      "cat",
+      "pal",
+      "font",
+      "logo"
     ],
     "expectedOutput": "Een complete, responsieve en klikbare productpagina plus een lijst van gebruikte brondata."
   },
@@ -170,25 +176,44 @@
     ],
     "iconPack": {
       "id": "lucide-react",
+      "source": "https://github.com/lucide-icons/lucide",
       "license": "ISC",
-      "styles": [
-        "outline",
-        "rounded",
-        "solid",
-        "minimal"
-      ],
+      "style": "outline",
       "usage": "Kies iconen op betekenis; gebruik nooit alleen een icoon voor essentiële tekst."
     },
     "paymentKit": {
-      "id": "morgenmaak-local-v1",
+      "id": "datatrans-payment-logos",
+      "source": "https://github.com/datatrans/payment-logos",
+      "license": "CC-BY-SA-4.0",
       "methods": [
-        "ideal",
-        "visa",
-        "mastercard",
-        "applepay",
-        "paypal",
-        "klarna",
-        "bancontact"
+        {
+          "id": "ideal",
+          "asset": "/payment-logos/ideal.svg"
+        },
+        {
+          "id": "visa",
+          "asset": "/payment-logos/visa.svg"
+        },
+        {
+          "id": "mastercard",
+          "asset": "/payment-logos/mastercard.svg"
+        },
+        {
+          "id": "applepay",
+          "asset": "/payment-logos/apple-pay.svg"
+        },
+        {
+          "id": "paypal",
+          "asset": "/payment-logos/paypal.svg"
+        },
+        {
+          "id": "klarna",
+          "asset": "/payment-logos/klarna.svg"
+        },
+        {
+          "id": "bancontact",
+          "asset": "/payment-logos/bancontact.svg"
+        }
       ],
       "purpose": "Visuele betaalvertrouwensbadges; geen checkout of betalingsverwerking."
     }

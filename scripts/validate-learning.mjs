@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import http from 'node:http';
 import { spawn } from 'node:child_process';
 import { stores, imageSlots } from '../src/content/product.js';
 import { annotationBase, getAnnotations } from '../src/content/annotations.js';
@@ -13,8 +14,14 @@ const appSource = fs.readFileSync('src/App.jsx', 'utf8');
 
 if (slugs.length !== 8) failures.push(`Verwacht exact 8 categorieën, vond ${slugs.length}`);
 if (imageSlots.length !== 18) failures.push(`Verwacht exact 18 beeldslots, vond ${imageSlots.length}`);
-for (const token of ['aria-modal="true"','role="tablist"','aria-selected={tab===id}','onKeyDown={trapFocus}','aria-controls="builder-menu"']) {
-  if (!appSource.includes(token)) failures.push(`Bouwmenu-toegankelijkheid ontbreekt in bron: ${token}`);
+for (const token of ['className="template-toolbar"','aria-controls={`selector-${id}`}','aria-expanded={open}','Exporteer deze prompt','datatrans-payment-logos','ALLE 18 INDIVIDUELE BEELDREGELS','slots:imageSlots.map','ref={cartRef}','copyStyleV2']) {
+  if (!appSource.includes(token)) failures.push(`Compacte templatebediening ontbreekt in bron: ${token}`);
+}
+if (/setBrandName|setProductName|BuilderMenu|builder-menu/.test(appSource)) failures.push('Merk- of producttekst is nog aanpasbaar via het oude bouwmenu');
+if (/GEBRUIK-DE-HUIDIGE-PAGINA-URL|De configureerbare URL wordt opgebouwd/.test(appSource)) failures.push('AI-export bevat nog een URL-placeholder');
+for (const asset of ['ideal.svg','visa.svg','mastercard.svg','apple-pay.svg','paypal.svg','klarna.svg','bancontact.svg']) {
+  const assetPath=`public/payment-logos/${asset}`;
+  if (!fs.existsSync(assetPath)||!fs.readFileSync(assetPath,'utf8').includes('<svg')) failures.push(`Officieel betaallogo ontbreekt of is ongeldig: ${assetPath}`);
 }
 
 const decode = (value = '') => value
@@ -35,8 +42,8 @@ for (const slot of imageSlots) {
   for (const field of ['id', 'shotId', 'area', 'label', 'brief', 'ratio', 'mobileRatio', 'prompt']) {
     if (!slot[field] || String(slot[field]).trim() === '') failures.push(`${slot.id || 'onbekend'}: mist ${field}`);
   }
-  if (!['1:1', '4:3'].includes(slot.ratio)) failures.push(`${slot.id}: onbekende desktopratio ${slot.ratio}`);
-  if (!['1:1', '4:3'].includes(slot.mobileRatio)) failures.push(`${slot.id}: onbekende mobielratio ${slot.mobileRatio}`);
+  if (slot.ratio !== '1:1') failures.push(`${slot.id}: desktopratio moet exact 1:1 zijn`);
+  if (slot.mobileRatio !== '1:1') failures.push(`${slot.id}: mobielratio moet exact 1:1 zijn`);
   if (!slot.prompt.includes(slot.ratio) || (slot.mobileRatio !== slot.ratio && !slot.prompt.includes(slot.mobileRatio))) failures.push(`${slot.id}: prompt vermeldt niet alle canonieke ratio's`);
 }
 
@@ -55,6 +62,9 @@ for (const slug of slugs) {
   if (manifest.designSystem?.palettes?.length !== 10) failures.push(`${slug}: verwacht 10 kleurpaletten`);
   if (manifest.designSystem?.fonts?.length !== 8) failures.push(`${slug}: verwacht 8 lettertypes`);
   if (manifest.designSystem?.logoTemplates?.length !== 20) failures.push(`${slug}: verwacht 20 logo-templates`);
+  if (manifest.schemaVersion !== '4.0') failures.push(`${slug}: verwacht manifestschema 4.0`);
+  if (manifest.designSystem?.paymentKit?.id !== 'datatrans-payment-logos') failures.push(`${slug}: Datatrans payment-kit ontbreekt`);
+  if (manifest.designSystem?.iconPack?.source !== 'https://github.com/lucide-icons/lucide') failures.push(`${slug}: officiële Lucide-bron ontbreekt`);
   if (JSON.stringify(manifest.routes) !== JSON.stringify(routes)) failures.push(`${slug}: routelijst wijkt af`);
   if (JSON.stringify(manifest.imageBriefs) !== JSON.stringify(imageSlots)) failures.push(`${slug}: beeldslots wijken af van canonieke bron`);
   if (JSON.stringify(manifest.contentPrompts) !== JSON.stringify(expectedContentPrompts)) failures.push(`${slug}: contentprompts wijken af van canonieke bron`);
@@ -111,10 +121,38 @@ async function verifyRenderedRoutes() {
       if (/<button[^>]*class="[^"]*learn-marker/.test(html)) failures.push(`${route}: leerlaag staat niet standaard uit`);
     }
 
-    const configured = await fetch(`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20&icons=solid&pay=ideal%2Cvisa&brand=TESTMERK&product=TESTPRODUCT&c1=%23b65778&c2=%232b1720&c3=%23fffafb&c4=%23f6e8ec`);
+    const configured = await fetch(`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20`);
     const configuredHtml = await configured.text();
-    for (const token of ['TESTMERK','TESTPRODUCT','logo-20','lucide-solid','"category":"beauty"','"paymentMethods":["ideal","visa"]']) {
+    for (const token of ['JOUW MERKNAAM','[JOUW PRODUCTNAAM]','logo-20','"category":{"id":"beauty"','datatrans-payment-logos']) {
       if (!configuredHtml.includes(token)) failures.push(`Deelbare URL mist SSR-configuratie: ${token}`);
+    }
+    const expectedUrl=`http://127.0.0.1:${port}/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20`;
+    if (!configuredHtml.replaceAll('&amp;','&').includes(expectedUrl)) failures.push('SSR-export bevat niet de exacte configureerbare URL');
+    for (const slot of imageSlots) {
+      if (!configuredHtml.includes(`"id":"${slot.id}"`)) failures.push(`SSR-export mist individuele beeldregel ${slot.id}`);
+    }
+
+    const spoofCases = [
+      { host: 'evil.example', 'x-forwarded-host': 'evil.example', 'x-forwarded-proto': 'javascript' },
+      { host: 'morgenmaak-product-template.jndegens.chatgpt.site', 'x-forwarded-host': 'evil.example', 'x-forwarded-proto': 'gopher' },
+      { host: 'attacker.invalid', 'x-forwarded-host': 'morgenmaak-product-template.jndegens.chatgpt.site', 'x-forwarded-proto': 'https' },
+    ];
+    const productionRoute='https://morgenmaak-product-template.jndegens.chatgpt.site/stores/beauty';
+    for (const spoofHeaders of spoofCases) {
+      const response = await new Promise((resolve, reject) => {
+        const request = http.request({ hostname: '127.0.0.1', port, path: '/stores/beauty?cat=beauty&pal=rose&font=luxury&logo=logo-20', headers: spoofHeaders }, (result) => {
+          let body = '';
+          result.setEncoding('utf8');
+          result.on('data', (chunk) => { body += chunk; });
+          result.on('end', () => resolve({ status: result.statusCode, body }));
+        });
+        request.on('error', reject);
+        request.end();
+      });
+      if (response.status !== 200) { failures.push(`SSR proxy-header-regressie antwoordt met ${response.status}`); continue; }
+      const html = response.body.replaceAll('&amp;', '&');
+      if (!html.includes(productionRoute)) failures.push(`SSR proxy-header-regressie mist canonieke productie-origin voor Host ${spoofHeaders.host}`);
+      if (html.includes('evil.example') || html.includes('javascript://') || html.includes('gopher://')) failures.push(`SSR proxy-header-regressie lekt vervalste header voor Host ${spoofHeaders.host}`);
     }
   } finally {
     server.kill('SIGTERM');

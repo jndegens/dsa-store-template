@@ -1,9 +1,10 @@
 # Asset provenance
 
-All visual assets in this template are original and may be reused with the template.
+This product template intentionally contains image placeholders instead of product photography.
 
-- `morgenmaak-kit.png`: generated for this project with OpenAI ImageGen on 2026-08-26. Prompt: “Premium approachable student ecommerce product mock-up of an original unbranded cold brew starter set: ribbed glass carafe, cobalt-blue lid, metal filter, amber jar and tumbler; paper-white studio, tomato-red circle and cobalt accent; square composition; no people, text, logo or watermark.”
-- `filter-detail.svg`, `kit-layout.svg`, `brew-steps.svg`: original code-native vector illustrations created for this project on 2026-08-26.
-- MORGENMAAK brand, copy, reviews and product data: fictional original example content created for this educational template.
+- Interface icons are rendered with the official [`lucide-react`](https://github.com/lucide-icons/lucide) package under the ISC license.
+- Payment marks in `payment-logos/` are copied without modification from the official [`datatrans/payment-logos`](https://github.com/datatrans/payment-logos) repository under CC-BY-SA-4.0: Visa, Mastercard, Apple Pay, PayPal, Klarna, iDEAL and Bancontact.
+- The 20 selectable wordmarks are original code-native text treatments. They do not contain third-party brand artwork.
+- All 18 product, feature, step, review, expert and FAQ visuals are descriptive 1:1 placeholders for student-supplied assets.
 
-The linked stores in `learning.json` are pattern references only. No third-party logo, product photo, review or store copy is included.
+Linked stores in the research data are pattern references only. Their logos, product photos, reviews and store copy are not included.
