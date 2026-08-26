@@ -767,7 +767,7 @@ button {
   position: absolute;
   z-index: 4;
   left: 50%;
-  bottom: 100px;
+  bottom: 130px;
   transform: translateX(-50%);
   width: 48px;
   height: 48px;
@@ -4036,4 +4036,63 @@ button {
   .footer-dsa-copy {
     font-size: 14px !important;
   }
+}
+
+/* The studio controls are always DSA-branded; store palettes only style the PDP below. */
+.template-toolbar[data-interface-brand="dsa"] {
+  --dsa-navy: #101820;
+  --dsa-panel: #19232e;
+  --dsa-panel-hover: #23313e;
+  --dsa-green: #007c65;
+  --dsa-orange: #e89a27;
+  --dsa-line: #344451;
+  --dsa-muted: #aeb9c2;
+  background: var(--dsa-navy);
+  border-top: 2px solid var(--dsa-green);
+  border-bottom-color: #ffffff18;
+  box-shadow: 0 12px 32px #07101638;
+  color: #fff;
+}
+.template-toolbar[data-interface-brand="dsa"] .toolbar-intro-icon {
+  background: var(--dsa-green);
+  box-shadow: 0 10px 28px #007c6545;
+}
+.template-toolbar[data-interface-brand="dsa"] .selector-label {
+  color: var(--dsa-muted);
+}
+.template-toolbar[data-interface-brand="dsa"] .selector-label svg,
+.template-toolbar[data-interface-brand="dsa"] .current-category-icon,
+.template-toolbar[data-interface-brand="dsa"] .current-font b {
+  color: var(--dsa-orange);
+}
+.template-toolbar[data-interface-brand="dsa"] .selector-control,
+.template-toolbar[data-interface-brand="dsa"] .toolbar-prompts {
+  border-color: var(--dsa-line);
+  background: var(--dsa-panel);
+  box-shadow: inset 0 1px #ffffff0b;
+}
+.template-toolbar[data-interface-brand="dsa"] .selector-control > button:hover,
+.template-toolbar[data-interface-brand="dsa"] .toolbar-prompts:hover,
+.template-toolbar[data-interface-brand="dsa"] .toolbar-prompts:focus-visible {
+  border-color: var(--dsa-orange);
+  background: var(--dsa-panel-hover);
+}
+.template-toolbar[data-interface-brand="dsa"] .toolbar-prompts.is-on,
+.template-toolbar[data-interface-brand="dsa"] .toolbar-export {
+  border-color: var(--dsa-orange);
+  background: var(--dsa-orange);
+  box-shadow: 0 9px 25px #e89a2748;
+}
+.template-toolbar[data-interface-brand="dsa"]
+  .compact-option-grid
+  > button.is-active {
+  border-color: var(--dsa-green);
+  box-shadow: 0 0 0 3px #007c6521;
+}
+.template-toolbar[data-interface-brand="dsa"] .option-icon {
+  color: var(--dsa-green);
+}
+.template-toolbar[data-interface-brand="dsa"] :is(button, a):focus-visible {
+  outline: 3px solid #f6bb61;
+  outline-offset: 2px;
 }
