@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { stores } from '../src/content/product.js';
+import { annotationBase } from '../src/content/annotations.js';
 
 fs.mkdirSync('public/stores', { recursive: true });
 const index = {
@@ -25,8 +26,8 @@ for (const store of Object.values(stores)) {
     imageRule: { ratio: '1:1', resolution: '1600 × 1600', appliesTo: 'productfoto’s, details, unboxing, lifestyle en review/UGC' },
     product: { name: store.product.name, subtitle: store.product.subtitle, description: store.product.description },
     imageBriefs: store.product.media,
-    contentSections: ['announcement','brand','title','proof','price','bundles','cta','benefits','story','included','reviews','faq'],
-    scrapeInstructions: 'Lees imageBriefs voor productieprompts. Dezelfde prompts staan semantisch in de HTML onder data-learn-record en data-shot-id.',
+    contentPrompts: Object.entries(annotationBase).map(([id, annotation]) => ({ id, ...annotation })),
+    scrapeInstructions: 'Lees contentPrompts en imageBriefs voor alle productieprompts. Dezelfde records staan semantisch in de HTML onder data-learn-record en data-shot-id.',
   };
   fs.writeFileSync(`${directory}/template.json`, `${JSON.stringify(manifest, null, 2)}\n`);
 }

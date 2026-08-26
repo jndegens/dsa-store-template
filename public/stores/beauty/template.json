@@ -142,19 +142,151 @@
       "prompt": "Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: ugc-review. Onderwerp: persoon bij raam met stick in hand. Compositie: selfie-achtig; product herkenbaar. Achtergrond: echte slaapkamer. Belichting: natuurlijk daglicht. Verplicht zichtbaar: huidtextuur, casual framing. Vermijd: beautyfilter, studio-retouche. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen."
     }
   ],
-  "contentSections": [
-    "announcement",
-    "brand",
-    "title",
-    "proof",
-    "price",
-    "bundles",
-    "cta",
-    "benefits",
-    "story",
-    "included",
-    "reviews",
-    "faq"
+  "contentPrompts": [
+    {
+      "id": "announcement",
+      "label": "Aankondigingsbalk",
+      "type": "copy",
+      "guidance": "Kies één concrete servicebelofte die voor bijna iedere bezoeker geldt.",
+      "prompt": "Schrijf 5 aankondigingsbalken van maximaal 55 tekens voor [PRODUCT]. Gebruik alleen een echte verzend-, garantie- of servicebelofte. Vermijd nep-urgentie.",
+      "checklist": [
+        "Eén voordeel",
+        "Maximaal 55 tekens",
+        "Feitelijk bewijsbaar"
+      ]
+    },
+    {
+      "id": "brand",
+      "label": "Merk en logo",
+      "type": "brand",
+      "guidance": "Een korte, leesbare merknaam bouwt herkenning en brengt de bezoeker terug naar boven.",
+      "prompt": "Bedenk 12 korte merknamen voor [PRODUCTCATEGORIE]. Ze moeten makkelijk uitspreekbaar en onderscheidend zijn. Geef per naam één tagline. Controleer daarna handelsmerken en domeinen.",
+      "checklist": [
+        "Leesbaar op mobiel",
+        "Past bij de niche",
+        "Merkcheck vereist"
+      ]
+    },
+    {
+      "id": "title",
+      "label": "Producttitel",
+      "type": "copy",
+      "guidance": "De titel zegt wat het product is. De ondertitel maakt het gewenste gebruiksmoment concreet.",
+      "prompt": "Schrijf 10 producttitels voor [PRODUCT], maximaal 6 woorden. Benoem producttype en belangrijkste onderscheid. Voeg per titel een ondertitel van maximaal 10 woorden toe. Geen superlatieven zonder bewijs.",
+      "checklist": [
+        "Producttype duidelijk",
+        "Belangrijk onderscheid",
+        "Geen onbewezen claim"
+      ]
+    },
+    {
+      "id": "proof",
+      "label": "Reviewbewijs",
+      "type": "social-proof",
+      "guidance": "Score en aantal horen samen en linken naar de onderliggende reviews.",
+      "prompt": "Vat deze geverifieerde reviews van [PRODUCT] samen: [RUWE REVIEWS]. Geef 3 terugkerende thema’s, het vaakst genoemde nadeel en de transparant berekende gemiddelde score. Verzin niets.",
+      "checklist": [
+        "Echte bron",
+        "Score plus aantal",
+        "Ook nuance"
+      ]
+    },
+    {
+      "id": "price",
+      "label": "Prijs en korting",
+      "type": "offer",
+      "guidance": "Maak de huidige prijs dominant. Toon alleen een vergelijkingsprijs als die aantoonbaar geldig is.",
+      "prompt": "Maak een helder prijsblok voor [PRODUCT] met verkoopprijs [PRIJS] en geldige vergelijkingsprijs [VAN-PRIJS]. Bereken de besparing exact. Laat kortingstaal weg wanneer de referentieprijs niet aantoonbaar is.",
+      "checklist": [
+        "Prijs dominant",
+        "Besparing narekenbaar",
+        "Geen verborgen kosten"
+      ]
+    },
+    {
+      "id": "bundles",
+      "label": "Voordeelbundels",
+      "type": "offer",
+      "guidance": "Vergelijk iedere optie op dezelfde dimensies: hoeveelheid, inhoud, prijs en besparing.",
+      "prompt": "Ontwerp 3 eerlijke bundels voor [PRODUCT]. Geef per bundel: exacte inhoud, totaalprijs, prijs per stuk, doelgroep en feitelijke badge. Adviseer alleen een optie wanneer de waarde aantoonbaar beter is.",
+      "checklist": [
+        "Exacte inhoud",
+        "Zelfde vergelijkingsbasis",
+        "Selectie zichtbaar"
+      ]
+    },
+    {
+      "id": "cta",
+      "label": "Primaire koopknop",
+      "type": "conversion",
+      "guidance": "De knop beschrijft exact wat er na de klik gebeurt. Praktische geruststelling staat er direct onder.",
+      "prompt": "Schrijf 8 actieve CTA-knoppen voor [PRODUCT], maximaal 4 woorden. De tekst moet exact overeenkomen met de vervolgstap. Voeg per CTA één korte regel toe over [VERZENDING/GARANTIE].",
+      "checklist": [
+        "Actief werkwoord",
+        "Eén primaire actie",
+        "Uitkomst klopt"
+      ]
+    },
+    {
+      "id": "benefits",
+      "label": "Belangrijkste voordelen",
+      "type": "copy",
+      "guidance": "Combineer ieder gewenst resultaat met de producteigenschap die dat mogelijk maakt.",
+      "prompt": "Zet deze eigenschappen van [PRODUCT] om in 3 voordelen: [EIGENSCHAPPEN]. Geef per voordeel een kop van maximaal 5 woorden en één feitelijke uitlegzin. Behoud beperkingen.",
+      "checklist": [
+        "Resultaat plus reden",
+        "Snel scanbaar",
+        "Geen absolute claims"
+      ]
+    },
+    {
+      "id": "story",
+      "label": "Probleem en mechanisme",
+      "type": "content",
+      "guidance": "Deze sectie maakt duidelijk waarom het probleem bestaat en hoe het product praktisch helpt.",
+      "prompt": "Schrijf een probleem-mechanisme-sectie voor [PRODUCT]. Open met een herkenbaar moment, leg in gewone taal uit hoe [MECHANISME] helpt en eindig met precies 3 gebruiksstappen. Maximaal 160 woorden.",
+      "checklist": [
+        "Herkenbaar probleem",
+        "Mechanisme uitgelegd",
+        "Drie concrete stappen"
+      ]
+    },
+    {
+      "id": "included",
+      "label": "Wat zit er in de doos?",
+      "type": "content",
+      "guidance": "Een exacte inhoudslijst voorkomt onzekerheid en retouren.",
+      "prompt": "Maak een verpakkingsinhoud-sectie voor [PRODUCT] op basis van [ECHTE INHOUD]. Noem ieder onderdeel exact één keer en voeg niets toe dat niet wordt meegeleverd.",
+      "checklist": [
+        "Alles één keer",
+        "Exacte benamingen",
+        "Geen verzonnen extra’s"
+      ]
+    },
+    {
+      "id": "reviews",
+      "label": "Reviewsectie",
+      "type": "social-proof",
+      "guidance": "Gebruik uitsluitend echte feedback met context, concreet resultaat en ruimte voor nuance.",
+      "prompt": "Structureer deze echte klantfeedback voor [PRODUCT]: [RUWE REVIEWS]. Behoud betekenis en formulering, anonimiseer persoonsgegevens, verzin niets en selecteer een evenwichtige mix inclusief één genuanceerde review.",
+      "checklist": [
+        "Echte bron",
+        "Context zichtbaar",
+        "Ook nuance"
+      ]
+    },
+    {
+      "id": "faq",
+      "label": "Veelgestelde vragen",
+      "type": "content",
+      "guidance": "Beantwoord bezwaren die nog niet eerder zijn opgelost. Geef eerst het directe antwoord.",
+      "prompt": "Maak 8 FAQ’s voor [PRODUCT] uit [KLANTVRAGEN]. Begin ieder antwoord met een direct kernfeit, houd het onder 55 woorden en verzin geen beleid of productspecificaties.",
+      "checklist": [
+        "Gebaseerd op bron",
+        "Antwoord eerst",
+        "Geen herhaling"
+      ]
+    }
   ],
-  "scrapeInstructions": "Lees imageBriefs voor productieprompts. Dezelfde prompts staan semantisch in de HTML onder data-learn-record en data-shot-id."
+  "scrapeInstructions": "Lees contentPrompts en imageBriefs voor alle productieprompts. Dezelfde records staan semantisch in de HTML onder data-learn-record en data-shot-id."
 }
