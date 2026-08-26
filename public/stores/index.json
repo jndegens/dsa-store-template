@@ -1,30 +1,17 @@
 {
-  "schemaVersion": "1.0",
-  "rule": "Alle afbeeldingsslots zijn verplicht 1:1 en ontworpen voor 1600 × 1600 pixels.",
-  "stores": [
-    {
-      "slug": "dieren",
-      "niche": "Dieren",
-      "brand": "WOLFVRIEND",
-      "product": "De Wolknest Hondenmand",
-      "page": "/stores/dieren",
-      "manifest": "/stores/dieren/template.json"
-    },
-    {
-      "slug": "beauty",
-      "niche": "Beauty",
-      "brand": "ÉLANE",
-      "product": "Dew Veil Serum Stick",
-      "page": "/stores/beauty",
-      "manifest": "/stores/beauty/template.json"
-    },
-    {
-      "slug": "gadgets",
-      "niche": "Gadgets",
-      "brand": "NORTHLAB",
-      "product": "Dock One Oplaadstation",
-      "page": "/stores/gadgets",
-      "manifest": "/stores/gadgets/template.json"
-    }
+  "schemaVersion": "2.0",
+  "template": "generic-wolkveld-product-template",
+  "routes": [
+    "/",
+    "/stores",
+    "/stores/dieren",
+    "/stores/beauty",
+    "/stores/gadgets"
+  ],
+  "canonicalManifest": "/stores/dieren/template.json",
+  "aliases": [
+    "/stores/dieren/template.json",
+    "/stores/beauty/template.json",
+    "/stores/gadgets/template.json"
   ]
 }

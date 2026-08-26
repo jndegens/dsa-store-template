@@ -1,145 +1,374 @@
 {
-  "schemaVersion": "1.0",
-  "pageType": "reusable-product-detail-page",
+  "schemaVersion": "2.0",
+  "pageType": "generic-wolkveld-product-template",
   "language": "nl-NL",
-  "niche": "Beauty",
-  "route": "/stores/beauty",
-  "theme": {
-    "brand": "ÉLANE",
-    "fontClass": "font-beauty",
-    "colors": {
-      "paper": "#fcf8f8",
-      "ink": "#351d2f",
-      "primary": "#6e3158",
-      "accent": "#c76183",
-      "soft": "#f1dfe5",
-      "signal": "#f1c4b5"
-    }
-  },
-  "imageRule": {
-    "ratio": "1:1",
-    "resolution": "1600 × 1600",
-    "appliesTo": "productfoto’s, details, unboxing, lifestyle en review/UGC"
-  },
-  "product": {
-    "name": "Dew Veil Serum Stick",
-    "subtitle": "Hydratatie precies waar je huid erom vraagt.",
-    "description": "Een compacte serumstick met zachte balsemtextuur voor een frisse, verzorgde uitstraling. Makkelijk aan te brengen en mee te nemen."
-  },
+  "routes": [
+    "/",
+    "/stores",
+    "/stores/dieren",
+    "/stores/beauty",
+    "/stores/gadgets"
+  ],
   "imageBriefs": [
     {
-      "id": "beauty-hero",
-      "shotId": "beauty-hero",
-      "number": "01",
-      "shotType": "hero-product",
-      "title": "Vrijstaande productfoto",
-      "direction": "Maak verpakking en productvorm begrijpelijk.",
-      "subject": "serumstick met dop ernaast",
-      "composition": "frontaal; product centraal",
-      "background": "porseleinwit met roze gloed",
-      "lighting": "grote softbox",
-      "mustInclude": "stick, dop, balsemtextuur",
-      "avoid": "bloemenzee, watermerk, tekst",
+      "id": "gallery-hero",
+      "shotId": "gallery-hero",
+      "area": "gallery",
+      "label": "Hoofdfoto",
+      "title": "Hoofdfoto",
+      "brief": "Vrijstaand product · compleet zichtbaar",
+      "direction": "Vrijstaand product · compleet zichtbaar",
       "ratio": "1:1",
-      "copySpace": "Geen tekst in beeld; houd rustige negatieve ruimte rond het product.",
+      "mobileRatio": "1:1",
       "resolution": "1600 × 1600",
-      "alt": "1:1 afbeeldingsplaceholder: Vrijstaande productfoto",
-      "prompt": "Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: hero-product. Onderwerp: serumstick met dop ernaast. Compositie: frontaal; product centraal. Achtergrond: porseleinwit met roze gloed. Belichting: grote softbox. Verplicht zichtbaar: stick, dop, balsemtextuur. Vermijd: bloemenzee, watermerk, tekst. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen."
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Vrijstaand product · compleet zichtbaar",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Hoofdfoto: Vrijstaand product · compleet zichtbaar",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Hoofdfoto. Doel: Vrijstaand product · compleet zichtbaar. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
-      "id": "beauty-texture",
-      "shotId": "beauty-texture",
-      "number": "02",
-      "shotType": "texture-shot",
-      "title": "Product + textuur",
-      "direction": "Laat kleur en consistentie zien.",
-      "subject": "open stick met één balsemveeg",
-      "composition": "diagonaal met veeg ernaast",
-      "background": "licht blush",
-      "lighting": "diffuus beautylicht",
-      "mustInclude": "crèmige transparante textuur",
-      "avoid": "glitter, voedseltextuur, tekst",
+      "id": "gallery-use",
+      "shotId": "gallery-use",
+      "area": "gallery",
+      "label": "In gebruik",
+      "title": "In gebruik",
+      "brief": "Product met gebruiker · schaal duidelijk",
+      "direction": "Product met gebruiker · schaal duidelijk",
       "ratio": "1:1",
-      "copySpace": "Geen tekst in beeld; houd rustige negatieve ruimte rond het product.",
+      "mobileRatio": "1:1",
       "resolution": "1600 × 1600",
-      "alt": "1:1 afbeeldingsplaceholder: Product + textuur",
-      "prompt": "Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: texture-shot. Onderwerp: open stick met één balsemveeg. Compositie: diagonaal met veeg ernaast. Achtergrond: licht blush. Belichting: diffuus beautylicht. Verplicht zichtbaar: crèmige transparante textuur. Vermijd: glitter, voedseltextuur, tekst. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen."
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Product met gebruiker · schaal duidelijk",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "In gebruik: Product met gebruiker · schaal duidelijk",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: In gebruik. Doel: Product met gebruiker · schaal duidelijk. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
-      "id": "beauty-apply",
-      "shotId": "beauty-apply",
-      "number": "03",
-      "shotType": "application",
-      "title": "Product in gebruik",
-      "direction": "Demonstreer één applicatiezone.",
-      "subject": "hand die stick langs jukbeen aanbrengt",
-      "composition": "natuurlijke close-up",
-      "background": "rustige badkamer",
-      "lighting": "zacht raamlicht",
-      "mustInclude": "echte huidtextuur, productcontact",
-      "avoid": "beautyfilter, medische before/after",
+      "id": "gallery-close",
+      "shotId": "gallery-close",
+      "area": "gallery",
+      "label": "Detailfoto",
+      "title": "Detailfoto",
+      "brief": "Close-up · materiaal en afwerking",
+      "direction": "Close-up · materiaal en afwerking",
       "ratio": "1:1",
-      "copySpace": "Geen tekst in beeld; houd rustige negatieve ruimte rond het product.",
+      "mobileRatio": "1:1",
       "resolution": "1600 × 1600",
-      "alt": "1:1 afbeeldingsplaceholder: Product in gebruik",
-      "prompt": "Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: application. Onderwerp: hand die stick langs jukbeen aanbrengt. Compositie: natuurlijke close-up. Achtergrond: rustige badkamer. Belichting: zacht raamlicht. Verplicht zichtbaar: echte huidtextuur, productcontact. Vermijd: beautyfilter, medische before/after. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen."
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Close-up · materiaal en afwerking",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Detailfoto: Close-up · materiaal en afwerking",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Detailfoto. Doel: Close-up · materiaal en afwerking. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
-      "id": "beauty-macro",
-      "shotId": "beauty-macro",
-      "number": "04",
-      "shotType": "macro-detail",
-      "title": "Close-up van de stick",
-      "direction": "Bewijs mechanisme en afwerking.",
-      "subject": "draairing, balsem en huls",
-      "composition": "extreme close-up",
-      "background": "warm neutraal",
-      "lighting": "strijklicht",
-      "mustInclude": "kunststofdetail en balsem",
-      "avoid": "vervormd logo, druppels, tekst",
+      "id": "gallery-features",
+      "shotId": "gallery-features",
+      "area": "gallery",
+      "label": "Kenmerken",
+      "title": "Kenmerken",
+      "brief": "Belangrijkste functies in één beeld",
+      "direction": "Belangrijkste functies in één beeld",
       "ratio": "1:1",
-      "copySpace": "Geen tekst in beeld; houd rustige negatieve ruimte rond het product.",
+      "mobileRatio": "1:1",
       "resolution": "1600 × 1600",
-      "alt": "1:1 afbeeldingsplaceholder: Close-up van de stick",
-      "prompt": "Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: macro-detail. Onderwerp: draairing, balsem en huls. Compositie: extreme close-up. Achtergrond: warm neutraal. Belichting: strijklicht. Verplicht zichtbaar: kunststofdetail en balsem. Vermijd: vervormd logo, druppels, tekst. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen."
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Belangrijkste functies in één beeld",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Kenmerken: Belangrijkste functies in één beeld",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Kenmerken. Doel: Belangrijkste functies in één beeld. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
-      "id": "beauty-box",
-      "shotId": "beauty-box",
-      "number": "05",
-      "shotType": "unboxing",
-      "title": "Wat zit er in het doosje?",
-      "direction": "Toon exact product en verpakking.",
-      "subject": "stick, dop, doosje en kaart",
-      "composition": "flat lay met witruimte",
-      "background": "porseleinwit",
-      "lighting": "toplicht",
-      "mustInclude": "ieder onderdeel eenmaal",
-      "avoid": "extra applicators, leesbare claims",
+      "id": "gallery-box",
+      "shotId": "gallery-box",
+      "area": "gallery",
+      "label": "In de doos",
+      "title": "In de doos",
+      "brief": "Exacte inhoud · geen extra accessoires",
+      "direction": "Exacte inhoud · geen extra accessoires",
       "ratio": "1:1",
-      "copySpace": "Geen tekst in beeld; houd rustige negatieve ruimte rond het product.",
+      "mobileRatio": "1:1",
       "resolution": "1600 × 1600",
-      "alt": "1:1 afbeeldingsplaceholder: Wat zit er in het doosje?",
-      "prompt": "Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: unboxing. Onderwerp: stick, dop, doosje en kaart. Compositie: flat lay met witruimte. Achtergrond: porseleinwit. Belichting: toplicht. Verplicht zichtbaar: ieder onderdeel eenmaal. Vermijd: extra applicators, leesbare claims. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen."
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Exacte inhoud · geen extra accessoires",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "In de doos: Exacte inhoud · geen extra accessoires",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: In de doos. Doel: Exacte inhoud · geen extra accessoires. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     },
     {
-      "id": "beauty-review",
-      "shotId": "beauty-review",
-      "number": "06",
-      "shotType": "ugc-review",
-      "title": "Vierkante UGC-reviewfoto",
-      "direction": "Maak een geloofwaardige mobiele foto.",
-      "subject": "persoon bij raam met stick in hand",
-      "composition": "selfie-achtig; product herkenbaar",
-      "background": "echte slaapkamer",
-      "lighting": "natuurlijk daglicht",
-      "mustInclude": "huidtextuur, casual framing",
-      "avoid": "beautyfilter, studio-retouche",
+      "id": "feature-01",
+      "shotId": "feature-01",
+      "area": "features",
+      "label": "Productfoto 1",
+      "title": "Productfoto 1",
+      "brief": "Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
+      "direction": "Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
+      "ratio": "4:3",
+      "mobileRatio": "4:3",
+      "resolution": "1600 × 1200",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Productfoto 1: Lifestyle productfoto · product in gebruik · resultaat zichtbaar",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 1. Doel: Lifestyle productfoto · product in gebruik · resultaat zichtbaar. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "feature-02",
+      "shotId": "feature-02",
+      "area": "features",
+      "label": "Productfoto 2",
+      "title": "Productfoto 2",
+      "brief": "Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
+      "direction": "Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
+      "ratio": "4:3",
+      "mobileRatio": "4:3",
+      "resolution": "1600 × 1200",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Productfoto 2: Detailfoto · eigenschap en mechanisme · tastbare kwaliteit",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 2. Doel: Detailfoto · eigenschap en mechanisme · tastbare kwaliteit. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "feature-03",
+      "shotId": "feature-03",
+      "area": "features",
+      "label": "Productfoto 3",
+      "title": "Productfoto 3",
+      "brief": "Contextfoto · realistische omgeving · schaal en gemak",
+      "direction": "Contextfoto · realistische omgeving · schaal en gemak",
+      "ratio": "4:3",
+      "mobileRatio": "4:3",
+      "resolution": "1600 × 1200",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Contextfoto · realistische omgeving · schaal en gemak",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Productfoto 3: Contextfoto · realistische omgeving · schaal en gemak",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productfoto 3. Doel: Contextfoto · realistische omgeving · schaal en gemak. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "step-01",
+      "shotId": "step-01",
+      "area": "steps",
+      "label": "Stapfoto 01",
+      "title": "Stapfoto 01",
+      "brief": "Unboxing · product en verpakking",
+      "direction": "Unboxing · product en verpakking",
       "ratio": "1:1",
-      "copySpace": "Geen tekst in beeld; houd rustige negatieve ruimte rond het product.",
+      "mobileRatio": "1:1",
       "resolution": "1600 × 1600",
-      "alt": "1:1 afbeeldingsplaceholder: Vierkante UGC-reviewfoto",
-      "prompt": "Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: ugc-review. Onderwerp: persoon bij raam met stick in hand. Compositie: selfie-achtig; product herkenbaar. Achtergrond: echte slaapkamer. Belichting: natuurlijk daglicht. Verplicht zichtbaar: huidtextuur, casual framing. Vermijd: beautyfilter, studio-retouche. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen."
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Unboxing · product en verpakking",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Stapfoto 01: Unboxing · product en verpakking",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Stapfoto 01. Doel: Unboxing · product en verpakking. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "step-02",
+      "shotId": "step-02",
+      "area": "steps",
+      "label": "Stapfoto 02",
+      "title": "Stapfoto 02",
+      "brief": "Voorbereiding · één duidelijke handeling",
+      "direction": "Voorbereiding · één duidelijke handeling",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Voorbereiding · één duidelijke handeling",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Stapfoto 02: Voorbereiding · één duidelijke handeling",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Stapfoto 02. Doel: Voorbereiding · één duidelijke handeling. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "step-03",
+      "shotId": "step-03",
+      "area": "steps",
+      "label": "Stapfoto 03",
+      "title": "Stapfoto 03",
+      "brief": "Product in gebruik · kernmoment",
+      "direction": "Product in gebruik · kernmoment",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Product in gebruik · kernmoment",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Stapfoto 03: Product in gebruik · kernmoment",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Stapfoto 03. Doel: Product in gebruik · kernmoment. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "step-04",
+      "shotId": "step-04",
+      "area": "steps",
+      "label": "Stapfoto 04",
+      "title": "Stapfoto 04",
+      "brief": "Resultaatbeeld · geloofwaardig eindmoment",
+      "direction": "Resultaatbeeld · geloofwaardig eindmoment",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Resultaatbeeld · geloofwaardig eindmoment",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Stapfoto 04: Resultaatbeeld · geloofwaardig eindmoment",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Stapfoto 04. Doel: Resultaatbeeld · geloofwaardig eindmoment. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "review-01",
+      "shotId": "review-01",
+      "area": "reviews",
+      "label": "Reviewfoto 01",
+      "title": "Reviewfoto 01",
+      "brief": "Klant met product · mobiele UGC-look",
+      "direction": "Klant met product · mobiele UGC-look",
+      "ratio": "4:3",
+      "mobileRatio": "4:3",
+      "resolution": "1600 × 1200",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Klant met product · mobiele UGC-look",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Reviewfoto 01: Klant met product · mobiele UGC-look",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 01. Doel: Klant met product · mobiele UGC-look. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "review-02",
+      "shotId": "review-02",
+      "area": "reviews",
+      "label": "Reviewfoto 02",
+      "title": "Reviewfoto 02",
+      "brief": "Product thuis · imperfect en geloofwaardig",
+      "direction": "Product thuis · imperfect en geloofwaardig",
+      "ratio": "4:3",
+      "mobileRatio": "4:3",
+      "resolution": "1600 × 1200",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Product thuis · imperfect en geloofwaardig",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Reviewfoto 02: Product thuis · imperfect en geloofwaardig",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 02. Doel: Product thuis · imperfect en geloofwaardig. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "review-03",
+      "shotId": "review-03",
+      "area": "reviews",
+      "label": "Reviewfoto 03",
+      "title": "Reviewfoto 03",
+      "brief": "Close-up resultaat · natuurlijk licht",
+      "direction": "Close-up resultaat · natuurlijk licht",
+      "ratio": "4:3",
+      "mobileRatio": "4:3",
+      "resolution": "1600 × 1200",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Close-up resultaat · natuurlijk licht",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Reviewfoto 03: Close-up resultaat · natuurlijk licht",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Reviewfoto 03. Doel: Close-up resultaat · natuurlijk licht. Formaat exact 4:3. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "expert-photo",
+      "shotId": "expert-photo",
+      "area": "reviews",
+      "label": "Expertfoto",
+      "title": "Expertfoto",
+      "brief": "Echte portretfoto · neutrale achtergrond",
+      "direction": "Echte portretfoto · neutrale achtergrond",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Echte portretfoto · neutrale achtergrond",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Expertfoto: Echte portretfoto · neutrale achtergrond",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Expertfoto. Doel: Echte portretfoto · neutrale achtergrond. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "faq-photo",
+      "shotId": "faq-photo",
+      "area": "faq",
+      "label": "FAQ-productfoto",
+      "title": "FAQ-productfoto",
+      "brief": "Product in rustige context · herkenbare schaal",
+      "direction": "Product in rustige context · herkenbare schaal",
+      "ratio": "1:1",
+      "mobileRatio": "4:3",
+      "resolution": "1600 × 1600",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Product in rustige context · herkenbare schaal",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "FAQ-productfoto: Product in rustige context · herkenbare schaal",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: FAQ-productfoto. Doel: Product in rustige context · herkenbare schaal. Formaat exact 1:1 op desktop en 4:3 op mobiel. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
+    },
+    {
+      "id": "final-thumbnail",
+      "shotId": "final-thumbnail",
+      "area": "final",
+      "label": "Productthumbnail",
+      "title": "Productthumbnail",
+      "brief": "Vrijstaand product · frontaal",
+      "direction": "Vrijstaand product · frontaal",
+      "ratio": "1:1",
+      "mobileRatio": "1:1",
+      "resolution": "1600 × 1600",
+      "subject": "[JOUW PRODUCT] in de beschreven situatie",
+      "composition": "Vrijstaand product · frontaal",
+      "background": "Rustige achtergrond passend bij jouw merkstijl",
+      "lighting": "Natuurlijk, zacht en geloofwaardig licht",
+      "mustInclude": "Het echte product, correct van vorm, kleur en schaal",
+      "avoid": "Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten",
+      "alt": "Productthumbnail: Vrijstaand product · frontaal",
+      "prompt": "Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: Productthumbnail. Doel: Vrijstaand product · frontaal. Formaat exact 1:1. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten."
     }
   ],
   "contentPrompts": [
@@ -147,8 +376,8 @@
       "id": "announcement",
       "label": "Aankondigingsbalk",
       "type": "copy",
-      "guidance": "Kies één concrete servicebelofte die voor bijna iedere bezoeker geldt.",
-      "prompt": "Schrijf 5 aankondigingsbalken van maximaal 55 tekens voor [PRODUCT]. Gebruik alleen een echte verzend-, garantie- of servicebelofte. Vermijd nep-urgentie.",
+      "guidance": "Gebruik één echte, brede servicebelofte.",
+      "prompt": "Schrijf 5 aankondigingsbalken van maximaal 55 tekens voor [PRODUCT]. Gebruik alleen een aantoonbare verzend-, garantie- of servicebelofte.",
       "checklist": [
         "Eén voordeel",
         "Maximaal 55 tekens",
@@ -156,23 +385,71 @@
       ]
     },
     {
+      "id": "header-benefits",
+      "label": "Voordelenbalk",
+      "type": "copy",
+      "guidance": "Kies drie korte voordelen die de hele winkel ondersteunen.",
+      "prompt": "Schrijf 3 korte, onderling verschillende winkelvoordelen voor [MERK]. Gebruik alleen echte service- of productfeiten.",
+      "checklist": [
+        "Drie verschillende voordelen",
+        "Kort en scanbaar",
+        "Geen nep-urgentie"
+      ]
+    },
+    {
       "id": "brand",
       "label": "Merk en logo",
       "type": "brand",
-      "guidance": "Een korte, leesbare merknaam bouwt herkenning en brengt de bezoeker terug naar boven.",
-      "prompt": "Bedenk 12 korte merknamen voor [PRODUCTCATEGORIE]. Ze moeten makkelijk uitspreekbaar en onderscheidend zijn. Geef per naam één tagline. Controleer daarna handelsmerken en domeinen.",
+      "guidance": "Gebruik een compact, leesbaar logo dat ook op mobiel werkt.",
+      "prompt": "Maak een briefing voor een eenvoudig woordmerk en beeldmerk voor [MERK] in [NICHE]. Beschrijf vorm, typografie, kleurgebruik en een versie voor klein mobiel formaat.",
       "checklist": [
-        "Leesbaar op mobiel",
-        "Past bij de niche",
-        "Merkcheck vereist"
+        "Herkenbaar op klein formaat",
+        "Past bij merkstijl",
+        "Geen gekopieerd logo"
+      ]
+    },
+    {
+      "id": "proof",
+      "label": "Reviewbewijs",
+      "type": "social-proof",
+      "guidance": "Score, aantal en bron moeten controleerbaar bij elkaar horen.",
+      "prompt": "Bereken de score uit [ECHTE REVIEWS] en schrijf één transparante reviewregel. Verzin geen aantal of score.",
+      "checklist": [
+        "Echte bron",
+        "Score plus aantal",
+        "Link naar reviews"
+      ]
+    },
+    {
+      "id": "category",
+      "label": "Productcategorie",
+      "type": "copy",
+      "guidance": "Gebruik een korte categorienaam die het product direct plaatst.",
+      "prompt": "Geef 10 categorielabels van maximaal 4 woorden voor [PRODUCT]. Kies gewone klanttaal.",
+      "checklist": [
+        "Maximaal vier woorden",
+        "Product direct herkenbaar",
+        "Geen claim"
+      ]
+    },
+    {
+      "id": "action-badge",
+      "label": "Actiebadge",
+      "type": "offer",
+      "guidance": "Gebruik alleen een korte badge als de actie aantoonbaar en actueel is.",
+      "prompt": "Schrijf maximaal 5 korte actiebadges voor [PRODUCT] op basis van [ECHTE ACTIE]. Laat de badge weg als er geen actuele actie is.",
+      "checklist": [
+        "Actie is echt",
+        "Maximaal drie woorden",
+        "Geen nep-schaarste"
       ]
     },
     {
       "id": "title",
       "label": "Producttitel",
       "type": "copy",
-      "guidance": "De titel zegt wat het product is. De ondertitel maakt het gewenste gebruiksmoment concreet.",
-      "prompt": "Schrijf 10 producttitels voor [PRODUCT], maximaal 6 woorden. Benoem producttype en belangrijkste onderscheid. Voeg per titel een ondertitel van maximaal 10 woorden toe. Geen superlatieven zonder bewijs.",
+      "guidance": "Zeg wat het product is en wat het onderscheidt.",
+      "prompt": "Schrijf 10 producttitels voor [PRODUCT], maximaal 6 woorden. Benoem producttype en belangrijkste onderscheid zonder onbewezen superlatief.",
       "checklist": [
         "Producttype duidelijk",
         "Belangrijk onderscheid",
@@ -180,35 +457,47 @@
       ]
     },
     {
-      "id": "proof",
-      "label": "Reviewbewijs",
-      "type": "social-proof",
-      "guidance": "Score en aantal horen samen en linken naar de onderliggende reviews.",
-      "prompt": "Vat deze geverifieerde reviews van [PRODUCT] samen: [RUWE REVIEWS]. Geef 3 terugkerende thema’s, het vaakst genoemde nadeel en de transparant berekende gemiddelde score. Verzin niets.",
-      "checklist": [
-        "Echte bron",
-        "Score plus aantal",
-        "Ook nuance"
-      ]
-    },
-    {
       "id": "price",
       "label": "Prijs en korting",
       "type": "offer",
-      "guidance": "Maak de huidige prijs dominant. Toon alleen een vergelijkingsprijs als die aantoonbaar geldig is.",
-      "prompt": "Maak een helder prijsblok voor [PRODUCT] met verkoopprijs [PRIJS] en geldige vergelijkingsprijs [VAN-PRIJS]. Bereken de besparing exact. Laat kortingstaal weg wanneer de referentieprijs niet aantoonbaar is.",
+      "guidance": "Toon alleen prijzen en besparingen die aantoonbaar kloppen.",
+      "prompt": "Maak een prijsblok met [PRIJS] en een geldige [VAN-PRIJS]. Bereken [BESPARING] exact en laat korting weg als de referentieprijs niet aantoonbaar is.",
       "checklist": [
         "Prijs dominant",
-        "Besparing narekenbaar",
+        "Exact narekenbaar",
         "Geen verborgen kosten"
+      ]
+    },
+    {
+      "id": "intro",
+      "label": "Productintro",
+      "type": "copy",
+      "guidance": "Leg in drie zinnen uit wat het is, voor wie en waarom.",
+      "prompt": "Schrijf een productintro van maximaal 55 woorden voor [PRODUCT]: wat het is, voor wie het bedoeld is en welk concreet probleem het helpt oplossen.",
+      "checklist": [
+        "Wat, wie en waarom",
+        "Maximaal 55 woorden",
+        "Geen absolute claim"
+      ]
+    },
+    {
+      "id": "benefit-list",
+      "label": "Kernvoordelen",
+      "type": "copy",
+      "guidance": "Koppel ieder resultaat aan de eigenschap die het mogelijk maakt.",
+      "prompt": "Zet [EIGENSCHAPPEN] om in 3 kernvoordelen. Geef per voordeel een kop van maximaal 5 woorden en één feitelijke uitlegzin.",
+      "checklist": [
+        "Drie scanbare voordelen",
+        "Resultaat plus reden",
+        "Beperkingen behouden"
       ]
     },
     {
       "id": "bundles",
       "label": "Voordeelbundels",
       "type": "offer",
-      "guidance": "Vergelijk iedere optie op dezelfde dimensies: hoeveelheid, inhoud, prijs en besparing.",
-      "prompt": "Ontwerp 3 eerlijke bundels voor [PRODUCT]. Geef per bundel: exacte inhoud, totaalprijs, prijs per stuk, doelgroep en feitelijke badge. Adviseer alleen een optie wanneer de waarde aantoonbaar beter is.",
+      "guidance": "Vergelijk hoeveelheid, inhoud en prijs op dezelfde basis.",
+      "prompt": "Ontwerp 3 eerlijke bundels voor [PRODUCT]. Geef per bundel exacte inhoud, totaalprijs, prijs per stuk en alleen een feitelijke badge.",
       "checklist": [
         "Exacte inhoud",
         "Zelfde vergelijkingsbasis",
@@ -216,59 +505,155 @@
       ]
     },
     {
+      "id": "stock",
+      "label": "Voorraadregel",
+      "type": "offer",
+      "guidance": "Gebruik alleen actuele, verifieerbare voorraadtekst.",
+      "prompt": "Schrijf één voorraadregel voor [PRODUCT] op basis van [ACTUELE VOORRAAD]. Vermijd druk en schaarste als die niet echt is.",
+      "checklist": [
+        "Actuele bron",
+        "Geen nep-schaarste",
+        "Duidelijke status"
+      ]
+    },
+    {
       "id": "cta",
       "label": "Primaire koopknop",
       "type": "conversion",
-      "guidance": "De knop beschrijft exact wat er na de klik gebeurt. Praktische geruststelling staat er direct onder.",
-      "prompt": "Schrijf 8 actieve CTA-knoppen voor [PRODUCT], maximaal 4 woorden. De tekst moet exact overeenkomen met de vervolgstap. Voeg per CTA één korte regel toe over [VERZENDING/GARANTIE].",
+      "guidance": "De knop zegt exact wat de volgende stap doet.",
+      "prompt": "Schrijf 8 actieve CTA-knoppen van maximaal 4 woorden voor [PRODUCT]. Laat de tekst exact aansluiten op de volgende stap.",
       "checklist": [
         "Actief werkwoord",
-        "Eén primaire actie",
+        "Eén actie",
         "Uitkomst klopt"
       ]
     },
     {
-      "id": "benefits",
-      "label": "Belangrijkste voordelen",
+      "id": "trust",
+      "label": "Verzending en garantie",
+      "type": "trust",
+      "guidance": "Noem alleen echte termijnen en voorwaarden.",
+      "prompt": "Schrijf twee compacte trustregels voor [VERZENDING] en [GARANTIE]. Benoem echte termijn en belangrijkste voorwaarde.",
+      "checklist": [
+        "Echte termijn",
+        "Voorwaarde zichtbaar",
+        "Geen vaag keurmerk"
+      ]
+    },
+    {
+      "id": "details",
+      "label": "Productdetails",
+      "type": "content",
+      "guidance": "Beantwoord werking, garantie en verzending met brondata.",
+      "prompt": "Schrijf vier korte productaccordions vanuit [PRODUCTDATA], [GARANTIE] en [VERZENDING]. Begin ieder antwoord met het kernfeit.",
+      "checklist": [
+        "Brondata gebruikt",
+        "Antwoord eerst",
+        "Geen verzonnen beleid"
+      ]
+    },
+    {
+      "id": "feature-heading",
+      "label": "Voordelenverhaal",
+      "type": "content",
+      "guidance": "Introduceer het herkenbare probleem en de bewijsstructuur.",
+      "prompt": "Schrijf een kop en intro voor drie bewijssecties van [PRODUCT]. Benoem het probleem zonder angsttaal.",
+      "checklist": [
+        "Probleem herkenbaar",
+        "Drie bewijsmomenten",
+        "Rustige toon"
+      ]
+    },
+    {
+      "id": "feature-01-copy",
+      "label": "Voordeel 1",
+      "type": "content",
+      "guidance": "Bewijs het belangrijkste klantvoordeel.",
+      "prompt": "Schrijf een kop, uitleg en 3 bewijsbullets voor het belangrijkste voordeel van [PRODUCT], gebaseerd op [PRODUCTEIGENSCHAP].",
+      "checklist": [
+        "Eén voordeel",
+        "Eigenschap als bewijs",
+        "Geen losse claim"
+      ]
+    },
+    {
+      "id": "feature-02-copy",
+      "label": "Voordeel 2",
+      "type": "content",
+      "guidance": "Leg materiaal of mechanisme begrijpelijk uit.",
+      "prompt": "Schrijf een kop, uitleg en 3 bewijsbullets over [MATERIAAL OF MECHANISME] van [PRODUCT].",
+      "checklist": [
+        "Gewone taal",
+        "Tastbaar detail",
+        "Geen jargonclaim"
+      ]
+    },
+    {
+      "id": "feature-03-copy",
+      "label": "Voordeel 3",
+      "type": "content",
+      "guidance": "Plaats gebruiksgemak in een herkenbare context.",
+      "prompt": "Schrijf een kop, uitleg en 3 bewijsbullets over dagelijks gebruik van [PRODUCT] in [CONTEXT].",
+      "checklist": [
+        "Echte context",
+        "Schaal duidelijk",
+        "Geloofwaardig resultaat"
+      ]
+    },
+    {
+      "id": "usp-strip",
+      "label": "USP-balk",
       "type": "copy",
-      "guidance": "Combineer ieder gewenst resultaat met de producteigenschap die dat mogelijk maakt.",
-      "prompt": "Zet deze eigenschappen van [PRODUCT] om in 3 voordelen: [EIGENSCHAPPEN]. Geef per voordeel een kop van maximaal 5 woorden en één feitelijke uitlegzin. Behoud beperkingen.",
+      "guidance": "Vat vier verschillende redenen samen.",
+      "prompt": "Maak 4 USP-koppen met één bewijszin voor [PRODUCT]. Iedere USP behandelt een andere koopreden.",
       "checklist": [
-        "Resultaat plus reden",
-        "Snel scanbaar",
-        "Geen absolute claims"
+        "Vier verschillende redenen",
+        "Bewijszin",
+        "Kort"
       ]
     },
     {
-      "id": "story",
-      "label": "Probleem en mechanisme",
+      "id": "steps-heading",
+      "label": "Stappenintro",
       "type": "content",
-      "guidance": "Deze sectie maakt duidelijk waarom het probleem bestaat en hoe het product praktisch helpt.",
-      "prompt": "Schrijf een probleem-mechanisme-sectie voor [PRODUCT]. Open met een herkenbaar moment, leg in gewone taal uit hoe [MECHANISME] helpt en eindig met precies 3 gebruiksstappen. Maximaal 160 woorden.",
+      "guidance": "Beloof een eenvoudig proces zonder stappen over te slaan.",
+      "prompt": "Schrijf een kop voor een proces van vier echte gebruiksstappen voor [PRODUCT].",
       "checklist": [
-        "Herkenbaar probleem",
-        "Mechanisme uitgelegd",
-        "Drie concrete stappen"
+        "Volgorde klopt",
+        "Vier stappen",
+        "Geen resultaatclaim"
       ]
     },
     {
-      "id": "included",
-      "label": "Wat zit er in de doos?",
+      "id": "steps-copy",
+      "label": "Gebruiksstappen",
       "type": "content",
-      "guidance": "Een exacte inhoudslijst voorkomt onzekerheid en retouren.",
-      "prompt": "Maak een verpakkingsinhoud-sectie voor [PRODUCT] op basis van [ECHTE INHOUD]. Noem ieder onderdeel exact één keer en voeg niets toe dat niet wordt meegeleverd.",
+      "guidance": "Beschrijf per stap één zichtbare handeling.",
+      "prompt": "Schrijf 4 genummerde gebruiksstappen voor [PRODUCT]. Geef per stap één werkwoordkop en één korte instructie uit [HANDLEIDING].",
       "checklist": [
-        "Alles één keer",
-        "Exacte benamingen",
-        "Geen verzonnen extra’s"
+        "Eén handeling per stap",
+        "Handleiding als bron",
+        "Veilige volgorde"
       ]
     },
     {
-      "id": "reviews",
-      "label": "Reviewsectie",
+      "id": "reviews-summary",
+      "label": "Reviewscore",
       "type": "social-proof",
-      "guidance": "Gebruik uitsluitend echte feedback met context, concreet resultaat en ruimte voor nuance.",
-      "prompt": "Structureer deze echte klantfeedback voor [PRODUCT]: [RUWE REVIEWS]. Behoud betekenis en formulering, anonimiseer persoonsgegevens, verzin niets en selecteer een evenwichtige mix inclusief één genuanceerde review.",
+      "guidance": "Gebruik een controleerbare score en reviewtelling.",
+      "prompt": "Bereken gemiddelde score en aantal uit [ECHTE REVIEWS]. Rond transparant af en verzin niets.",
+      "checklist": [
+        "Controleerbare bron",
+        "Correct gemiddelde",
+        "Aantal zichtbaar"
+      ]
+    },
+    {
+      "id": "reviews-copy",
+      "label": "Reviewteksten",
+      "type": "social-proof",
+      "guidance": "Behoud context en nuance van echte feedback.",
+      "prompt": "Selecteer 6 representatieve reviews uit [ECHTE REVIEWS]. Behoud betekenis, anonimiseer persoonsgegevens en neem minstens één genuanceerde review op.",
       "checklist": [
         "Echte bron",
         "Context zichtbaar",
@@ -276,17 +661,77 @@
       ]
     },
     {
-      "id": "faq",
+      "id": "expert-copy",
+      "label": "Expertquote",
+      "type": "social-proof",
+      "guidance": "Gebruik alleen een echte, relevante expert met toestemming.",
+      "prompt": "Redigeer [ECHTE EXPERTQUOTE] voor helderheid zonder de betekenis te veranderen. Voeg naam, functie en relevante expertise toe.",
+      "checklist": [
+        "Echte persoon",
+        "Toestemming",
+        "Geen gewijzigde claim"
+      ]
+    },
+    {
+      "id": "guarantee",
+      "label": "Garantieblok",
+      "type": "trust",
+      "guidance": "Leg termijn, proces en uitzonderingen direct uit.",
+      "prompt": "Schrijf een garantieblok op basis van [ECHTE VOORWAARDEN]. Benoem termijn, aanvraagproces en uitzonderingen in gewone taal.",
+      "checklist": [
+        "Termijn klopt",
+        "Proces duidelijk",
+        "Uitzonderingen zichtbaar"
+      ]
+    },
+    {
+      "id": "faq-heading",
+      "label": "FAQ-intro",
+      "type": "content",
+      "guidance": "Introduceer de laatste praktische bezwaren kort.",
+      "prompt": "Schrijf een rustige FAQ-kop en één introzin voor [PRODUCT].",
+      "checklist": [
+        "Kort",
+        "Praktisch",
+        "Geen nieuwe claim"
+      ]
+    },
+    {
+      "id": "faq-copy",
       "label": "Veelgestelde vragen",
       "type": "content",
-      "guidance": "Beantwoord bezwaren die nog niet eerder zijn opgelost. Geef eerst het directe antwoord.",
-      "prompt": "Maak 8 FAQ’s voor [PRODUCT] uit [KLANTVRAGEN]. Begin ieder antwoord met een direct kernfeit, houd het onder 55 woorden en verzin geen beleid of productspecificaties.",
+      "guidance": "Beantwoord echte klantvragen met het kernantwoord eerst.",
+      "prompt": "Maak 5 FAQ’s uit [KLANTVRAGEN]. Begin ieder antwoord met het kernfeit en verzin geen beleid of productspecificaties.",
       "checklist": [
         "Gebaseerd op bron",
         "Antwoord eerst",
         "Geen herhaling"
       ]
+    },
+    {
+      "id": "final-copy",
+      "label": "Laatste productblok",
+      "type": "conversion",
+      "guidance": "Herhaal productnaam, bewijs en belangrijkste voordeel.",
+      "prompt": "Schrijf het laatste koopblok voor [PRODUCT] met productnaam, echte reviewregel, één voordeelzin en een duidelijke bundel-CTA.",
+      "checklist": [
+        "Zelfde productnaam",
+        "Echte reviewdata",
+        "CTA klopt"
+      ]
+    },
+    {
+      "id": "footer",
+      "label": "Footer",
+      "type": "brand",
+      "guidance": "Vul merkbelofte, servicepagina’s en contactgegevens volledig in.",
+      "prompt": "Schrijf een merkintro van maximaal 35 woorden en een complete footerlinklijst voor [MERK]. Gebruik alleen bestaande pagina’s en echte contactgegevens.",
+      "checklist": [
+        "Contact klopt",
+        "Links bestaan",
+        "Merkbelofte kort"
+      ]
     }
   ],
-  "scrapeInstructions": "Lees contentPrompts en imageBriefs voor alle productieprompts. Dezelfde records staan semantisch in de HTML onder data-learn-record en data-shot-id."
+  "scrapeInstructions": "Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder record staat ook als data-learn-record in de verborgen semantische leerlaag."
 }

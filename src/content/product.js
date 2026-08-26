@@ -1,63 +1,43 @@
-// START HERE — all example stores are driven by this configuration.
-const common = {
-  navigation: [
-    { label: 'Waarom dit werkt', href: '#waarom' }, { label: 'Zo gebruik je het', href: '#gebruik' },
-    { label: 'Reviews', href: '#reviews' }, { label: 'FAQ', href: '#faq' },
-  ],
-  ui: { learnOff:'Bekijk uitleg', learnOn:'Leerlaag aan', choose:'Kies je voordeelbundel', add:'In winkelmand', save:'Bespaar', reviews:'reviews', shipping:'Gratis verzending', guarantee:'30 dagen proberen', quantity:'Aantal', included:'Wat je ontvangt', verified:'Geverifieerde voorbeeldreview', basedOn:'Gebaseerd op', faq:'Veelgestelde vragen', demo:'Dit is een oefenwinkel. Er wordt niets besteld of betaald.' },
-};
-
-const shot = (id,number,type,title,direction,subject,composition,background,lighting,mustInclude,avoid) => ({
-  id, shotId:id, number, shotType:type, title, direction, subject, composition, background, lighting,
-  mustInclude, avoid, ratio:'1:1', copySpace:'Geen tekst in beeld; houd rustige negatieve ruimte rond het product.', resolution:'1600 × 1600',
-  alt:`1:1 afbeeldingsplaceholder: ${title}`,
-  prompt:`Maak een fotorealistische vierkante productfoto (1:1, 1600 × 1600) voor [MERK] [PRODUCT]. Shot-type: ${type}. Onderwerp: ${subject}. Compositie: ${composition}. Achtergrond: ${background}. Belichting: ${lighting}. Verplicht zichtbaar: ${mustInclude}. Vermijd: ${avoid}. Geen tekst, watermerk, vervormde handen of niet-bestaande productonderdelen.`,
+// One canonical, product-neutral configuration drives the visible template,
+// hidden semantic learning layer and every public route manifest.
+const imageSlot = (id, area, label, brief, ratio, mobileRatio = ratio) => ({
+  id, shotId: id, area, label, title: label, brief, direction: brief, ratio,
+  mobileRatio,
+  resolution: ratio === '1:1' ? '1600 × 1600' : '1600 × 1200',
+  subject: '[JOUW PRODUCT] in de beschreven situatie',
+  composition: brief,
+  background: 'Rustige achtergrond passend bij jouw merkstijl',
+  lighting: 'Natuurlijk, zacht en geloofwaardig licht',
+  mustInclude: 'Het echte product, correct van vorm, kleur en schaal',
+  avoid: 'Tekst in beeld, watermerken, verzonnen onderdelen en misleidende resultaten',
+  alt: `${label}: ${brief}`,
+  prompt: `Maak een fotorealistische productfoto voor [MERK] [PRODUCT]. Slot: ${label}. Doel: ${brief}. Formaat exact ${ratio}${mobileRatio !== ratio ? ` op desktop en ${mobileRatio} op mobiel` : ''}. Toon het echte product correct van vorm, kleur en schaal. Gebruik een rustige merkpassende achtergrond en natuurlijk zacht licht. Geen tekst, watermerk, verzonnen onderdelen of misleidende resultaten.`,
 });
 
-const stores = {
-  dieren: {
-    slug:'dieren', nicheLabel:'Dieren', brand:'WOLFVRIEND', mark:'W', fontClass:'font-pet',
-    colors:{paper:'#f7f2e8',ink:'#19372b',primary:'#1f5b43',accent:'#e77a36',soft:'#dce6d5',signal:'#f1c75b'},
-    announcement:'VANDAAG GRATIS VERZENDING · 30 DAGEN PROBEREN', category:'Comfort voor honden',
-    product:{eyebrow:'Elke dag een rustige rustplek',name:'De Wolknest Hondenmand',subtitle:'Ondersteunend comfort dat wél in je interieur past.',description:'Een zachte, vormvaste hondenmand met hoge rand, wasbare hoes en antislipbodem. Ontworpen voor opkrullen, uitstrekken en écht tot rust komen.',rating:4.8,reviewCount:327,compareAtPrice:99.95,
-      bullets:['Ondersteunende hoge rand','Afritsbare, wasbare hoes','Antislipbodem voor iedere vloer'],
-      bundles:[{id:'single',label:'1 × Wolknest',detail:'Voor één favoriete slaapplek',price:69.95,badge:'Meest gekozen'},{id:'duo',label:'2 × Wolknest',detail:'Boven én beneden een mand',price:119.9,compareAtPrice:139.9,badge:'Bespaar €20'},{id:'family',label:'3 × Wolknest',detail:'Voor meerdere honden',price:164.9,compareAtPrice:209.85,badge:'Beste waarde'}],
-      media:[
-        shot('pet-hero','01','hero-product','Vrijstaande productfoto','Toon de complete mand duidelijk en premium.','complete hondenmand, leeg','driekwart vooraanzicht; product vult 75%','warm gebroken wit','zacht daglicht van links','vorm, hoge rand, instap, stofstructuur','hond, accessoires, tekst, afgesneden randen'),
-        shot('pet-use','02','product-in-use','Product met gebruiker','Laat formaat en gebruik direct zien.','hond ontspannen in de mand','ooghoogte; hele hond en mand zichtbaar','rustige woonkamer in aardetinten','warm raamlicht','realistische verhouding hond en mand','druk interieur, kostuum, onnatuurlijke pose'),
-        shot('pet-close','03','macro-detail','Close-up van materiaal','Bewijs zachtheid en afwerking.','stof, naad en vulling','macro; één hoek diagonaal in beeld','neutraal zacht','strijklicht voor textuur','vezels, stiknaad, dikte van rand','kunstmatige glans, vingers, tekst'),
-        shot('pet-features','04','feature-proof','Hoes en antislip','Maak onderhoud visueel concreet.','open rits en antisliponderzijde','bovenaanzicht met twee details','lichte studiovloer','helder diffuus licht','rits, hoes, antisliptextuur','niet-bestaande onderdelen, tekstlabels'),
-        shot('pet-box','05','unboxing','Inhoud van de doos','Laat exact zien wat de klant ontvangt.','verpakking, mand, onderhoudskaart','flat lay met gelijke tussenruimte','zacht beige','schaduwloos toplicht','alle onderdelen één keer','extra cadeaus, logo’s, leesbare tekst'),
-        shot('pet-review','06','ugc-review','Vierkante UGC-reviewfoto','Toon geloofwaardig dagelijks gebruik.','hond slapend in mand naast bank','mobiele snapshot; licht uit midden','echte woonkamer','natuurlijk gemengd daglicht','kleine imperfecties, product herkenbaar','studio-perfectie, filters, influencerpose'),
-      ]},
-    story:{kicker:'VAN DRAAIEN NAAR NEERPLOFFEN',title:'Een eigen plek maakt rust makkelijker.',intro:'De hoge, gevulde rand geeft een beschutte plek om tegenaan te liggen. De lage instap houdt de mand toegankelijk en de hoes gaat gewoon in de was.',steps:[['01','Uitpakken','Laat de mand enkele uren zijn vorm terugkrijgen.'],['02','Neerzetten','Kies een rustige plek waar je hond graag bij je is.'],['03','Wassen','Rits de hoes los en volg het waslabel.']]},
-    included:['Wolknest hondenmand','Afritsbare buitenhoes','Vormvaste binnenvulling','Onderhoudskaart'],
-    reviews:[['Sanne & Bo',5,'Hij koos hem meteen zelf','Bo lag normaal half op het kleed. Nu kruipt hij na het wandelen direct tegen de rand aan.'],['Milan & Dex',4,'Mooi genoeg voor de woonkamer','De hoes voelt stevig en de kleur is rustig. De vulling had na uitpakken wel even nodig.'],['Lotte & Pip',5,'Wassen ging verrassend makkelijk','Na een modderige wandeling kon de hoes er snel af. De mand schoof niet over onze vloer.']],
-    faqs:[['Welke maat kies ik?','Meet je hond liggend van neus tot staartaanzet en tel ongeveer 20 cm op. Voeg een echte maattabel toe.'],['Kan de hele mand in de wasmachine?','De buitenhoes kan los. Controleer voor je eigen product altijd het echte waslabel.'],['Zakt de rand in?','Vervang deze voorbeeldtekst door de echte materiaal- en gebruiksinformatie van jouw leverancier.'],['Is dit een echte winkel?','Nee. Dit is een klikbare onderwijstemplate met voorbeeldinhoud en AI-prompts.']],
-  },
-  beauty: {
-    slug:'beauty',nicheLabel:'Beauty',brand:'ÉLANE',mark:'É',fontClass:'font-beauty',colors:{paper:'#fcf8f8',ink:'#351d2f',primary:'#6e3158',accent:'#c76183',soft:'#f1dfe5',signal:'#f1c4b5'},announcement:'GRATIS VERZENDING VANAF €45 · 30 DAGEN PROBEREN',category:'Dagelijkse skincare',
-    product:{eyebrow:'Glans zonder tien stappen',name:'Dew Veil Serum Stick',subtitle:'Hydratatie precies waar je huid erom vraagt.',description:'Een compacte serumstick met zachte balsemtextuur voor een frisse, verzorgde uitstraling. Makkelijk aan te brengen en mee te nemen.',rating:4.7,reviewCount:241,compareAtPrice:44.95,bullets:['Gerichte, knoeivrije applicatie','Zachte finish zonder plakkerig gevoel','Compact voor onderweg'],bundles:[{id:'single',label:'1 × Serum Stick',detail:'Om de formule te ontdekken',price:34.95},{id:'duo',label:'2 × Serum Stick',detail:'Thuis én in je tas',price:59.9,compareAtPrice:69.9,badge:'Meest gekozen'},{id:'trio',label:'3 × Serum Stick',detail:'De laagste prijs per stuk',price:79.9,compareAtPrice:104.85,badge:'Beste waarde'}],media:[
-      shot('beauty-hero','01','hero-product','Vrijstaande productfoto','Maak verpakking en productvorm begrijpelijk.','serumstick met dop ernaast','frontaal; product centraal','porseleinwit met roze gloed','grote softbox','stick, dop, balsemtextuur','bloemenzee, watermerk, tekst'),
-      shot('beauty-texture','02','texture-shot','Product + textuur','Laat kleur en consistentie zien.','open stick met één balsemveeg','diagonaal met veeg ernaast','licht blush','diffuus beautylicht','crèmige transparante textuur','glitter, voedseltextuur, tekst'),
-      shot('beauty-apply','03','application','Product in gebruik','Demonstreer één applicatiezone.','hand die stick langs jukbeen aanbrengt','natuurlijke close-up','rustige badkamer','zacht raamlicht','echte huidtextuur, productcontact','beautyfilter, medische before/after'),
-      shot('beauty-macro','04','macro-detail','Close-up van de stick','Bewijs mechanisme en afwerking.','draairing, balsem en huls','extreme close-up','warm neutraal','strijklicht','kunststofdetail en balsem','vervormd logo, druppels, tekst'),
-      shot('beauty-box','05','unboxing','Wat zit er in het doosje?','Toon exact product en verpakking.','stick, dop, doosje en kaart','flat lay met witruimte','porseleinwit','toplicht','ieder onderdeel eenmaal','extra applicators, leesbare claims'),
-      shot('beauty-review','06','ugc-review','Vierkante UGC-reviewfoto','Maak een geloofwaardige mobiele foto.','persoon bij raam met stick in hand','selfie-achtig; product herkenbaar','echte slaapkamer','natuurlijk daglicht','huidtextuur, casual framing','beautyfilter, studio-retouche'),
-    ]},story:{kicker:'KLEIN RITUEEL, FRISSE FINISH',title:'Eén beweging. Precies genoeg.',intro:'De vaste textuur maakt gericht aanbrengen eenvoudig. Gebruik hem waar je huid droog aanvoelt of waar je een verzorgde glans wilt.',steps:[['01','Draai','Draai een klein stukje product omhoog.'],['02','Strijk','Breng zacht aan op een schone huid.'],['03','Dep','Werk de randen uit met schone vingers.']]},included:['Dew Veil Serum Stick','Beschermende dop','Papieren productdoosje','Korte gebruikskaart'],reviews:[['Mara V.',5,'Past echt overal bij','Ik gebruik hem op mijn jukbeenderen en droge plekjes. De stick zit standaard in mijn tas.'],['Aya R.',4,'Mooie zachte finish','Geeft een subtiele glans zonder glitter. Bij warm weer gebruik ik maar een heel klein beetje.'],['Sophie K.',5,'Geen geknoei meer','Voor mij veel handiger dan een pipet. Ik zie precies waar ik het product aanbreng.']],faqs:[['Wanneer gebruik ik de stick?','Baseer echte instructies op jouw formule en geteste routine.'],['Is hij geschikt voor iedere huid?','Doe geen universele claim zonder onderbouwing. Vermeld ingrediënten en waarschuwingen.'],['Hoe lang gaat één stick mee?','Vul hier een berekening in die past bij jouw echte productgewicht en gebruik.'],['Is dit een echte winkel?','Nee. Dit is een klikbare onderwijstemplate met voorbeeldinhoud en AI-prompts.']]},
-  gadgets: {
-    slug:'gadgets',nicheLabel:'Gadgets',brand:'NORTHLAB',mark:'N',fontClass:'font-tech',colors:{paper:'#f4f7fb',ink:'#111a2a',primary:'#165dff',accent:'#0b86a8',soft:'#dde8f4',signal:'#b9e8ff'},announcement:'VOOR 22:00 BESTELD · GRATIS VERZONDEN',category:'Slimme accessoires',
-    product:{eyebrow:'Eén kabel. Rust op je bureau.',name:'Dock One Oplaadstation',subtitle:'Laad je dagelijkse apparaten tegelijk en overzichtelijk op.',description:'Een compact laadstation met drie vaste laadplekken, USB-C-voeding en een stabiele antislipvoet. Gemaakt voor nachtkastje of bureau.',rating:4.8,reviewCount:416,compareAtPrice:79.95,bullets:['Drie apparaten tegelijk','USB-C-voeding meegeleverd','Compact, kabelarm ontwerp'],bundles:[{id:'single',label:'1 × Dock One',detail:'Voor bureau of nachtkastje',price:59.95,badge:'Meest gekozen'},{id:'duo',label:'2 × Dock One',detail:'Thuis én op kantoor',price:104.9,compareAtPrice:119.9,badge:'Bespaar €15'},{id:'family',label:'3 × Dock One',detail:'Voor meerdere kamers',price:144.9,compareAtPrice:179.85,badge:'Beste waarde'}],media:[
-      shot('tech-hero','01','hero-product','Vrijstaande productfoto','Toon vorm en laadplekken direct.','compleet laadstation','driekwart; centraal','koel lichtgrijs','diffuus studiolicht','station, laadvlakken, USB-C-poort','zwevende apparaten, tekst, sci-fi'),
-      shot('tech-kit','02','accessories','Product + USB-C-accessoires','Maak exact zichtbaar wat wordt meegeleverd.','dock, USB-C-kabel en adapter','geordende flat lay','licht koelgrijs','toplicht','station, één kabel, één adapter','extra kabels, verkeerde stekkers'),
-      shot('tech-ports','03','macro-detail','Close-up USB-C-poort','Bewijs aansluiting en afwerking.','USB-C-ingang en behuizing','extreme close-up','donkerblauw verloop','randverlichting','poortvorm en textuur','micro-USB, vervormde connector'),
-      shot('tech-use','04','desk-use','Product in gebruik','Toon drie apparaten correct geplaatst.','telefoon, oordopjes, smartwatch','bovenaanzicht','mat nachtblauw bureau','zacht ochtendlicht','drie apparaten, één voedingskabel','zwevende horloges, kabelwirwar'),
-      shot('tech-box','05','unboxing','Inhoud van de verpakking','Toon exact wat de koper ontvangt.','doos, dock, kabel, adapter, handleiding','isometrische flat lay','lichtgrijs','diffuus licht','alle onderdelen één keer','extra accessoires, leesbare tekst'),
-      shot('tech-review','06','ugc-review','Vierkante UGC-reviewfoto','Maak een echte nachtkastfoto.','dock met apparaten','mobiele snapshot','echte slaapkamer','warm lamplicht','één kabel, alledaagse context','studio-perfectie, RGB-licht'),
-    ]},story:{kicker:'MINDER KABELS, MEER OVERZICHT',title:'Alles heeft vannacht één plek.',intro:'Leg je apparaten neer in plaats van drie stekkers te zoeken. Het compacte dock verzamelt je dagelijkse laadmoment op één plek.',steps:[['01','Aansluiten','Verbind het dock met de USB-C-voeding.'],['02','Neerleggen','Plaats apparaten op de laadplekken.'],['03','Oppakken','Begin de dag opgeladen en opgeruimd.']]},included:['Dock One laadstation','USB-C naar USB-C-kabel','USB-C-voedingsadapter','Beknopte handleiding'],reviews:[['Daan P.',5,'Mijn bureau is eindelijk rustig','Telefoon, horloge en oordopjes hebben nu één vaste plek. De voet blijft goed staan.'],['Levi S.',4,'Compact en duidelijk','Neemt minder plek in dan verwacht. Met een heel dik hoesje moest ik de positie zoeken.'],['Nina B.',5,'Precies goed voor het nachtkastje','Geen drie kabels meer naast mijn bed. Het lampje is subtiel genoeg.']],faqs:[['Welke apparaten passen erop?','Noem uitsluitend geteste modellen en laadstandaarden.'],['Zit de adapter erbij?','In deze voorbeeldstore wel. Pas dit aan op de echte verpakkingsinhoud.'],['Werkt het met een hoesje?','Beschrijf de maximaal geteste dikte en materiaalsoorten.'],['Is dit een echte winkel?','Nee. Dit is een klikbare onderwijstemplate met voorbeeldinhoud en AI-prompts.']]},
-};
+export const imageSlots = [
+  imageSlot('gallery-hero','gallery','Hoofdfoto','Vrijstaand product · compleet zichtbaar','1:1'),
+  imageSlot('gallery-use','gallery','In gebruik','Product met gebruiker · schaal duidelijk','1:1'),
+  imageSlot('gallery-close','gallery','Detailfoto','Close-up · materiaal en afwerking','1:1'),
+  imageSlot('gallery-features','gallery','Kenmerken','Belangrijkste functies in één beeld','1:1'),
+  imageSlot('gallery-box','gallery','In de doos','Exacte inhoud · geen extra accessoires','1:1'),
+  imageSlot('feature-01','features','Productfoto 1','Lifestyle productfoto · product in gebruik · resultaat zichtbaar','4:3'),
+  imageSlot('feature-02','features','Productfoto 2','Detailfoto · eigenschap en mechanisme · tastbare kwaliteit','4:3'),
+  imageSlot('feature-03','features','Productfoto 3','Contextfoto · realistische omgeving · schaal en gemak','4:3'),
+  imageSlot('step-01','steps','Stapfoto 01','Unboxing · product en verpakking','1:1'),
+  imageSlot('step-02','steps','Stapfoto 02','Voorbereiding · één duidelijke handeling','1:1'),
+  imageSlot('step-03','steps','Stapfoto 03','Product in gebruik · kernmoment','1:1'),
+  imageSlot('step-04','steps','Stapfoto 04','Resultaatbeeld · geloofwaardig eindmoment','1:1'),
+  imageSlot('review-01','reviews','Reviewfoto 01','Klant met product · mobiele UGC-look','4:3'),
+  imageSlot('review-02','reviews','Reviewfoto 02','Product thuis · imperfect en geloofwaardig','4:3'),
+  imageSlot('review-03','reviews','Reviewfoto 03','Close-up resultaat · natuurlijk licht','4:3'),
+  imageSlot('expert-photo','reviews','Expertfoto','Echte portretfoto · neutrale achtergrond','1:1'),
+  imageSlot('faq-photo','faq','FAQ-productfoto','Product in rustige context · herkenbare schaal','1:1','4:3'),
+  imageSlot('final-thumbnail','final','Productthumbnail','Vrijstaand product · frontaal','1:1'),
+];
 
-Object.values(stores).forEach((item)=>Object.assign(item,common));
-export { stores };
-export const icons={cart:[['path',{d:'M3 4h2l2.3 10.5a2 2 0 002 1.5H18a2 2 0 001.9-1.4L22 7H7'}],['circle',{cx:10,cy:20,r:1}],['circle',{cx:18,cy:20,r:1}]],arrow:[['path',{d:'M5 12h14M14 7l5 5-5 5'}]],check:[['path',{d:'M5 12l4 4L19 6'}]],copy:[['rect',{x:8,y:8,width:11,height:11,rx:2}],['path',{d:'M16 8V5a2 2 0 00-2-2H5a2 2 0 01-2-2v9a2 2 0 002 2h3'}]],info:[['circle',{cx:12,cy:12,r:9}],['path',{d:'M12 11v6M12 7h.01'}]],close:[['path',{d:'M5 5l14 14M19 5L5 19'}]],menu:[['path',{d:'M4 7h16M4 12h16M4 17h16'}]],minus:[['path',{d:'M5 12h14'}]],plus:[['path',{d:'M5 12h14M12 5v14'}]],image:[['rect',{x:3,y:4,width:18,height:16,rx:1}],['circle',{cx:8.5,cy:9,r:1.5}],['path',{d:'M4 17l5-5 3 3 2-2 6 6'}]],chevron:[['path',{d:'M6 9l6 6 6-6'}]],shield:[['path',{d:'M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z'}]]};
-export const money=(value)=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(value);
+export const stores = Object.fromEntries(['dieren','beauty','gadgets'].map((slug) => [slug, {
+  slug,
+  nicheLabel: 'Generieke producttemplate',
+  brand: '[JOUW MERKNAAM]',
+  product: { name: '[JOUW PRODUCTNAAM]', media: imageSlots },
+}]));

@@ -1,36 +1,31 @@
 import fs from 'node:fs';
-import { stores } from '../src/content/product.js';
+import { stores, imageSlots } from '../src/content/product.js';
 import { annotationBase } from '../src/content/annotations.js';
 
 fs.mkdirSync('public/stores', { recursive: true });
-const index = {
-  schemaVersion: '1.0',
-  rule: 'Alle afbeeldingsslots zijn verplicht 1:1 en ontworpen voor 1600 × 1600 pixels.',
-  stores: Object.values(stores).map(({ slug, nicheLabel, brand, product }) => ({
-    slug, niche: nicheLabel, brand, product: product.name,
-    page: `/stores/${slug}`,
-    manifest: `/stores/${slug}/template.json`,
-  })),
+const routes = ['/', '/stores', ...Object.keys(stores).map((slug) => `/stores/${slug}`)];
+const manifest = {
+  schemaVersion: '2.0',
+  pageType: 'generic-wolkveld-product-template',
+  language: 'nl-NL',
+  routes,
+  imageBriefs: imageSlots,
+  contentPrompts: Object.entries(annotationBase).map(([id, annotation]) => ({ id, ...annotation })),
+  scrapeInstructions: 'Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder record staat ook als data-learn-record in de verborgen semantische leerlaag.',
 };
 
-for (const store of Object.values(stores)) {
-  const directory = `public/stores/${store.slug}`;
+for (const slug of Object.keys(stores)) {
+  const directory = `public/stores/${slug}`;
   fs.mkdirSync(directory, { recursive: true });
-  const manifest = {
-    schemaVersion: '1.0',
-    pageType: 'reusable-product-detail-page',
-    language: 'nl-NL',
-    niche: store.nicheLabel,
-    route: `/stores/${store.slug}`,
-    theme: { brand: store.brand, fontClass: store.fontClass, colors: store.colors },
-    imageRule: { ratio: '1:1', resolution: '1600 × 1600', appliesTo: 'productfoto’s, details, unboxing, lifestyle en review/UGC' },
-    product: { name: store.product.name, subtitle: store.product.subtitle, description: store.product.description },
-    imageBriefs: store.product.media,
-    contentPrompts: Object.entries(annotationBase).map(([id, annotation]) => ({ id, ...annotation })),
-    scrapeInstructions: 'Lees contentPrompts en imageBriefs voor alle productieprompts. Dezelfde records staan semantisch in de HTML onder data-learn-record en data-shot-id.',
-  };
   fs.writeFileSync(`${directory}/template.json`, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
+const index = {
+  schemaVersion: '2.0',
+  template: 'generic-wolkveld-product-template',
+  routes,
+  canonicalManifest: '/stores/dieren/template.json',
+  aliases: Object.keys(stores).map((slug) => `/stores/${slug}/template.json`),
+};
 fs.writeFileSync('public/stores/index.json', `${JSON.stringify(index, null, 2)}\n`);
-console.log(`JSON-manifests gegenereerd voor ${index.stores.length} stores.`);
+console.log(`Eén generiek manifest gegenereerd voor ${routes.length} routes en ${imageSlots.length} zichtbare beeldslots.`);

@@ -6,15 +6,14 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const store = stores[slug] || stores.dieren;
+  await params;
   return {
-    title: `${store.brand} · ${store.nicheLabel} producttemplate`,
-    description: `${store.product.name}: klikbare oefenstore met 1:1-beeldbriefs en AI-prompts.`,
+    title: 'Productpagina template · Dropship Academy',
+    description: 'Invulbare Wolkveld-productpagina met beeldbriefs en scrape-bare AI-prompts.',
   };
 }
 
 export default async function StoreTemplatePage({ params }) {
-  const { slug } = await params;
-  return <App niche={slug} />;
+  await params;
+  return <App />;
 }

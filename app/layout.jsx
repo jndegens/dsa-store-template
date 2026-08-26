@@ -1,8 +1,8 @@
 import '../src/styles.css';
 
 export const metadata = {
-  title: 'Store Library · Dropship Academy',
-  description: 'Interactieve productpagina-templates met vierkante beeldbriefs en kopieerbare AI-prompts.',
+  title: 'Productpagina template · Dropship Academy',
+  description: 'Invulbare Wolkveld-productpagina met beeldbriefs en kopieerbare AI-prompts.',
 };
 
 export default function RootLayout({ children }) {

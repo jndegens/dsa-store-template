@@ -1,10 +1,10 @@
 import App from '../../src/App.jsx';
 
 export const metadata = {
-  title: 'Store Library · Dropship Academy',
-  description: 'Klikbare productpagina-templates met scrape-bare AI-prompts.',
+  title: 'Productpagina template · Dropship Academy',
+  description: 'Invulbare Wolkveld-productpagina met beeldbriefs en scrape-bare AI-prompts.',
 };
 
 export default function StoresPage() {
-  return <App page="hub" />;
+  return <App />;
 }
