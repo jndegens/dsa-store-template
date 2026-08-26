@@ -14,7 +14,7 @@ const appSource = fs.readFileSync('src/App.jsx', 'utf8');
 
 if (slugs.length !== 8) failures.push(`Verwacht exact 8 categorieën, vond ${slugs.length}`);
 if (imageSlots.length !== 18) failures.push(`Verwacht exact 18 beeldslots, vond ${imageSlots.length}`);
-for (const token of ['className="template-toolbar"','icon="category"','icon="palette"','icon="font"','className="current-palette"','className="current-font"','DSA STORE TEMPLATE','aria-controls={`selector-${id}`}','aria-expanded={open}','Exporteer deze prompt','datatrans-payment-logos','ALLE 18 INDIVIDUELE BEELDREGELS','slots:imageSlots.map','ref={cartRef}','copyStyleV2']) {
+for (const token of ['className="template-toolbar"','icon={category.icon}','icon="palette"','icon="font"','className="current-palette"','className="current-font"','DSA STORE TEMPLATE','aria-controls={`selector-${id}`}','aria-expanded={open}','Kopieer volledige AI-opdracht','datatrans-payment-logos','ALLE 18 INDIVIDUELE BEELDREGELS','slots:imageSlots.map','ref={cartRef}','ref={studioRef}','copyStyleV2']) {
   if (!appSource.includes(token)) failures.push(`Compacte templatebediening ontbreekt in bron: ${token}`);
 }
 if (/setBrandName|setProductName|BuilderMenu|builder-menu/.test(appSource)) failures.push('Merk- of producttekst is nog aanpasbaar via het oude bouwmenu');
