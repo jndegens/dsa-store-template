@@ -4144,3 +4144,68 @@ button {
   outline: 3px solid var(--dsa-mint);
   outline-offset: 2px;
 }
+
+/* The teaching layer stays recognisably DSA, independent of the selected store palette. */
+.learning-on .learnable {
+  outline-color: #007c65;
+}
+.learn-marker {
+  top: 50%;
+  right: -12px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #fff;
+  background: #007c65;
+  color: #fff;
+  box-shadow:
+    0 0 0 1px #005c4b,
+    0 5px 14px #007c6540;
+  transform: translateY(-50%);
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+.learn-marker:hover,
+.learn-marker:focus-visible {
+  background: #101820;
+  box-shadow:
+    0 0 0 2px #80d8c5,
+    0 7px 18px #07101642;
+  transform: translateY(-50%) scale(1.06);
+}
+.rating-row > .learn-marker {
+  top: 0;
+}
+.sale-bar > .learn-marker,
+.benefit-bar > .learn-marker {
+  right: 12px;
+}
+.learn-marker:focus-visible,
+.placeholder__learn:focus-visible {
+  outline: 3px solid #80d8c5;
+  outline-offset: 3px;
+}
+.placeholder__learn {
+  border-color: #005c4b;
+  background: #007c65;
+  color: #fff;
+  box-shadow: 0 5px 14px #007c652e;
+}
+.placeholder__learn:hover {
+  background: #101820;
+}
+
+@media (max-width: 820px) {
+  .learn-marker {
+    right: -8px;
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-marker {
+    transition: none;
+  }
+}
