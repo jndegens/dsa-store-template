@@ -20,6 +20,28 @@ Base44 mag de repository daarom **niet als volledige pagina klonen**. Gebruik de
 - een gewone winkel-footer voor het aangeleverde merk;
 - alle klantgerichte interacties: galerij, bundels, accordeons, FAQ, winkelmand en mobiele koopbalk.
 
+## Galerijen en beelden
+
+- Bouw zowel bovenaan als in de laatste koopsectie een volledige galerij: één groot 1:1-beeld, pijlen en exact vijf klikbare miniaturen.
+- Gebruik bovenaan `gallery-hero`, `gallery-use`, `gallery-close`, `gallery-features` en `gallery-box`.
+- Gebruik onderaan `final-thumbnail`, `gallery-use`, `gallery-close`, `gallery-features` en `gallery-box`.
+- Een leeg vlak onder het grote onderste beeld is nooit toegestaan. De vijf klikbare miniaturen staan daar direct onder en wisselen het grote beeld.
+- Alle product-, detail-, stap-, review- en contextbeelden blijven exact 1:1.
+
+## Officiële assets
+
+- Gebruik interface-iconen uitsluitend via de npm-package `lucide-react`; importeer iconen als componenten.
+- Schrijf geen eigen inline-SVG, gebruik geen emoji, icon-fonts of CSS-vormen als vervanging voor een icoon.
+- Gebruik voor betalingen de zeven officiële Datatrans-bestanden uit `public/payment-logos/`: iDEAL, Visa, Mastercard, Apple Pay, PayPal, Klarna en Bancontact.
+- Render ieder betaallogo als een echte `<img>` met behoud van verhouding. Gebruik bij een externe import als fallback `https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/{bestandsnaam}`.
+- Teken betaallogo's nooit opnieuw en vervang ze niet door tekst, emoji, base64-placeholders of generieke badges.
+
+## Leesbaarheid
+
+- Gewone bodytekst is minimaal 16px.
+- Secundaire tekst, labels, knoppen, bundelregels, bijschriften en navigatie zijn minimaal 14px.
+- Maak tekst niet kleiner om een layout passend te krijgen; laat regels afbreken en geef componenten meer ruimte.
+
 ## Nooit opnemen of tonen
 
 - `.template-toolbar` en de categorie-, kleuren- en lettertypekiezer;
@@ -49,6 +71,9 @@ De export is pas klaar als:
 - de pagina visueel overeenkomt met het klantgerichte deel van de DSA-referentie;
 - alle bundels afzonderlijk selecteerbaar zijn en prijs/inhoud leesbaar blijven;
 - officiële betaallogo's als afbeeldingen laden;
+- bovenste én onderste galerij ieder vijf klikbare miniaturen en werkende pijlen bevatten;
+- alle interface-iconen uit `lucide-react` komen en geen handgeschreven SVG of emoji bevatten;
+- bodytekst minimaal 16px en alle overige klantgerichte tekst minimaal 14px is;
 - accordeons met één klik openen en sluiten;
 - galerij, winkelmand en mobiele CTA werken;
 - alle productbeelden exact 1:1 zijn;

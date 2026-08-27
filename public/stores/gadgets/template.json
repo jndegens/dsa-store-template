@@ -25,7 +25,7 @@
     "download": "https://github.com/jndegens/dsa-store-template/archive/refs/heads/main.zip"
   },
   "aiContract": {
-    "masterPrompt": "BELANGRIJK: bouw uitsluitend een schone klantgerichte merchant-storefront. Clone of render NOOIT de volledige DSA-app. Lees eerst STOREFRONT.md en daarna public/base44.json en dit route-manifest. Gebruik de repository als ontwerp- en datareferentie. Neem geen DSA-toolbar, DSA-branding, leerlaag, promptmodals, machine-content, GitHub/Base44-uitleg of demowinkelmand over. Gebruik bouwmetadata tijdens het genereren maar verwijder die uit de productie-DOM. Vraag eerst om ontbrekende productdata en vervang alleen placeholders met aangeleverde, verifieerbare informatie. Behoud de klantgerichte secties, interacties en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties.",
+    "masterPrompt": "BELANGRIJK: bouw uitsluitend een schone klantgerichte merchant-storefront. Clone of render NOOIT de volledige DSA-app. Lees eerst STOREFRONT.md en daarna public/base44.json en dit route-manifest. Gebruik de repository als ontwerp- en datareferentie. Neem geen DSA-toolbar, DSA-branding, leerlaag, promptmodals, machine-content, GitHub/Base44-uitleg of demowinkelmand over. Gebruik bouwmetadata tijdens het genereren maar verwijder die uit de productie-DOM. Vraag eerst om ontbrekende productdata en vervang alleen placeholders met aangeleverde, verifieerbare informatie. Behoud de klantgerichte secties, interacties en 1:1 beeldverhoudingen. Bouw boven en onder een volledige galerij met een groot 1:1 beeld, vijf klikbare miniaturen en pijlen. Gebruik alle zeven officiële betaalassets als <img> en uitsluitend lucide-react voor interface-iconen. Lopende tekst is minimaal 16px en geen merchanttekst is kleiner dan 14px. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties.",
     "surfaceContract": {
       "mode": "merchant-storefront-only",
       "repositoryRole": "Design- en datareferentie; nooit de volledige DSA-app als uitvoer klonen.",
@@ -93,6 +93,123 @@
         "Controleer dat alle verboden zichtbare termen nul resultaten geven"
       ]
     },
+    "implementationContracts": {
+      "typography": {
+        "bodyMinimumPx": 16,
+        "secondaryMinimumPx": 14,
+        "controlMinimumPx": 14,
+        "rule": "Geen klantgerichte tekst kleiner dan 14px; lopende tekst minimaal 16px."
+      },
+      "icons": {
+        "library": "lucide-react",
+        "package": "lucide-react",
+        "repository": "https://github.com/lucide-icons/lucide",
+        "importRule": "Importeer uitsluitend via lucide-react; teken geen eigen SVG.",
+        "forbidden": [
+          "handgeschreven SVG",
+          "emoji-iconen",
+          "icon fonts",
+          "CSS-vormen als icoon"
+        ]
+      },
+      "payments": {
+        "library": "datatrans-payment-logos",
+        "repository": "https://github.com/datatrans/payment-logos",
+        "renderRule": "Render elk logo als <img> met asset of rawUrl; nooit als tekst, emoji, base64 of nagetekende SVG.",
+        "methods": [
+          {
+            "id": "ideal",
+            "label": "iDEAL",
+            "file": "ideal.svg",
+            "asset": "/payment-logos/ideal.svg",
+            "repositoryAsset": "public/payment-logos/ideal.svg",
+            "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/ideal.svg"
+          },
+          {
+            "id": "visa",
+            "label": "Visa",
+            "file": "visa.svg",
+            "asset": "/payment-logos/visa.svg",
+            "repositoryAsset": "public/payment-logos/visa.svg",
+            "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/visa.svg"
+          },
+          {
+            "id": "mastercard",
+            "label": "Mastercard",
+            "file": "mastercard.svg",
+            "asset": "/payment-logos/mastercard.svg",
+            "repositoryAsset": "public/payment-logos/mastercard.svg",
+            "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/mastercard.svg"
+          },
+          {
+            "id": "applepay",
+            "label": "Apple Pay",
+            "file": "apple-pay.svg",
+            "asset": "/payment-logos/apple-pay.svg",
+            "repositoryAsset": "public/payment-logos/apple-pay.svg",
+            "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/apple-pay.svg"
+          },
+          {
+            "id": "paypal",
+            "label": "PayPal",
+            "file": "paypal.svg",
+            "asset": "/payment-logos/paypal.svg",
+            "repositoryAsset": "public/payment-logos/paypal.svg",
+            "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/paypal.svg"
+          },
+          {
+            "id": "klarna",
+            "label": "Klarna",
+            "file": "klarna.svg",
+            "asset": "/payment-logos/klarna.svg",
+            "repositoryAsset": "public/payment-logos/klarna.svg",
+            "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/klarna.svg"
+          },
+          {
+            "id": "bancontact",
+            "label": "Bancontact",
+            "file": "bancontact.svg",
+            "asset": "/payment-logos/bancontact.svg",
+            "repositoryAsset": "public/payment-logos/bancontact.svg",
+            "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/bancontact.svg"
+          }
+        ],
+        "forbidden": [
+          "tekstbadges",
+          "emoji",
+          "base64",
+          "nagetekende betaalmerken"
+        ]
+      },
+      "galleries": {
+        "primary": {
+          "slotIds": [
+            "gallery-hero",
+            "gallery-use",
+            "gallery-close",
+            "gallery-features",
+            "gallery-box"
+          ],
+          "thumbnailCount": 5
+        },
+        "final": {
+          "slotIds": [
+            "final-thumbnail",
+            "gallery-use",
+            "gallery-close",
+            "gallery-features",
+            "gallery-box"
+          ],
+          "thumbnailCount": 5
+        },
+        "interactionRules": [
+          "groot actief 1:1 beeld",
+          "vijf klikbare miniaturen",
+          "vorige/volgende-knoppen",
+          "geen lege ruimte onder het hoofdbeeld"
+        ]
+      }
+    },
     "workflow": [
       "Lees STOREFRONT.md vóór alle broncode",
       "Gebruik de GitHub-repository als referentie, niet als volledig te klonen eindproduct",
@@ -106,6 +223,10 @@
       "Geen DSA-studio, DSA-branding of AI-uitleg in de winkel",
       "Behoud de klantgerichte layout en sectievolgorde",
       "Alle afbeeldingen exact 1:1",
+      "Boven en onder een complete galerij met vijf klikbare miniaturen",
+      "Alle betaalmerken als officiële afbeeldingsassets",
+      "Alle interface-iconen uit lucide-react",
+      "Lopende tekst minimaal 16px en overige merchanttekst minimaal 14px",
       "Geen verzonnen feiten of social proof",
       "Alle klantcontrols toetsenbordtoegankelijk",
       "Bouwmetadata consumeren maar niet renderen"
@@ -152,12 +273,25 @@
       "bold",
       "minimal"
     ],
+    "typography": {
+      "bodyMinimumPx": 16,
+      "secondaryMinimumPx": 14,
+      "controlMinimumPx": 14,
+      "rule": "Geen klantgerichte tekst kleiner dan 14px; lopende tekst minimaal 16px."
+    },
     "iconPack": {
       "id": "lucide-react",
+      "package": "lucide-react",
       "source": "https://github.com/lucide-icons/lucide",
       "license": "ISC",
       "style": "outline",
-      "usage": "Kies iconen op betekenis; gebruik nooit alleen een icoon voor essentiële tekst."
+      "usage": "Importeer iconen uit lucide-react op betekenis; teken geen eigen SVG en gebruik nooit alleen een icoon voor essentiële tekst.",
+      "forbidden": [
+        "handgeschreven SVG",
+        "emoji-iconen",
+        "icon fonts",
+        "CSS-vormen als icoon"
+      ]
     },
     "paymentKit": {
       "id": "datatrans-payment-logos",
@@ -166,33 +300,62 @@
       "methods": [
         {
           "id": "ideal",
-          "asset": "/payment-logos/ideal.svg"
+          "label": "iDEAL",
+          "file": "ideal.svg",
+          "asset": "/payment-logos/ideal.svg",
+          "repositoryAsset": "public/payment-logos/ideal.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/ideal.svg"
         },
         {
           "id": "visa",
-          "asset": "/payment-logos/visa.svg"
+          "label": "Visa",
+          "file": "visa.svg",
+          "asset": "/payment-logos/visa.svg",
+          "repositoryAsset": "public/payment-logos/visa.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/visa.svg"
         },
         {
           "id": "mastercard",
-          "asset": "/payment-logos/mastercard.svg"
+          "label": "Mastercard",
+          "file": "mastercard.svg",
+          "asset": "/payment-logos/mastercard.svg",
+          "repositoryAsset": "public/payment-logos/mastercard.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/mastercard.svg"
         },
         {
           "id": "applepay",
-          "asset": "/payment-logos/apple-pay.svg"
+          "label": "Apple Pay",
+          "file": "apple-pay.svg",
+          "asset": "/payment-logos/apple-pay.svg",
+          "repositoryAsset": "public/payment-logos/apple-pay.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/apple-pay.svg"
         },
         {
           "id": "paypal",
-          "asset": "/payment-logos/paypal.svg"
+          "label": "PayPal",
+          "file": "paypal.svg",
+          "asset": "/payment-logos/paypal.svg",
+          "repositoryAsset": "public/payment-logos/paypal.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/paypal.svg"
         },
         {
           "id": "klarna",
-          "asset": "/payment-logos/klarna.svg"
+          "label": "Klarna",
+          "file": "klarna.svg",
+          "asset": "/payment-logos/klarna.svg",
+          "repositoryAsset": "public/payment-logos/klarna.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/klarna.svg"
         },
         {
           "id": "bancontact",
-          "asset": "/payment-logos/bancontact.svg"
+          "label": "Bancontact",
+          "file": "bancontact.svg",
+          "asset": "/payment-logos/bancontact.svg",
+          "repositoryAsset": "public/payment-logos/bancontact.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/bancontact.svg"
         }
       ],
+      "renderRule": "Render elk logo als <img> met asset of rawUrl; nooit als tekst, emoji, base64 of nagetekende SVG.",
       "purpose": "Visuele betaalvertrouwensbadges; geen checkout of betalingsverwerking."
     }
   },
@@ -1771,5 +1934,122 @@
       "Herstel en test galerij, bundels, betaallogo’s, accordeons, FAQ, winkelmand en mobiele CTA",
       "Controleer dat alle verboden zichtbare termen nul resultaten geven"
     ]
+  },
+  "implementationContracts": {
+    "typography": {
+      "bodyMinimumPx": 16,
+      "secondaryMinimumPx": 14,
+      "controlMinimumPx": 14,
+      "rule": "Geen klantgerichte tekst kleiner dan 14px; lopende tekst minimaal 16px."
+    },
+    "icons": {
+      "library": "lucide-react",
+      "package": "lucide-react",
+      "repository": "https://github.com/lucide-icons/lucide",
+      "importRule": "Importeer uitsluitend via lucide-react; teken geen eigen SVG.",
+      "forbidden": [
+        "handgeschreven SVG",
+        "emoji-iconen",
+        "icon fonts",
+        "CSS-vormen als icoon"
+      ]
+    },
+    "payments": {
+      "library": "datatrans-payment-logos",
+      "repository": "https://github.com/datatrans/payment-logos",
+      "renderRule": "Render elk logo als <img> met asset of rawUrl; nooit als tekst, emoji, base64 of nagetekende SVG.",
+      "methods": [
+        {
+          "id": "ideal",
+          "label": "iDEAL",
+          "file": "ideal.svg",
+          "asset": "/payment-logos/ideal.svg",
+          "repositoryAsset": "public/payment-logos/ideal.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/ideal.svg"
+        },
+        {
+          "id": "visa",
+          "label": "Visa",
+          "file": "visa.svg",
+          "asset": "/payment-logos/visa.svg",
+          "repositoryAsset": "public/payment-logos/visa.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/visa.svg"
+        },
+        {
+          "id": "mastercard",
+          "label": "Mastercard",
+          "file": "mastercard.svg",
+          "asset": "/payment-logos/mastercard.svg",
+          "repositoryAsset": "public/payment-logos/mastercard.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/mastercard.svg"
+        },
+        {
+          "id": "applepay",
+          "label": "Apple Pay",
+          "file": "apple-pay.svg",
+          "asset": "/payment-logos/apple-pay.svg",
+          "repositoryAsset": "public/payment-logos/apple-pay.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/apple-pay.svg"
+        },
+        {
+          "id": "paypal",
+          "label": "PayPal",
+          "file": "paypal.svg",
+          "asset": "/payment-logos/paypal.svg",
+          "repositoryAsset": "public/payment-logos/paypal.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/paypal.svg"
+        },
+        {
+          "id": "klarna",
+          "label": "Klarna",
+          "file": "klarna.svg",
+          "asset": "/payment-logos/klarna.svg",
+          "repositoryAsset": "public/payment-logos/klarna.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/klarna.svg"
+        },
+        {
+          "id": "bancontact",
+          "label": "Bancontact",
+          "file": "bancontact.svg",
+          "asset": "/payment-logos/bancontact.svg",
+          "repositoryAsset": "public/payment-logos/bancontact.svg",
+          "rawUrl": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/bancontact.svg"
+        }
+      ],
+      "forbidden": [
+        "tekstbadges",
+        "emoji",
+        "base64",
+        "nagetekende betaalmerken"
+      ]
+    },
+    "galleries": {
+      "primary": {
+        "slotIds": [
+          "gallery-hero",
+          "gallery-use",
+          "gallery-close",
+          "gallery-features",
+          "gallery-box"
+        ],
+        "thumbnailCount": 5
+      },
+      "final": {
+        "slotIds": [
+          "final-thumbnail",
+          "gallery-use",
+          "gallery-close",
+          "gallery-features",
+          "gallery-box"
+        ],
+        "thumbnailCount": 5
+      },
+      "interactionRules": [
+        "groot actief 1:1 beeld",
+        "vijf klikbare miniaturen",
+        "vorige/volgende-knoppen",
+        "geen lege ruimte onder het hoofdbeeld"
+      ]
+    }
   }
 }

@@ -37,11 +37,13 @@ Als Base44 geen Git-import aanbiedt, download dan `https://github.com/jndegens/d
 3. Wacht op echte productdata voordat placeholders worden vervangen.
 4. Behoud de storefront-sectievolgorde, responsive CSS en klantgerichte interacties.
 5. Gebruik `data-ai-*`, `data-learn-record` en `data-visible-slot` alleen als bouwmetadata; verwijder ze uit de productie-output.
-6. Houd ieder zichtbaar product-, detail-, stap-, review- en contextbeeld exact 1:1.
-7. Gebruik de bestaande Lucide-iconen en meegeleverde Datatrans-betaallogo's.
-8. Verzin geen prijzen, kortingen, voorraad, claims, reviews, experts, keurmerken, levertijden of garanties.
-9. Voer `npm test` uit en los fouten op voordat het resultaat wordt opgeleverd.
-10. Neem nooit de DSA-toolbar, DSA-branding, leerlaag, promptmodals, machine-content, GitHub-links of demowinkelmand over.
+6. Houd ieder zichtbaar product-, detail-, stap-, review- en contextbeeld exact 1:1. Bouw bovenaan én onderaan één groot beeld met pijlen en exact vijf klikbare miniaturen; laat onder het onderste beeld nooit een leeg vlak staan.
+7. Installeer en gebruik `lucide-react` voor alle interface-iconen. Gebruik geen handgeschreven inline-SVG, emoji, icon-font of CSS-vorm als icoon.
+8. Render de zeven officiële Datatrans-betaallogo's als `<img>` vanuit `public/payment-logos/`. Gebruik bij externe import de fallback `https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos/{bestandsnaam}`; teken logo's nooit zelf na.
+9. Houd bodytekst minimaal 16px en secundaire tekst, labels, knoppen, bundelregels en bijschriften minimaal 14px.
+10. Verzin geen prijzen, kortingen, voorraad, claims, reviews, experts, keurmerken, levertijden of garanties.
+11. Voer `npm test` uit en los fouten op voordat het resultaat wordt opgeleverd.
+12. Neem nooit de DSA-toolbar, DSA-branding, leerlaag, promptmodals, machine-content, GitHub-links of demowinkelmand over.
 
 ## Een bestaande volledige kopie herstellen
 
@@ -62,6 +64,10 @@ De standaardconfiguratie is `cat=dieren&pal=dsa&font=friendly`. Alle ondersteund
 - De gekozen categorie, kleuren en lettertypes zijn als initiële winkelstijl toegepast; de instelknoppen staan niet in de winkel.
 - Desktop en mobiel responsief blijven.
 - Galerij, bundels, accordeons, FAQ en winkelmand klikbaar zijn.
+- Zowel de bovenste als de onderste galerij een groot 1:1-beeld, pijlen en vijf klikbare miniaturen bevat.
+- Alle betaalmethodes met de officiële Datatrans-afbeeldingen laden.
+- Alle interface-iconen uit `lucide-react` komen; er staan geen handgeschreven SVG's of emoji-iconen in.
+- Bodytekst minimaal 16px en alle secundaire klantgerichte tekst minimaal 14px is.
 - Alle zichtbare afbeeldingen 1:1 zijn.
 - Alleen aangeleverde productdata is gebruikt.
 - Geen DSA-, Base44-, GitHub-, AI-, prompt-, template- of leerlaagtekst zichtbaar is.
