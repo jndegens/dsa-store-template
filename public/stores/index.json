@@ -17,6 +17,7 @@
     "url": "https://github.com/jndegens/dsa-store-template",
     "cloneUrl": "https://github.com/jndegens/dsa-store-template.git",
     "branch": "main",
+    "storefrontContract": "https://github.com/jndegens/dsa-store-template/blob/main/STOREFRONT.md",
     "guide": "https://github.com/jndegens/dsa-store-template/blob/main/BASE44.md",
     "machineData": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/base44.json",
     "download": "https://github.com/jndegens/dsa-store-template/archive/refs/heads/main.zip"

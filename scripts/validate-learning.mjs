@@ -11,11 +11,19 @@ const annotations = getAnnotations();
 const canonicalManifestPath = 'public/stores/dieren/template.json';
 const forbiddenLegacyCopy = /wolknest|hondenmand|wolfvriend/i;
 const appSource = fs.readFileSync('src/App.jsx', 'utf8');
+const storefrontContractPath = 'STOREFRONT.md';
 
 if (slugs.length !== 8) failures.push(`Verwacht exact 8 categorieën, vond ${slugs.length}`);
 if (imageSlots.length !== 18) failures.push(`Verwacht exact 18 beeldslots, vond ${imageSlots.length}`);
-for (const token of ['className="template-toolbar"','icon={category.icon}','icon="palette"','icon="font"','className="current-palette"','className="current-font"','DSA STORE TEMPLATE','aria-controls={`selector-${id}`}','aria-expanded={open}','Kopieer Base44-opdracht','repositoryUrl','base44DataUrl','datatrans-payment-logos','BASE44-BOUWOPDRACHT','slots:imageSlots.map','ref={cartRef}','ref={studioRef}','copyStyleV2']) {
+for (const token of ['className="template-toolbar"','icon={category.icon}','icon="palette"','icon="font"','className="current-palette"','className="current-font"','DSA STORE TEMPLATE','aria-controls={`selector-${id}`}','aria-expanded={open}','Kopieer Base44-opdracht','repositoryUrl','base44DataUrl','storefrontContractUrl','merchant-storefront-only','STOREFRONT.md','datatrans-payment-logos','BASE44-BOUWOPDRACHT','BESTAAND BASE44-PROJECT HERSTELLEN','slots:imageSlots.map','ref={cartRef}','ref={studioRef}','copyStyleV2']) {
   if (!appSource.includes(token)) failures.push(`Compacte templatebediening ontbreekt in bron: ${token}`);
+}
+if (!fs.existsSync(storefrontContractPath)) failures.push('Storefront-exportcontract ontbreekt');
+else {
+  const storefrontContract = fs.readFileSync(storefrontContractPath, 'utf8');
+  for (const token of ['merchant-storefront', '.template-toolbar', '.machine-content', 'DSA-logo', 'Bestaande foutieve Base44-import herstellen']) {
+    if (!storefrontContract.includes(token)) failures.push(`Storefront-exportcontract mist harde grens: ${token}`);
+  }
 }
 if (/setBrandName|setProductName|BuilderMenu|builder-menu/.test(appSource)) failures.push('Merk- of producttekst is nog aanpasbaar via het oude bouwmenu');
 if (/id="logo"|label="Merk & logo"|setLogoId|logoId|logoTemplates|Logo-template/.test(appSource)) failures.push('De verwijderde merk- en logokeuze staat nog in de templatebediening of AI-export');
@@ -69,6 +77,11 @@ for (const slug of slugs) {
   if (manifest.schemaVersion !== '5.0') failures.push(`${slug}: verwacht manifestschema 5.0`);
   if (manifest.templateId !== 'dsa-store-template') failures.push(`${slug}: vaste template-ID ontbreekt`);
   if (manifest.sourceRepository?.url !== 'https://github.com/jndegens/dsa-store-template') failures.push(`${slug}: openbare GitHub-bron ontbreekt`);
+  if (manifest.sourceRepository?.storefrontContract !== 'https://github.com/jndegens/dsa-store-template/blob/main/STOREFRONT.md') failures.push(`${slug}: storefrontcontract-URL ontbreekt`);
+  if (manifest.surfaceContract?.mode !== 'merchant-storefront-only') failures.push(`${slug}: storefront-only contract ontbreekt`);
+  for (const selector of ['.template-toolbar','.studio-modal','.prompt-drawer','.machine-content']) {
+    if (!manifest.surfaceContract?.excludeSelectors?.includes(selector)) failures.push(`${slug}: uitsluitselector ontbreekt: ${selector}`);
+  }
   if (manifest.designSystem?.paymentKit?.id !== 'datatrans-payment-logos') failures.push(`${slug}: Datatrans payment-kit ontbreekt`);
   if (manifest.designSystem?.iconPack?.source !== 'https://github.com/lucide-icons/lucide') failures.push(`${slug}: officiële Lucide-bron ontbreekt`);
   if (JSON.stringify(manifest.routes) !== JSON.stringify(routes)) failures.push(`${slug}: routelijst wijkt af`);
@@ -83,7 +96,12 @@ else {
   if (base44.schemaVersion !== '5.0') failures.push('Base44-machinebestand gebruikt niet schema 5.0');
   if (base44.templateId !== 'dsa-store-template') failures.push('Base44-machinebestand mist de vaste template-ID');
   if (base44.sourceRepository?.url !== 'https://github.com/jndegens/dsa-store-template') failures.push('Base44-machinebestand mist de openbare GitHub-bron');
+  if (base44.readOrder?.[0] !== 'STOREFRONT.md') failures.push('Base44-machinebestand leest het storefrontcontract niet als eerste');
   if (!base44.readOrder?.includes('BASE44.md')) failures.push('Base44-machinebestand verwijst niet naar de startgids');
+  if (base44.surfaceContract?.mode !== 'merchant-storefront-only') failures.push('Base44-machinebestand mist storefront-only mode');
+  for (const selector of ['.template-toolbar','.studio-modal','.prompt-drawer','.machine-content']) {
+    if (!base44.surfaceContract?.excludeSelectors?.includes(selector)) failures.push(`Base44-machinebestand mist uitsluitselector: ${selector}`);
+  }
   const base44InputIds = new Set((base44.requiredInputs || []).map((input) => input.id));
   for (const slot of imageSlots) if (!base44InputIds.has(`image.${slot.id}`)) failures.push(`Base44-machinebestand mist beeldslot ${slot.id}`);
 }

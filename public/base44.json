@@ -2,16 +2,18 @@
   "schemaVersion": "5.0",
   "templateId": "dsa-store-template",
   "id": "dsa-store-template-base44-package",
-  "purpose": "Machineleesbare overdracht waarmee Base44 de bestaande DSA-productpagina vanuit broncode kan importeren en met echte productdata kan vullen.",
+  "purpose": "Machineleesbare overdracht waarmee Base44 uitsluitend een klantgerichte merchant-storefront bouwt, met de DSA-repository als ontwerp- en datareferentie.",
   "sourceRepository": {
     "url": "https://github.com/jndegens/dsa-store-template",
     "cloneUrl": "https://github.com/jndegens/dsa-store-template.git",
     "branch": "main",
+    "storefrontContract": "https://github.com/jndegens/dsa-store-template/blob/main/STOREFRONT.md",
     "guide": "https://github.com/jndegens/dsa-store-template/blob/main/BASE44.md",
     "machineData": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/base44.json",
     "download": "https://github.com/jndegens/dsa-store-template/archive/refs/heads/main.zip"
   },
   "readOrder": [
+    "STOREFRONT.md",
     "BASE44.md",
     "public/base44.json",
     "public/stores/{category}/template.json",
@@ -4638,6 +4640,73 @@
       }
     ]
   },
+  "surfaceContract": {
+    "mode": "merchant-storefront-only",
+    "repositoryRole": "Design- en datareferentie; nooit de volledige DSA-app als uitvoer klonen.",
+    "include": [
+      "actiebalk en USP-balk",
+      "merchant-header",
+      "main#main met alle productsecties",
+      "merchant-footer",
+      "galerij, bundels, accordeons, FAQ, winkelmand en mobiele CTA",
+      "officiële Datatrans-betaallogo’s"
+    ],
+    "excludeSelectors": [
+      ".template-toolbar",
+      ".studio-modal",
+      ".studio-backdrop",
+      ".prompt-drawer",
+      ".learn-marker",
+      ".placeholder__learn",
+      ".placeholder__prompt",
+      ".machine-content",
+      "#dsa-ai-blueprint"
+    ],
+    "excludeVisibleTerms": [
+      "DSA STORE TEMPLATE",
+      "Dropship Academy",
+      "Base44",
+      "GitHub",
+      "AI-prompt",
+      "template",
+      "leerlaag",
+      "scrape",
+      "DEMO-WINKELMAND",
+      "onderwijstemplate"
+    ],
+    "metadataPolicy": "Lees data-ai-*, data-learn-* en data-visible-slot tijdens de bouw, maar render deze bouwmetadata niet in de productie-DOM.",
+    "brandingPolicy": "Vervang alle DSA-branding door de aangeleverde brand_name en brand_logo."
+  },
+  "repairWorkflow": {
+    "useWhen": "Het bestaande Base44-project bevat de volledige DSA-studio of zichtbare DSA/editorinformatie.",
+    "preserve": [
+      "aangeleverde merchant-productdata",
+      "productbeelden",
+      "prijzen",
+      "merknaam en merklogo",
+      "klantgerichte storefrontsecties"
+    ],
+    "remove": [
+      ".template-toolbar",
+      ".studio-modal",
+      ".studio-backdrop",
+      ".prompt-drawer",
+      ".learn-marker",
+      ".placeholder__learn",
+      ".placeholder__prompt",
+      ".machine-content",
+      "#dsa-ai-blueprint"
+    ],
+    "steps": [
+      "Lees STOREFRONT.md",
+      "Werk in het bestaande project",
+      "Behoud merchant-data en afbeeldingen",
+      "Verwijder de volledige studio/editorlaag en DSA-branding",
+      "Bouw merchant-header en merchant-footer",
+      "Herstel en test galerij, bundels, betaallogo’s, accordeons, FAQ, winkelmand en mobiele CTA",
+      "Controleer dat alle verboden zichtbare termen nul resultaten geven"
+    ]
+  },
   "requiredInputs": [
     {
       "id": "brand_name",
@@ -4905,26 +4974,29 @@
     }
   ],
   "buildRules": [
-    "Importeer of clone de repository; herschrijf de template niet vanaf een screenshot",
-    "Behoud de bestaande React-componenten, CSS en sectievolgorde",
+    "Lees STOREFRONT.md vóór het openen of kopiëren van src/App.jsx",
+    "Gebruik de repository als ontwerp- en datareferentie; clone de complete app niet naar de uitvoer",
+    "Behoud de klantgerichte sectievolgorde, responsive layout en interacties",
     "Vervang uitsluitend placeholders met aangeleverde, verifieerbare productdata",
-    "Behoud alle data-ai-*, data-learn-record en data-visible-slot attributen",
+    "Gebruik data-ai-*, data-learn-record en data-visible-slot tijdens de bouw en verwijder bouwmetadata uit de productie-DOM",
     "Alle zichtbare afbeeldingen zijn exact 1:1",
-    "Behoud alle klikbare interacties en toetsenbordbediening",
-    "Gebruik Lucide voor interface-iconen en de meegeleverde Datatrans-betaallogo’s",
+    "Gebruik Lucide voor winkeliconen en de meegeleverde Datatrans-betaallogo’s",
     "Voer npm test uit voor oplevering"
   ],
   "forbidden": [
+    "DSA-toolbar, DSA-branding, leerlaag, promptmodals, machine-content, GitHub/Base44-uitleg of demowinkelmand in de storefront",
     "Verzonnen claims, prijzen, voorraad, reviews, experts, keurmerken, levertijden of garanties",
     "Een screenshot gebruiken als enige bouwbron",
     "Afbeeldingen met een andere verhouding dan 1:1",
-    "Machineleesbare attributen of interactieve states verwijderen"
+    "Bouwmetadata als zichtbare inhoud of productie-DOM exporteren"
   ],
   "acceptanceCriteria": [
-    "De gekozen categorie, palette en font werken via URL-parameters",
+    "De gekozen categorie, palette en font zijn als initiële merchant-stijl toegepast zonder zichtbare configuratiecontrols",
     "De desktop- en mobiele layout blijven responsief",
-    "Alle knoppen, selectors, bundels, accordeons, modals en winkelmand zijn klikbaar",
+    "Galerij, bundels, accordeons, FAQ, winkelmand en mobiele CTA zijn klikbaar",
+    "Officiële betaallogo’s laden als afbeeldingen",
     "Alle placeholders komen uit aangeleverde input",
+    "De zichtbare tekst bevat geen DSA-, Base44-, GitHub-, AI-, prompt-, template-, leerlaag-, scrape- of demotekst",
     "npm test slaagt zonder fouten"
   ]
 }

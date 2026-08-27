@@ -19,34 +19,103 @@
     "url": "https://github.com/jndegens/dsa-store-template",
     "cloneUrl": "https://github.com/jndegens/dsa-store-template.git",
     "branch": "main",
+    "storefrontContract": "https://github.com/jndegens/dsa-store-template/blob/main/STOREFRONT.md",
     "guide": "https://github.com/jndegens/dsa-store-template/blob/main/BASE44.md",
     "machineData": "https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/base44.json",
     "download": "https://github.com/jndegens/dsa-store-template/archive/refs/heads/main.zip"
   },
   "aiContract": {
-    "masterPrompt": "Importeer of clone eerst de openbare DSA GitHub-repository. Lees BASE44.md, public/base44.json en daarna dit route-manifest. Gebruik de bestaande broncode als source of truth en reconstrueer de pagina niet vanaf een screenshot. Vraag eerst om ontbrekende productdata. Vervang daarna uitsluitend placeholders met aangeleverde, verifieerbare informatie. Behoud alle secties, klikbare interacties, machineleesbare attributen en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties.",
+    "masterPrompt": "BELANGRIJK: bouw uitsluitend een schone klantgerichte merchant-storefront. Clone of render NOOIT de volledige DSA-app. Lees eerst STOREFRONT.md en daarna public/base44.json en dit route-manifest. Gebruik de repository als ontwerp- en datareferentie. Neem geen DSA-toolbar, DSA-branding, leerlaag, promptmodals, machine-content, GitHub/Base44-uitleg of demowinkelmand over. Gebruik bouwmetadata tijdens het genereren maar verwijder die uit de productie-DOM. Vraag eerst om ontbrekende productdata en vervang alleen placeholders met aangeleverde, verifieerbare informatie. Behoud de klantgerichte secties, interacties en 1:1 beeldverhoudingen. Verzin nooit claims, prijzen, voorraad, reviews, experts, keurmerken of garanties.",
+    "surfaceContract": {
+      "mode": "merchant-storefront-only",
+      "repositoryRole": "Design- en datareferentie; nooit de volledige DSA-app als uitvoer klonen.",
+      "include": [
+        "actiebalk en USP-balk",
+        "merchant-header",
+        "main#main met alle productsecties",
+        "merchant-footer",
+        "galerij, bundels, accordeons, FAQ, winkelmand en mobiele CTA",
+        "officiële Datatrans-betaallogo’s"
+      ],
+      "excludeSelectors": [
+        ".template-toolbar",
+        ".studio-modal",
+        ".studio-backdrop",
+        ".prompt-drawer",
+        ".learn-marker",
+        ".placeholder__learn",
+        ".placeholder__prompt",
+        ".machine-content",
+        "#dsa-ai-blueprint"
+      ],
+      "excludeVisibleTerms": [
+        "DSA STORE TEMPLATE",
+        "Dropship Academy",
+        "Base44",
+        "GitHub",
+        "AI-prompt",
+        "template",
+        "leerlaag",
+        "scrape",
+        "DEMO-WINKELMAND",
+        "onderwijstemplate"
+      ],
+      "metadataPolicy": "Lees data-ai-*, data-learn-* en data-visible-slot tijdens de bouw, maar render deze bouwmetadata niet in de productie-DOM.",
+      "brandingPolicy": "Vervang alle DSA-branding door de aangeleverde brand_name en brand_logo."
+    },
+    "repairWorkflow": {
+      "useWhen": "Het bestaande Base44-project bevat de volledige DSA-studio of zichtbare DSA/editorinformatie.",
+      "preserve": [
+        "aangeleverde merchant-productdata",
+        "productbeelden",
+        "prijzen",
+        "merknaam en merklogo",
+        "klantgerichte storefrontsecties"
+      ],
+      "remove": [
+        ".template-toolbar",
+        ".studio-modal",
+        ".studio-backdrop",
+        ".prompt-drawer",
+        ".learn-marker",
+        ".placeholder__learn",
+        ".placeholder__prompt",
+        ".machine-content",
+        "#dsa-ai-blueprint"
+      ],
+      "steps": [
+        "Lees STOREFRONT.md",
+        "Werk in het bestaande project",
+        "Behoud merchant-data en afbeeldingen",
+        "Verwijder de volledige studio/editorlaag en DSA-branding",
+        "Bouw merchant-header en merchant-footer",
+        "Herstel en test galerij, bundels, betaallogo’s, accordeons, FAQ, winkelmand en mobiele CTA",
+        "Controleer dat alle verboden zichtbare termen nul resultaten geven"
+      ]
+    },
     "workflow": [
-      "Importeer de GitHub-repository",
-      "Lees BASE44.md en public/base44.json",
-      "Lees configuration en sections",
+      "Lees STOREFRONT.md vóór alle broncode",
+      "Gebruik de GitHub-repository als referentie, niet als volledig te klonen eindproduct",
+      "Lees public/base44.json en configuration/sections",
       "Rapporteer ontbrekende requiredInputs",
       "Wacht op echte productdata",
-      "Vul de bestaande componenten",
+      "Bouw alleen de merchant-storefront",
       "Voer npm test uit"
     ],
     "hardRules": [
-      "Behoud de DSA-layout en componentstructuur",
+      "Geen DSA-studio, DSA-branding of AI-uitleg in de winkel",
+      "Behoud de klantgerichte layout en sectievolgorde",
       "Alle afbeeldingen exact 1:1",
       "Geen verzonnen feiten of social proof",
-      "Alle controls toetsenbordtoegankelijk",
-      "Behoud machineleesbare attributen"
+      "Alle klantcontrols toetsenbordtoegankelijk",
+      "Bouwmetadata consumeren maar niet renderen"
     ],
     "configurableUrlParams": [
       "cat",
       "pal",
       "font"
     ],
-    "expectedOutput": "Een complete, responsieve en klikbare productpagina plus een lijst van gebruikte brondata."
+    "expectedOutput": "Een complete, responsieve en klikbare merchant-productpagina zonder DSA/editor/template-informatie, plus een lijst van gebruikte brondata."
   },
   "designSystem": {
     "templateBrand": "DSA STORE TEMPLATE",
@@ -1635,5 +1704,72 @@
       "imageSlot": null
     }
   ],
-  "scrapeInstructions": "Begin bij public/base44.json en lees daarna aiContract.masterPrompt. Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder promptrecord staat in de initiële HTML als data-learn-record en data-ai-section. JavaScript-interactie is niet nodig om de prompts te lezen."
+  "scrapeInstructions": "Begin bij public/base44.json en lees daarna aiContract.masterPrompt. Ieder imageBrief correspondeert exact met data-visible-slot in de HTML. Ieder promptrecord staat in de initiële HTML als data-learn-record en data-ai-section. JavaScript-interactie is niet nodig om de prompts te lezen.",
+  "surfaceContract": {
+    "mode": "merchant-storefront-only",
+    "repositoryRole": "Design- en datareferentie; nooit de volledige DSA-app als uitvoer klonen.",
+    "include": [
+      "actiebalk en USP-balk",
+      "merchant-header",
+      "main#main met alle productsecties",
+      "merchant-footer",
+      "galerij, bundels, accordeons, FAQ, winkelmand en mobiele CTA",
+      "officiële Datatrans-betaallogo’s"
+    ],
+    "excludeSelectors": [
+      ".template-toolbar",
+      ".studio-modal",
+      ".studio-backdrop",
+      ".prompt-drawer",
+      ".learn-marker",
+      ".placeholder__learn",
+      ".placeholder__prompt",
+      ".machine-content",
+      "#dsa-ai-blueprint"
+    ],
+    "excludeVisibleTerms": [
+      "DSA STORE TEMPLATE",
+      "Dropship Academy",
+      "Base44",
+      "GitHub",
+      "AI-prompt",
+      "template",
+      "leerlaag",
+      "scrape",
+      "DEMO-WINKELMAND",
+      "onderwijstemplate"
+    ],
+    "metadataPolicy": "Lees data-ai-*, data-learn-* en data-visible-slot tijdens de bouw, maar render deze bouwmetadata niet in de productie-DOM.",
+    "brandingPolicy": "Vervang alle DSA-branding door de aangeleverde brand_name en brand_logo."
+  },
+  "repairWorkflow": {
+    "useWhen": "Het bestaande Base44-project bevat de volledige DSA-studio of zichtbare DSA/editorinformatie.",
+    "preserve": [
+      "aangeleverde merchant-productdata",
+      "productbeelden",
+      "prijzen",
+      "merknaam en merklogo",
+      "klantgerichte storefrontsecties"
+    ],
+    "remove": [
+      ".template-toolbar",
+      ".studio-modal",
+      ".studio-backdrop",
+      ".prompt-drawer",
+      ".learn-marker",
+      ".placeholder__learn",
+      ".placeholder__prompt",
+      ".machine-content",
+      "#dsa-ai-blueprint"
+    ],
+    "steps": [
+      "Lees STOREFRONT.md",
+      "Werk in het bestaande project",
+      "Behoud merchant-data en afbeeldingen",
+      "Verwijder de volledige studio/editorlaag en DSA-branding",
+      "Bouw merchant-header en merchant-footer",
+      "Herstel en test galerij, bundels, betaallogo’s, accordeons, FAQ, winkelmand en mobiele CTA",
+      "Controleer dat alle verboden zichtbare termen nul resultaten geven"
+    ]
+  }
 }
