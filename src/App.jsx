@@ -2059,8 +2059,8 @@ export default function App({
                 >
                   <Icon name={styleCopied ? "check" : "copy"} />
                   {styleCopied
-                    ? "AI-opdracht gekopieerd"
-                    : "Kopieer AI-opdracht"}
+                    ? "Base44-opdracht gekopieerd"
+                    : "Kopieer Base44-opdracht"}
                 </button>
                 <div className="prompt-preview">
                   <header>
