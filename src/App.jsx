@@ -2210,8 +2210,7 @@ function MachineContent({ annotations, theme, aiBrief }) {
       </script>
       <section
         className="machine-content"
-        hidden
-        aria-hidden="true"
+        aria-label="Scrape-bare templateprompts"
         data-template="dsa-store-template"
         data-style-preset={theme.preset}
         data-primary-color={theme.accent}

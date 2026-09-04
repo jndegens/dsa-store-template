@@ -1219,7 +1219,6 @@ button {
   display: none;
 }
 .machine-content {
-  display: none !important;
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -3242,9 +3241,10 @@ button {
   min-height: 92px;
   padding: 12px 22px;
   display: grid;
-  grid-template-columns:
-    minmax(190px, 1.05fr) repeat(3, minmax(190px, 1fr))
-    minmax(130px, 0.62fr);
+  grid-template-columns: minmax(190px, 1.05fr) repeat(
+      3,
+      minmax(190px, 1fr)
+    ) minmax(130px, 0.62fr);
   gap: 10px;
   overflow: visible;
 }
