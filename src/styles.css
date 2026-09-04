@@ -221,19 +221,11 @@ button {
   border-color: var(--gold);
 }
 .placeholder {
-  --placeholder-bg-start: color-mix(
-    in srgb,
-    var(--sand-2) 64%,
-    var(--cream)
-  );
+  --placeholder-bg-start: color-mix(in srgb, var(--sand-2) 64%, var(--cream));
   --placeholder-bg-end: color-mix(in srgb, var(--sand) 58%, var(--cream));
   --placeholder-line: color-mix(in srgb, var(--ink) 28%, transparent);
   --placeholder-shape: color-mix(in srgb, var(--gold) 19%, transparent);
-  --placeholder-shape-soft: color-mix(
-    in srgb,
-    var(--sand-2) 66%,
-    transparent
-  );
+  --placeholder-shape-soft: color-mix(in srgb, var(--sand-2) 66%, transparent);
   aspect-ratio: var(--ratio);
   border-radius: var(--radius);
   background: linear-gradient(
@@ -3249,10 +3241,10 @@ button {
   min-height: 92px;
   padding: 12px 22px;
   display: grid;
-  grid-template-columns: minmax(190px, 1.05fr) repeat(3, minmax(190px, 1fr)) minmax(
-      130px,
-      0.62fr
-    );
+  grid-template-columns: minmax(190px, 1.05fr) repeat(
+      3,
+      minmax(190px, 1fr)
+    ) minmax(130px, 0.62fr);
   gap: 10px;
   overflow: visible;
 }
@@ -3966,14 +3958,18 @@ button {
   color: #007c65;
   font-size: 8px;
   font-weight: 900;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
 }
 .studio-repository strong {
   font-size: 13px;
 }
 .studio-repository code {
   color: #4d615b;
-  font: 9px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font:
+    9px/1.35 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
   overflow-wrap: anywhere;
 }
 .studio-config > span {
@@ -4261,13 +4257,19 @@ button {
 .template-toolbar[data-interface-brand="dsa"] .toolbar-prompts {
   border-color: var(--dsa-line);
   background: var(--dsa-panel);
-  box-shadow: inset 0 1px #ffffff0d, 0 8px 22px #06100d1f;
+  box-shadow:
+    inset 0 1px #ffffff0d,
+    0 8px 22px #06100d1f;
 }
 .template-toolbar[data-interface-brand="dsa"] .selector-current {
   border-inline-color: #80d8c51f !important;
 }
-.template-toolbar[data-interface-brand="dsa"] .selector-control > button:first-child,
-.template-toolbar[data-interface-brand="dsa"] .selector-control > button:last-child {
+.template-toolbar[data-interface-brand="dsa"]
+  .selector-control
+  > button:first-child,
+.template-toolbar[data-interface-brand="dsa"]
+  .selector-control
+  > button:last-child {
   color: var(--dsa-mint);
   background: #007c650d;
 }
@@ -4280,12 +4282,20 @@ button {
 .template-toolbar[data-interface-brand="dsa"] .toolbar-prompts.is-on,
 .template-toolbar[data-interface-brand="dsa"] .toolbar-export {
   border-color: var(--dsa-green-bright);
-  background: linear-gradient(135deg, var(--dsa-green), var(--dsa-green-bright));
-  box-shadow: 0 9px 25px #007c655c, inset 0 1px #ffffff29;
+  background: linear-gradient(
+    135deg,
+    var(--dsa-green),
+    var(--dsa-green-bright)
+  );
+  box-shadow:
+    0 9px 25px #007c655c,
+    inset 0 1px #ffffff29;
 }
 .template-toolbar[data-interface-brand="dsa"] .toolbar-export:hover {
   background: linear-gradient(135deg, #006e59, #0f987d);
-  box-shadow: 0 12px 30px #007c6573, inset 0 1px #ffffff2e;
+  box-shadow:
+    0 12px 30px #007c6573,
+    inset 0 1px #ffffff2e;
 }
 .template-toolbar[data-interface-brand="dsa"]
   .compact-option-grid
@@ -4299,6 +4309,162 @@ button {
 .template-toolbar[data-interface-brand="dsa"] :is(button, a):focus-visible {
   outline: 3px solid var(--dsa-mint);
   outline-offset: 2px;
+}
+
+/* SheCommerce is a separate education-brand skin; the storefront structure stays identical. */
+.shecommerce-logo-mark {
+  display: block;
+  width: 154px;
+  height: auto;
+  object-fit: contain;
+}
+.wordmark .shecommerce-logo-mark {
+  width: 168px;
+}
+.site-footer .shecommerce-logo-mark {
+  width: 172px;
+  filter: brightness(0) invert(1);
+}
+.template-toolbar[data-interface-brand="shecommerce"] {
+  --she-pink: #e92063;
+  --she-yellow: #ffc105;
+  --she-ink: #141414;
+  --she-line: #dedede;
+  --she-muted: #737373;
+  background: #fff;
+  color: var(--she-ink);
+  border-top: 3px solid var(--she-pink);
+  border-bottom-color: var(--she-line);
+  box-shadow: 0 10px 28px #14141414;
+}
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-inner {
+  grid-template-columns: 180px repeat(3, minmax(150px, 1fr)) 48px minmax(
+      180px,
+      0.85fr
+    );
+}
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-intro {
+  border-right-color: var(--she-line);
+}
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-intro-icon {
+  width: 176px;
+  padding-inline: 13px;
+  background: #fff;
+  border-color: #f3a7be;
+  box-shadow: 0 8px 20px #e9206317;
+}
+.template-toolbar[data-interface-brand="shecommerce"]
+  .toolbar-intro-icon
+  .shecommerce-logo-mark {
+  width: 148px;
+}
+.template-toolbar[data-interface-brand="shecommerce"] .selector-label {
+  color: var(--she-muted);
+}
+.template-toolbar[data-interface-brand="shecommerce"] .selector-label svg,
+.template-toolbar[data-interface-brand="shecommerce"] .current-category-icon,
+.template-toolbar[data-interface-brand="shecommerce"] .current-font b,
+.template-toolbar[data-interface-brand="shecommerce"] .option-icon {
+  color: var(--she-pink);
+}
+.template-toolbar[data-interface-brand="shecommerce"] .selector-control,
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-prompts {
+  border-color: var(--she-line);
+  background: #fafafa;
+  color: var(--she-ink);
+  box-shadow:
+    inset 0 1px #fff,
+    0 5px 16px #1414140a;
+}
+.template-toolbar[data-interface-brand="shecommerce"] .selector-current {
+  border-inline-color: var(--she-line) !important;
+}
+.template-toolbar[data-interface-brand="shecommerce"]
+  .selector-control
+  > button {
+  color: var(--she-ink);
+}
+.template-toolbar[data-interface-brand="shecommerce"]
+  .selector-control
+  > button:first-child,
+.template-toolbar[data-interface-brand="shecommerce"]
+  .selector-control
+  > button:last-child {
+  color: var(--she-pink);
+  background: #e9206308;
+}
+.template-toolbar[data-interface-brand="shecommerce"]
+  .selector-control
+  > button:hover,
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-prompts:hover,
+.template-toolbar[data-interface-brand="shecommerce"]
+  .toolbar-prompts:focus-visible {
+  border-color: var(--she-pink);
+  background: #fff0f4;
+}
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-prompts.is-on {
+  border-color: var(--she-pink);
+  background: var(--she-pink);
+  color: #fff;
+}
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-export {
+  border-color: #e0a900;
+  background: var(--she-yellow);
+  color: var(--she-ink);
+  box-shadow:
+    0 9px 24px #ffc1054a,
+    inset 0 1px #fff8;
+}
+.template-toolbar[data-interface-brand="shecommerce"] .toolbar-export:hover {
+  background: #f2b800;
+  box-shadow:
+    0 12px 28px #ffc1055c,
+    inset 0 1px #fff8;
+}
+.template-toolbar[data-interface-brand="shecommerce"]
+  .compact-option-grid
+  > button.is-active {
+  border-color: var(--she-pink);
+  box-shadow: 0 0 0 3px #e920631f;
+}
+.template-toolbar[data-interface-brand="shecommerce"]
+  :is(button, a):focus-visible {
+  outline: 3px solid var(--she-pink);
+  outline-offset: 2px;
+}
+.wolkveld-template[data-interface-brand="shecommerce"]
+  :is(.buy-button, .final-buy__button, .mobile-buy-bar > button:last-child) {
+  background: #ffc105;
+  border-color: #e0a900;
+  color: #141414;
+  box-shadow: 0 8px 20px #ffc10542;
+}
+.wolkveld-template[data-interface-brand="shecommerce"]
+  :is(
+    .buy-button,
+    .final-buy__button,
+    .mobile-buy-bar > button:last-child
+  ):hover {
+  background: #f2b800;
+}
+
+@media (max-width: 820px) {
+  .template-toolbar[data-interface-brand="shecommerce"] .toolbar-inner {
+    grid-template-columns: 56px minmax(0, 1fr) 48px;
+  }
+  .template-toolbar[data-interface-brand="shecommerce"] .toolbar-intro-icon {
+    width: 56px;
+    padding-inline: 6px;
+  }
+  .template-toolbar[data-interface-brand="shecommerce"]
+    .toolbar-intro-icon
+    .shecommerce-logo-mark {
+    width: 44px;
+  }
+  .wordmark .shecommerce-logo-mark,
+  .site-footer .shecommerce-logo-mark {
+    width: 146px;
+  }
 }
 
 /* The teaching layer stays recognisably DSA, independent of the selected store palette. */

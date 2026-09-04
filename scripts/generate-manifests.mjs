@@ -7,8 +7,8 @@ const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/$/, '');
 const withBasePath = (path) => `${basePath}${path}`;
 const routes = [withBasePath('/'), withBasePath('/stores'), ...Object.keys(stores).map((slug) => withBasePath(`/stores/${slug}`))];
 const categories = ['dieren','beauty','gadgets','wellness','fashion','wonen','kids','outdoor'];
-const palettes = ['dsa','amber','rose','electric','sage','clay','violet','lemon','mono','coral','ocean'];
-const fonts = ['friendly','luxury','technical','editorial','rounded','fashion','bold','minimal'];
+const palettes = ['dsa','shecommerce','amber','rose','electric','sage','clay','violet','lemon','mono','coral','ocean'];
+const fonts = ['friendly','shecommerce','luxury','technical','editorial','rounded','fashion','bold','minimal'];
 const paymentLogoRawBase = 'https://raw.githubusercontent.com/jndegens/dsa-store-template/main/public/payment-logos';
 const paymentMethods = [
   {id:'ideal',label:'iDEAL',file:'ideal.svg'},
@@ -57,7 +57,7 @@ const manifest = {
     implementationContracts,
     workflow: ['Lees STOREFRONT.md vóór alle broncode','Gebruik de GitHub-repository als referentie, niet als volledig te klonen eindproduct','Lees public/base44.json en configuration/sections','Rapporteer ontbrekende requiredInputs','Wacht op echte productdata','Bouw alleen de merchant-storefront','Voer npm test uit'],
     hardRules: ['Geen DSA-studio, DSA-branding of AI-uitleg in de winkel','Behoud de klantgerichte layout en sectievolgorde','Alle afbeeldingen exact 1:1','Boven en onder een complete galerij met vijf klikbare miniaturen','Alle betaalmerken als officiële afbeeldingsassets','Alle interface-iconen uit lucide-react','Lopende tekst minimaal 16px en overige merchanttekst minimaal 14px','Geen verzonnen feiten of social proof','Alle klantcontrols toetsenbordtoegankelijk','Bouwmetadata consumeren maar niet renderen'],
-    configurableUrlParams: ['cat','pal','font'],
+    configurableUrlParams: ['cat','pal','font','brand'],
     expectedOutput: 'Een complete, responsieve en klikbare merchant-productpagina zonder DSA/editor/template-informatie, plus een lijst van gebruikte brondata.',
   },
   designSystem: {templateBrand:'DSA STORE TEMPLATE',categories,palettes,fonts,typography:implementationContracts.typography,iconPack:{id:'lucide-react',package:'lucide-react',source:'https://github.com/lucide-icons/lucide',license:'ISC',style:'outline',usage:'Importeer iconen uit lucide-react op betekenis; teken geen eigen SVG en gebruik nooit alleen een icoon voor essentiële tekst.',forbidden:implementationContracts.icons.forbidden},paymentKit:{id:'datatrans-payment-logos',source:'https://github.com/datatrans/payment-logos',license:'CC-BY-SA-4.0',methods:paymentMethods,renderRule:implementationContracts.payments.renderRule,purpose:'Visuele betaalvertrouwensbadges; geen checkout of betalingsverwerking.'}},

@@ -15,7 +15,7 @@ const storefrontContractPath = 'STOREFRONT.md';
 
 if (slugs.length !== 8) failures.push(`Verwacht exact 8 categorieën, vond ${slugs.length}`);
 if (imageSlots.length !== 18) failures.push(`Verwacht exact 18 beeldslots, vond ${imageSlots.length}`);
-for (const token of ['className="template-toolbar"','icon={category.icon}','icon="palette"','icon="font"','className="current-palette"','className="current-font"','DSA STORE TEMPLATE','aria-controls={`selector-${id}`}','aria-expanded={open}','Kopieer Base44-opdracht','repositoryUrl','base44DataUrl','storefrontContractUrl','merchant-storefront-only','STOREFRONT.md','datatrans-payment-logos','BASE44-BOUWOPDRACHT','BESTAAND BASE44-PROJECT HERSTELLEN','slots:imageSlots.map','ref={cartRef}','ref={studioRef}','copyStyleV2','finalGalleryIndex','className="final-gallery__thumbs"','data-payment-asset','data-payment-raw-url','lucide-react']) {
+for (const token of ['className="template-toolbar"','icon={category.icon}','icon="palette"','icon="font"','className="current-palette"','className="current-font"','DSA STORE TEMPLATE','aria-controls={`selector-${id}`}','aria-expanded={open}','Kopieer Base44-opdracht','repositoryUrl','base44DataUrl','storefrontContractUrl','merchant-storefront-only','STOREFRONT.md','datatrans-payment-logos','BASE44-BOUWOPDRACHT','BESTAAND BASE44-PROJECT HERSTELLEN','slots: imageSlots.map','ref={cartRef}','ref={studioRef}','copyStyleV2','finalGalleryIndex','className="final-gallery__thumbs"','data-payment-asset','data-payment-raw-url','lucide-react','query.brand','data-interface-brand']) {
   if (!appSource.includes(token)) failures.push(`Compacte templatebediening ontbreekt in bron: ${token}`);
 }
 if (!fs.existsSync(storefrontContractPath)) failures.push('Storefront-exportcontract ontbreekt');
@@ -70,11 +70,11 @@ for (const slug of slugs) {
   if (canonicalBytes !== null && bytes !== canonicalBytes) failures.push(`${slug}: manifest wijkt byte-voor-byte af van canoniek manifest`);
   if (forbiddenLegacyCopy.test(bytes)) failures.push(`${slug}: manifest bevat oude productspecifieke data`);
   const manifest = JSON.parse(bytes);
-  if (manifest.designSystem?.palettes?.length !== 11) failures.push(`${slug}: verwacht 11 kleurpaletten`);
-  if (manifest.designSystem?.fonts?.length !== 8) failures.push(`${slug}: verwacht 8 lettertypes`);
+  if (manifest.designSystem?.palettes?.length !== 12 || !manifest.designSystem.palettes.includes('shecommerce')) failures.push(`${slug}: verwacht 12 kleurpaletten inclusief SheCommerce`);
+  if (manifest.designSystem?.fonts?.length !== 9 || !manifest.designSystem.fonts.includes('shecommerce')) failures.push(`${slug}: verwacht 9 lettertypes inclusief SheCommerce`);
   if (manifest.designSystem?.logoTemplates) failures.push(`${slug}: verwijderde logo-instelling staat nog in het manifest`);
   if (manifest.designSystem?.templateBrand !== 'DSA STORE TEMPLATE') failures.push(`${slug}: vaste DSA-templatebranding ontbreekt`);
-  if (JSON.stringify(manifest.aiContract?.configurableUrlParams) !== JSON.stringify(['cat','pal','font'])) failures.push(`${slug}: configureerbare URL-parameters zijn niet exact cat, pal en font`);
+  if (JSON.stringify(manifest.aiContract?.configurableUrlParams) !== JSON.stringify(['cat','pal','font','brand'])) failures.push(`${slug}: configureerbare URL-parameters zijn niet exact cat, pal, font en brand`);
   if (manifest.schemaVersion !== '5.0') failures.push(`${slug}: verwacht manifestschema 5.0`);
   if (manifest.templateId !== 'dsa-store-template') failures.push(`${slug}: vaste template-ID ontbreekt`);
   if (manifest.sourceRepository?.url !== 'https://github.com/jndegens/dsa-store-template') failures.push(`${slug}: openbare GitHub-bron ontbreekt`);

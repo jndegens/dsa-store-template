@@ -66,6 +66,7 @@
       ],
       "pal": [
         "dsa",
+        "shecommerce",
         "amber",
         "rose",
         "electric",
@@ -79,6 +80,7 @@
       ],
       "font": [
         "friendly",
+        "shecommerce",
         "luxury",
         "technical",
         "editorial",
@@ -3183,6 +3185,7 @@
       ],
       "palettes": [
         "dsa",
+        "shecommerce",
         "amber",
         "rose",
         "electric",
@@ -3196,6 +3199,7 @@
       ],
       "fonts": [
         "friendly",
+        "shecommerce",
         "luxury",
         "technical",
         "editorial",
