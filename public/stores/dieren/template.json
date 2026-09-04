@@ -234,8 +234,7 @@
     "configurableUrlParams": [
       "cat",
       "pal",
-      "font",
-      "brand"
+      "font"
     ],
     "expectedOutput": "Een complete, responsieve en klikbare merchant-productpagina zonder DSA/editor/template-informatie, plus een lijst van gebruikte brondata."
   },
@@ -253,7 +252,6 @@
     ],
     "palettes": [
       "dsa",
-      "shecommerce",
       "amber",
       "rose",
       "electric",
@@ -267,7 +265,6 @@
     ],
     "fonts": [
       "friendly",
-      "shecommerce",
       "luxury",
       "technical",
       "editorial",
